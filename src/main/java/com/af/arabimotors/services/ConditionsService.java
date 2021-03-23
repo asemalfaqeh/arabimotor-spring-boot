@@ -18,7 +18,7 @@ public class ConditionsService {
 	ConditionRepository conditionRepository;
 	
 	public void saveNewCondition(ConditionRequest conditionRequest) {
-
+		//first commit from win
 		ConditionsEntity conditionsEntity = new ConditionsEntity();
 		BeanUtils.copyProperties(conditionRequest, conditionsEntity);
 		conditionsEntity.setConditionName(conditionRequest.getConditionName());
