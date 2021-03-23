@@ -1,0 +1,11 @@
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/configs/WebSecurityConfig.java
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/controllers/AuthController.java
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/repositories/UserRepository.java
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/entities/RoleEntity.java
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/entities/UserEntity.java
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/repositories/RoleRepository.java
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/configs/PageConfig.java
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/services/CustomUserDetailsService.java
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/ArabimotorsApplication.java
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/configs/CustomizeAuthenticationSuccessHandler.java
+/Users/mbpro/Desktop/STS Projects/arabimotors/src/main/java/com/af/arabimotors/ServletInitializer.java
