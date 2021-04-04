@@ -1,2 +1,6 @@
+com/af/arabimotors/repositories/HomeRepository.class
 com/af/arabimotors/controllers/admin/ConditionController.class
+com/af/arabimotors/services/BodyTypeService.class
 com/af/arabimotors/controllers/admin/AuthController.class
+com/af/arabimotors/repositories/MaxPriceRepository.class
+com/af/arabimotors/repositories/BodyTypeRepository.class

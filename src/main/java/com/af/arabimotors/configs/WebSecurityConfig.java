@@ -61,17 +61,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				WebUrlsConstants.ADMIN_CONDITIONS,
 				WebUrlsConstants.ADMIN_DASHBOARD,
 				WebUrlsConstants.ADMIN_POST_NEW_CONDITION,
-				WebUrlsConstants.ADMIN_EDIT_CONDITION,WebUrlsConstants.ADMIN_DELETE_CODNITION_BY_ID};
+				WebUrlsConstants.ADMIN_EDIT_CONDITION, WebUrlsConstants.ADMIN_DELETE_CODNITION_BY_ID};
 	}
 	
 	public String[] permitPathes() {
 		return new String[] {
-		  WebUrlsConstants.LOGIN,WebUrlsConstants.SIGN_UP
+		  WebUrlsConstants.LOGIN,
+		  WebUrlsConstants.SIGN_UP,
+		  WebUrlsConstants.WEB_HOME_PAGE,
+		  WebUrlsConstants.BASE_URL,
 		};
 	}
 	
+	// authenticated user paths // USER //
 	public String[] userPathes() {
-		return new String[] {};
+		return new String[] {
+				  WebUrlsConstants.ACCOUNT_DETAILS,
+				  WebUrlsConstants.UPDATE_USER_PROFILE,
+				  WebUrlsConstants.UPDATE_PHOTO_PROFILE,
+				  WebUrlsConstants.UPLOAD_PHOTO
+		};
 	}
 
 }

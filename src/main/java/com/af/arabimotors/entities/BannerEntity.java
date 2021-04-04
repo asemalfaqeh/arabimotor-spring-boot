@@ -17,7 +17,10 @@ public class BannerEntity {
 	
 	@Column(name = "banner", nullable = true)
 	private String banner;
-
+	
+	@Column(name = "enabled", columnDefinition = "boolean default true")
+	private boolean enabled;
+	
 	public String getBanner() {
 		return banner;
 	}
@@ -29,6 +32,14 @@ public class BannerEntity {
 	@Override
 	public String toString() {
 		return "BannerEntity [banner=" + banner + "]";
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 	

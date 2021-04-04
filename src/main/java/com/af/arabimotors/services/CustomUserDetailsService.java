@@ -43,7 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 //	    user.setRoles(new HashSet<>(Arrays.asList(userRole)));
 //	    userRepository.save(user);
 //	}
-	//first commit from wid
+	
 	public void saveUser(UserEntity user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
@@ -51,6 +51,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
+	
+	public void updateCurrentUser(UserEntity userEntity) {
+		userRepository.save(userEntity);
+	}
+
 	
 	@Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

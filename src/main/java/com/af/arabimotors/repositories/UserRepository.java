@@ -10,5 +10,6 @@ import com.af.arabimotors.entities.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
 	UserEntity findByEmail(final String email);
+	
 
 }

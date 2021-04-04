@@ -12,16 +12,18 @@ public class ConditionsEntity implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -3877068715530326366L;
+	
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private String id;
+    private Long id;
 
     @Column(name = "condition_name", nullable = false)
     private String conditionName;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "boolean default true")
     private boolean enabled;
+    
 
     public boolean isEnabled() {
         return enabled;
@@ -33,11 +35,11 @@ public class ConditionsEntity implements Serializable{
 
     
 
-    public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

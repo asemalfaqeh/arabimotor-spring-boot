@@ -15,14 +15,13 @@ import java.util.List;
 
 
 @Repository
+@Transactional
 public interface ConditionRepository extends JpaRepository<ConditionsEntity, Long>{
     
-	@Transactional
 	@Modifying
 	@Query(value = "update conditions e set e.condition_name = :name where e.id = :id", nativeQuery = true)
-	public void updateCondition(@Param("name") String name, @Param("id") String id);
+	public void updateCondition(@Param("name") String name, @Param("id") Long id);
 	
-	@Transactional
 	@Modifying
 	@Query(value = "update conditions e set e.enabled = 0 where e.id = :id", nativeQuery = true)
 	public void disableCondition(@Param("id") String id);

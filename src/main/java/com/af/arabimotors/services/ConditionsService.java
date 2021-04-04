@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.af.arabimotors.entities.ConditionsEntity;
-import com.af.arabimotors.model.ConditionRequest;
+import com.af.arabimotors.model.request.ConditionRequest;
 import com.af.arabimotors.repositories.ConditionRepository;
 
 
@@ -22,6 +22,7 @@ public class ConditionsService {
 		ConditionsEntity conditionsEntity = new ConditionsEntity();
 		BeanUtils.copyProperties(conditionRequest, conditionsEntity);
 		conditionsEntity.setConditionName(conditionRequest.getConditionName());
+		conditionsEntity.setEnabled(true);
 		conditionRepository.save(conditionsEntity);
 	}
 	

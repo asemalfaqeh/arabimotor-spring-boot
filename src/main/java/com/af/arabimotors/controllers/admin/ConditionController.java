@@ -3,7 +3,8 @@ package com.af.arabimotors.controllers.admin;
 
 
 import com.af.arabimotors.entities.ConditionsEntity;
-import com.af.arabimotors.model.ConditionRequest;
+import com.af.arabimotors.model.request.ConditionRequest;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.af.arabimotors.services.ConditionsService;
 import com.af.arabimotors.utils.WebUrlsConstants;
+import com.af.arabimotors.utils.WebViewsConstants;
 
 
 @Controller
@@ -27,14 +29,15 @@ public class ConditionController {
 	public ModelAndView allConditions() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("conditions", conditionsService.getAllConditions());
-		modelAndView.setViewName("admin/conditions");
+		modelAndView.setViewName(WebViewsConstants.ADMIN_CONDITION_VIEW);
 		return modelAndView;
 	}
+	
 	// go to add new condition  
 	@RequestMapping(value = WebUrlsConstants.ADMIN_ADD_CONDTITION, method = RequestMethod.GET)
 	public ModelAndView addNewCondition(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/add_condition");
+		modelAndView.setViewName(WebViewsConstants.ADMIN_ADD_NEW_CONDITION);
 		return modelAndView;
 	}
 
@@ -46,7 +49,7 @@ public class ConditionController {
 
 		if (bindingResult.hasErrors()){
 			modelAndView.addObject("errorMessage", "Condition Not Saved");
-			modelAndView.setViewName("admin/add_condition");
+			modelAndView.setViewName(WebViewsConstants.ADMIN_ADD_NEW_CONDITION);
 		} else {
 			conditionsService.saveNewCondition(conditionRequest);
 			modelAndView.setViewName("redirect:" + WebUrlsConstants.ADMIN_CONDITIONS);
@@ -63,7 +66,7 @@ public class ConditionController {
 		ModelAndView modelAndView = new ModelAndView();
 		ConditionsEntity conditionsEntity = conditionsService.findConditionById(id);
 		modelAndView.addObject("condition", conditionsEntity);
-		modelAndView.setViewName("admin/edit_condition");
+		modelAndView.setViewName(WebViewsConstants.ADMIN_EDIT_CONDITION);
 		System.out.println(" Conditiion: " + conditionsEntity.toString());
 		return modelAndView;
 	}
@@ -77,7 +80,7 @@ public class ConditionController {
 
 		if (bindingResult.hasErrors()){
 			modelAndView.addObject("errorMessage", "Condition Not Saved");
-			modelAndView.setViewName("admin/edit_condition");
+			modelAndView.setViewName(WebViewsConstants.ADMIN_EDIT_CONDITION);
 		}else {
 			conditionsService.updateCondition(conditionRequest);
 			modelAndView.setViewName("redirect:" + WebUrlsConstants.ADMIN_CONDITIONS);
