@@ -16,5 +16,6 @@ public class BodyTypeService {
     public List<BodyTypeEntity> findAllBodyType(){
         return bodyTypeRepository.findAll();
     }
+    
 
 }

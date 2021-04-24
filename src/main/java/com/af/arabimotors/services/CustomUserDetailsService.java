@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.af.arabimotors.entities.RoleEntity;
 import com.af.arabimotors.entities.UserEntity;
+import com.af.arabimotors.model.request.UserChangePasswordRequest;
 import com.af.arabimotors.repositories.RoleRepository;
 import com.af.arabimotors.repositories.UserRepository;
 
@@ -55,8 +56,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public void updateCurrentUser(UserEntity userEntity) {
 		userRepository.save(userEntity);
 	}
-
 	
+
 	@Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 

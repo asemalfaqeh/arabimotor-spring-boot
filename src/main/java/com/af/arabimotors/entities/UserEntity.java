@@ -49,7 +49,7 @@ public class UserEntity {
 
 	@Column(name = "is_primary",  columnDefinition = "boolean default false")
 	private boolean is_primary;
-
+    
 	@Column(name = "email_verified_at", nullable = true)
 	private String emailVerifiedAt;
 	
@@ -118,8 +118,6 @@ public class UserEntity {
 	public void setRoles(Set<RoleEntity> roles) {
 		this.roles = roles;
 	}
-	
-	
 
 	public String getAddress() {
 		return address;
@@ -186,8 +184,29 @@ public class UserEntity {
 		this.isEmailVerified = isEmailVerified;
 	}
 
-    public String getPhotosImagePath(Long id, String user_photo) {
+	
+	
+    public String getEmailVerifiedAt() {
+		return emailVerifiedAt;
+	}
+
+	public void setEmailVerifiedAt(String emailVerifiedAt) {
+		this.emailVerifiedAt = emailVerifiedAt;
+	}
+
+	public String getPhotosImagePath(Long id, String user_photo) {
         return "/user-photos/" + id + "/" + user_photo;
     }
+
+	@Override
+	public String toString() {
+		return "UserEntity [id=" + id + ", email=" + email + ", password=" + password + ", fullname=" + fullname
+				+ ", enabled=" + enabled + ", isEmailVerified=" + isEmailVerified + ", address=" + address
+				+ ", created_at=" + created_at + ", is_primary=" + is_primary + ", emailVerifiedAt=" + emailVerifiedAt
+				+ ", phone=" + phone + ", city=" + city + ", sellerTypeEntity=" + sellerTypeEntity + ", user_photo="
+				+ user_photo + ", roles=" + roles + "]";
+	}
+    
+	
 
 }

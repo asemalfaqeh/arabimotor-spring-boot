@@ -19,5 +19,15 @@ public interface WebUrlsConstants {
       String UPDATE_USER_PROFILE = "/account-update";
       String UPDATE_PHOTO_PROFILE = "/update-photo";
       String UPLOAD_PHOTO = "/user-photos/**";
+      String CHANGE_PASSWORD = "/change-password";
+      String SOCIAL_MEDIA_LINKS = "/user-social";
+      String CONFIRM_ACCOUNT = "/confirm-account";
+      String ERROR_PAGE = "/error-404";
+      String RESEND_VERIFY_EMAIL = "/resend-verify-email";
+      String VERIFY_EMAIL_LINK = "http://localhost:8080/confirm-account?token=";
+      String RESET_PASSWORD_LINK = "http://localhost:8080/reset-password?token=";
+      String FORGOT_PASSWORD = "/forgot-password";
+      String RESET_PASSWORD_POST = "/reset-password";
+      String SUBMIT_VEHICLE = "/post-vehicle";
     
 }

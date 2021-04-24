@@ -25,6 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 
 	@Bean
 	public UserDetailsService jpaUserDetails() {
@@ -47,7 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureUrl("/login?error=true").usernameParameter("email").passwordParameter("password").and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").and()
 				.exceptionHandling();
-		
 	}
 
 	@Override
@@ -70,6 +70,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		  WebUrlsConstants.SIGN_UP,
 		  WebUrlsConstants.WEB_HOME_PAGE,
 		  WebUrlsConstants.BASE_URL,
+		  WebUrlsConstants.CONFIRM_ACCOUNT,
+		  WebUrlsConstants.ERROR_PAGE
 		};
 	}
 	
@@ -79,7 +81,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				  WebUrlsConstants.ACCOUNT_DETAILS,
 				  WebUrlsConstants.UPDATE_USER_PROFILE,
 				  WebUrlsConstants.UPDATE_PHOTO_PROFILE,
-				  WebUrlsConstants.UPLOAD_PHOTO
+				  WebUrlsConstants.UPLOAD_PHOTO,
+				  WebUrlsConstants.CHANGE_PASSWORD,
+				  WebUrlsConstants.SOCIAL_MEDIA_LINKS,
+				  WebUrlsConstants.RESEND_VERIFY_EMAIL,
+				  WebUrlsConstants.SUBMIT_VEHICLE
+				  
 		};
 	}
 

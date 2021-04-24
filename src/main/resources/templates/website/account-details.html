@@ -4,7 +4,24 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{front-end-template.html}">
 <head>
-<title>ArabiMotor - Home</title>
+<title>حسابي</title>
+<style>
+
+.closebtn {
+	margin-left: 15px;
+	color: white;
+	font-weight: bold;
+	float: right;
+	font-size: 22px;
+	line-height: 20px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.closebtn:hover {
+	color: black;
+}
+</style>
 </head>
 <body>
 	<div layout:fragment="content">
@@ -29,29 +46,38 @@
 		<!-- End Page Banner -->
 
 		<!-- Start Dashboard Area -->
-		<div class="dashboard-area ptb-100">	
+		<div class="dashboard-area ptb-100">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-3 col-md-12">
 						<div class="dashboard-profile">
 							<div class="profile-box">
 								<div class="profile-icon">
-									<a target="_blank" th:href="@{${photo}}">
-									<img th:src="@{${photo}}"/>
-									</a>
+
+									<div th:if="${isphoto == null}" class="profile-icon">
+										<a href="#"> <i class='bx bxs-user'></i>
+										</a>
+									</div>
+
+									<div th:unless="${isphoto == null}">
+										<a target="_blank" th:href="@{${photo}}"> <img
+											th:src="@{${photo}}" />
+										</a>
+									</div>
+
 								</div>
 							</div>
 
 							<div class="profile-info">
 								<ul class="info-list">
-									<li><a href="submit-vehicle.html">اعرض سيارتك للبيع</a></li>
+									<li><a th:href="@{/post-vehicle}">اعرض سيارتك للبيع</a></li>
 									<li><a href="favorites.html">المفضلة</a></li>
-									<li><a href="account-details.html" class="active">حسابي</a>
+									<li><a th:href="@{/account-details}" class="active">حسابي</a>
 									</li>
 									<li><a href="messages.html">الرسائل</a></li>
-									<li><a href="social-media.html">وسائل التواصل
+									<li><a th:href="@{/user-social}">وسائل التواصل
 											الاجتماعي</a></li>
-									<li><a href="change-password.html">تحديث كلمة المرور</a></li>
+									<li><a th:href="@{/change-password}">تحديث كلمة المرور</a></li>
 									<li><a th:href="@{/logout}">تسجيل الخروج</a></li>
 								</ul>
 							</div>
@@ -64,13 +90,14 @@
 						</div>
 
 						<div class="dashboard-form">
-							<form method="post" th:action="@{/update-photo}" enctype="multipart/form-data">
+							<form method="post" th:action="@{/update-photo}"
+								enctype="multipart/form-data">
 								<div class="row">
 									<div class="col-lg-12 col-md-12">
 										<div class="form-group">
-										   <div th:if="${error_image}">
-										     <label th:text="${error_image}"></label>
-										   </div>
+											<div th:if="${error_image}">
+												<label th:text="${error_image}"></label>
+											</div>
 											<label>تحديث صورة الملف الشخصي</label>
 
 											<div class="col-lg-6 col-md-6">
@@ -88,18 +115,26 @@
 
 								</div>
 							</form>
-							<br>
-							<br>
+							<br> <br>
 
 							<form th:action="@{/account-update}" method="post">
 								<div class="row">
-								
-								<div th:if="${error}">
-								  <th:block th:each="e : ${error}">
-								  	 <label class="alert danger" th:text="${e.defaultMessage}"></label><br>
-								  </th:block>
-								</div>
-			
+
+									<div th:if="${error}">
+										<th:block th:each="e : ${error}">
+											<label class="alert danger" th:text="${e.defaultMessage}"></label>
+											<br>
+										</th:block>
+									</div>
+
+									<div th:if="${!userdetails.isEmailVerified}">
+										
+											 <a th:href="@{/resend-verify-email}">تاكيد البريد
+													الالكتروني</a>
+										
+									</div>
+									<br> <br>
+
 									<div class="col-lg-6 col-md-6">
 										<div class="form-group">
 											<label>اسم المستخدم</label> <input name="fullname"
@@ -157,12 +192,12 @@
 										</div>
 									</div>
 
-
 								</div>
 
 								<button type="submit" class="default-btn">
 									تحديث بيانات الحساب <span></span>
 								</button>
+
 							</form>
 						</div>
 					</div>

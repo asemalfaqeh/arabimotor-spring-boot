@@ -12,6 +12,7 @@ public class UserResponse {
 	private CityEntity city;
 	private SellerTypeEntity sellerTypeEntity;
 	private String user_photo;
+	private boolean isEmailVerified;
 	public String getEmail() {
 		return email;
 	}
@@ -54,10 +55,19 @@ public class UserResponse {
 	public void setUser_photo(String user_photo) {
 		this.user_photo = user_photo;
 	}
+	
+	
+	public boolean isEmailVerified() {
+		return isEmailVerified;
+	}
+	public void setEmailVerified(boolean isEmailVerified) {
+		this.isEmailVerified = isEmailVerified;
+	}
 	@Override
 	public String toString() {
 		return "UserResponse [email=" + email + ", fullname=" + fullname + ", address=" + address + ", phone=" + phone
-				+ ", city=" + city + ", sellerTypeEntity=" + sellerTypeEntity + ", user_photo=" + user_photo + "]";
+				+ ", city=" + city + ", sellerTypeEntity=" + sellerTypeEntity + ", user_photo=" + user_photo
+				+ ", isEmailVerified=" + isEmailVerified + "]";
 	}
 	
 	

@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import com.af.arabimotors.entities.BodyTypeEntity;
 import com.af.arabimotors.entities.ConditionsEntity;
 
 import java.util.List;
@@ -29,6 +31,7 @@ public interface ConditionRepository extends JpaRepository<ConditionsEntity, Lon
 	public ConditionsEntity findById(String id);
 
 	public List<ConditionsEntity> findAllByEnabled(boolean enabled);
+	
 	
 	
 }

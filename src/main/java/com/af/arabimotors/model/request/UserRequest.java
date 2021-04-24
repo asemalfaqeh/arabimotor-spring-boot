@@ -9,21 +9,20 @@ import com.af.arabimotors.entities.SellerTypeEntity;
 
 public class UserRequest {
 
-	@NotBlank(message = "حقل بريد الالكتروني يجب ان لا يكون فارغ")
+	@NotBlank(message = "{email.notempty}")
 	private String email;
-	@NotBlank(message = "حقل الاسم كامل يجب ان لا يكون فارغ")
+	@NotBlank(message = "{fullname.notemtpy}")
 	private String fullname;
-	@NotBlank(message = "حقل العنوان الكامل يجب ان لا يكون فارغ")
+	@NotBlank(message = "{address.notempty}")
 	private String address;
 	private String password;
-	@NotBlank(message = "حقل رقم الهاتف المحمول يجب ان لا يكون فارغ")
+	@NotBlank(message = "{phone.notempty}")
 	private String phone;
 	private CityEntity city;
 	private SellerTypeEntity sellerTypeEntity;
 	private String confirm_password;
 	private MultipartFile user_photo;
 	private Long id;
-	
 	
 	
 	public Long getId() {

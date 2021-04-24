@@ -44,5 +44,8 @@ public class ConditionsService {
 		return conditionRepository.findById(id+"");
 	}
 
+	public List<ConditionsEntity> findAll(){
+		return conditionRepository.findAll();
+	}
 
 }
