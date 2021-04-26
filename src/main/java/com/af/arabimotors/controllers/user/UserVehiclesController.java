@@ -121,7 +121,7 @@ public class UserVehiclesController {
 
 			// get original file name //
 			Path absouletPath = Paths.get(".");
-			String uploadDir = absouletPath + "/src/main/resources/static/user-photos/" + userEntity.getId();
+			String uploadDir = absouletPath + "/src/main/resources/static/uploads/";
 			// set upload image path //
 			FileUploadUtil.saveFile(uploadDir, submitVehicleRequest.getMainImageMultipartFile().getOriginalFilename(),
 					submitVehicleRequest.getMainImageMultipartFile());
@@ -134,7 +134,7 @@ public class UserVehiclesController {
 
 			}
 
-			submitVehicleRequest.setMain_image(submitVehicleRequest.getMainImageMultipartFile().getOriginalFilename());
+			submitVehicleRequest.setMain_image("uploads/"+submitVehicleRequest.getMainImageMultipartFile().getOriginalFilename());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -144,13 +144,14 @@ public class UserVehiclesController {
 		VehiclesEntity vehiclesEntity = new VehiclesEntity();
 		submitVehicleRequest.setUserEntity(userEntity); // user details
 		submitVehicleRequest.setCreatedDate(new Date()); // created at date
+		submitVehicleRequest.setPrice("$"+submitVehicleRequest.getPrice());
 		BeanUtils.copyProperties(submitVehicleRequest, vehiclesEntity);
 
 		List<VehicleImagesEntity> vehicleImagesEntities = new ArrayList<>();
 
 		for (MultipartFile multipartFile : submitVehicleRequest.getMultipartFiles()) {
 			VehicleImagesEntity vehicleImagesRequest = new VehicleImagesEntity();
-			vehicleImagesRequest.setImage(multipartFile.getOriginalFilename());
+			vehicleImagesRequest.setImage("uploads/"+multipartFile.getOriginalFilename());
 			vehicleImagesRequest.setVehiclesEntity(vehiclesEntity);
 			vehicleImagesEntities.add(vehicleImagesRequest);
 		}

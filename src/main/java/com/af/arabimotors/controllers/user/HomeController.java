@@ -1,7 +1,9 @@
 package com.af.arabimotors.controllers.user;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.af.arabimotors.entities.*;
 import com.af.arabimotors.services.*;
@@ -30,6 +32,9 @@ public class HomeController {
 	@Autowired
 	private MaxPricesService maxPriceService;
 	
+	@Autowired
+	private VehicleService vehicleService;
+	
 
 	@RequestMapping("/home")
 	public ModelAndView homePage() {
@@ -40,11 +45,16 @@ public class HomeController {
 		List<YearsEntity> yearsEntities = yearsService.findAllYears();
 		List<PriceEntity> priceEntities = maxPriceService.findAllPrices();
 		List<BodyTypeEntity> bodyTypeEntities = bodyTypeService.findAllBodyType();
+		List<VehiclesEntity> vehiclesEntities = vehicleService.findAll();
 		
+		// get new added vehicles and set limit four items  //
+		List<VehiclesEntity> firstFourVehiclesEntities = vehiclesEntities.stream().limit(4).collect(Collectors.toList());
+		Collections.reverse(firstFourVehiclesEntities);
 		model.addObject("models", vehicleModelsEntities);
 		model.addObject("years", yearsEntities);
 		model.addObject("prices", priceEntities);
 		model.addObject("body_types", bodyTypeEntities);
+		model.addObject("vehicles_best_ranking", firstFourVehiclesEntities);
 		model.setViewName(WebViewsConstants.USER_HOME);
 		
 		return model;
@@ -58,3 +68,12 @@ public class HomeController {
 	}
 	
 }
+
+
+
+
+
+
+
+
+

@@ -153,105 +153,38 @@
 				</div>
 
 				<div class="row">
+				 <th:block th:each="vbr : ${vehicles_best_ranking}">
 					<div class="col-lg-3 col-sm-6">
 						<div class="single-car-ranking">
+							
 							<div class="car-ranking-image">
 								<a href="car-details.html"><img
-									src="assets/images/car-ranking/car-ranking-1.jpg" alt="image"></a>
-
+									th:src="@{${vbr.main_image}}" alt="image"></a>
 								<div class="icon">
-									<a href="car-details.html"> <i class="flaticon-gallery">
-											5</i>
+									<a href="car-details.html"> 
+									<i class="flaticon-gallery" th:text="${vbr.vehicleImagesEntity.size()}"></i>
 									</a>
 								</div>
 							</div>
-
+							
 							<div class="car-ranking-content">
-								<div class="tag">$25,000</div>
+								<div class="tag" th:text="${vbr.price}"></div>
 								<h3>
-									<a href="car-details.html">2021 MAZDA CX-30</a>
+									<a href="car-details.html" th:text="${vbr.ad_title}">...</a>
 								</h3>
 								<p>
-									<b>MILEAGES</b> 3 Miles, Orland Park
+									 <b th:text="${#dates.format(vbr.createdDate,'aa HH:mm, yyyy/MM/dd')}"></b>
+									 <label>,</label>
+									 <label th:text="${vbr.cityEntity.name}"></label>
+									 <label>,</label>
+									 <label th:text="${vbr.vehicle_type.conditionName}">...</label>
 								</p>
 							</div>
+							
 						</div>
 					</div>
+					</th:block>
 
-					<div class="col-lg-3 col-sm-6">
-						<div class="single-car-ranking">
-							<div class="car-ranking-image">
-								<a href="car-details.html"><img
-									src="assets/images/car-ranking/car-ranking-2.jpg" alt="image"></a>
-
-								<div class="icon">
-									<a href="car-details.html"> <i class="flaticon-gallery">
-											3</i>
-									</a>
-								</div>
-							</div>
-
-							<div class="car-ranking-content">
-								<div class="tag">$49,000</div>
-								<h3>
-									<a href="car-details.html">2021 SUBARU XC-60</a>
-								</h3>
-								<p>
-									<b>MILEAGES</b> 7 Miles, Blauvelt, NY
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-sm-6">
-						<div class="single-car-ranking">
-							<div class="car-ranking-image">
-								<a href="car-details.html"><img
-									src="assets/images/car-ranking/car-ranking-3.jpg" alt="image"></a>
-
-								<div class="icon">
-									<a href="car-details.html"> <i class="flaticon-gallery">
-											4</i>
-									</a>
-								</div>
-							</div>
-
-							<div class="car-ranking-content">
-								<div class="tag">$55,000</div>
-								<h3>
-									<a href="car-details.html">2021 NISSAN XX-50</a>
-								</h3>
-								<p>
-									<b>MILEAGES</b> 2 Miles, Blauvelt, NY
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-sm-6">
-						<div class="single-car-ranking">
-							<div class="car-ranking-image">
-								<a href="car-details.html"><img
-									src="assets/images/car-ranking/car-ranking-4.jpg" alt="image"></a>
-
-								<div class="icon">
-									<a href="car-details.html"> <i class="flaticon-gallery">
-											2</i>
-									</a>
-								</div>
-							</div>
-
-							<div class="car-ranking-content">
-								<div class="tag">$75,000</div>
-								<h3>
-									<a href="car-details.html">2021 KIA SOUL XC 60</a>
-								</h3>
-								<p>
-									<b>MILEAGES</b> 9 Miles, Bardonia
-								</p>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</section>

@@ -24,7 +24,7 @@ import com.af.arabimotors.entities.YearsEntity;
 public class SubmitVehicleRequest {
 
 	@NotBlank(message = "{field.not_empty}")
-	@Size(max = 80, message = "{ad_title.too_long}")
+	@Size(max = 50, message = "{ad_title.too_long}")
 	private String ad_title;
 	
 	@NotBlank(message = "{price.not_empty}")
@@ -56,6 +56,18 @@ public class SubmitVehicleRequest {
 	// igonre in vehicle entity //
 	private MultipartFile[] multipartFiles;
 
+
+	@NotBlank(message = "{field.not_empty}")
+	@Size(max = 500, message = "{field.too_long}")
+	private String description;
+	
+	private UserEntity userEntity;
+	
+	private YearsEntity yearsEntities;
+	
+	private CityEntity cityEntity;
+
+
 	
 	
 	public MultipartFile[] getMultipartFiles() {
@@ -86,18 +98,6 @@ public class SubmitVehicleRequest {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-
-
-	@NotBlank(message = "{field.not_empty}")
-	@Size(max = 500, message = "{field.too_long}")
-	private String description;
-	
-	private UserEntity userEntity;
-	
-	private YearsEntity yearsEntities;
-	
-	private CityEntity cityEntity;
-
 
 	public String getAd_title() {
 		return ad_title;

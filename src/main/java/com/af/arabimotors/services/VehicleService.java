@@ -1,5 +1,7 @@
 package com.af.arabimotors.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +18,12 @@ public class VehicleService {
 		vehicleRepository.save(entity);
 	}
 
+    public List<VehiclesEntity> findFirstFoutVehicles(){
+    	return vehicleRepository.findFirstFoutVehicles();
+    }
+	
+    public List<VehiclesEntity> findAll(){
+    	return vehicleRepository.findAll();
+    }
+    
 }
