@@ -29,5 +29,9 @@ public interface WebUrlsConstants {
       String FORGOT_PASSWORD = "/forgot-password";
       String RESET_PASSWORD_POST = "/reset-password";
       String SUBMIT_VEHICLE = "/post-vehicle";
+      String VEHICLE_DETAILS = "/vehicle-details";
+      String ALL_VEHICLES = "/all-vehicles";
+      String VEHICLES_SORT = "/sort-vehicles";
+      
     
 }

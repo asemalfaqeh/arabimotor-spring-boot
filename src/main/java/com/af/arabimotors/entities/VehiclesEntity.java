@@ -23,6 +23,7 @@ public class VehiclesEntity {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
+	@Column(name = "id")
 	private Long id;
 	
 	@Column(name = "ad_title")
@@ -78,11 +79,19 @@ public class VehiclesEntity {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "city", referencedColumnName = "id")
 	private CityEntity cityEntity;
+	
+	@Column(name = "vehicle_features", nullable = true)
+	private String vehicleFeatures;
+	
+	@Column(name = "is_featured", columnDefinition = "boolean default false", nullable = false)
+	private boolean isFeagtured;
+	
+	@Column(name = "is_most_popular", columnDefinition = "boolean default false", nullable = false)
+	private boolean isMostPopular;
 
 	 @Temporal(TemporalType.TIMESTAMP)
 	 private Date createdDate;
 	
-	 
 	 
 	public Date getCreatedDate() {
 		return createdDate;
@@ -220,6 +229,30 @@ public class VehiclesEntity {
 		this.cityEntity = cityEntity;
 	}
 
+	public String getVehicleFeatures() {
+		return vehicleFeatures;
+	}
+
+	public void setVehicleFeatures(String vehicleFeatures) {
+		this.vehicleFeatures = vehicleFeatures;
+	}
+
+	public boolean isFeagtured() {
+		return isFeagtured;
+	}
+
+	public void setFeagtured(boolean isFeagtured) {
+		this.isFeagtured = isFeagtured;
+	}
+
+	public boolean isMostPopular() {
+		return isMostPopular;
+	}
+
+	public void setMostPopular(boolean isMostPopular) {
+		this.isMostPopular = isMostPopular;
+	}
+
 	@Override
 	public String toString() {
 		return "VehiclesEntity [id=" + id + ", ad_title=" + ad_title + ", price=" + price + ", vehicle_type="
@@ -227,8 +260,12 @@ public class VehiclesEntity {
 				+ ", fuelTypeEntity=" + fuelTypeEntity + ", mileage=" + mileage + ", gearTypeEntity=" + gearTypeEntity
 				+ ", engineCapicityEntity=" + engineCapicityEntity + ", main_image=" + main_image
 				+ ", vehicleImagesEntity=" + vehicleImagesEntity + ", description=" + description + ", userEntity="
-				+ userEntity + ", yearsEntities=" + yearsEntities + ", cityEntity=" + cityEntity + "]";
+				+ userEntity + ", yearsEntities=" + yearsEntities + ", cityEntity=" + cityEntity + ", vehicleFeatures="
+				+ vehicleFeatures + ", isFeagtured=" + isFeagtured + ", isMostPopular=" + isMostPopular
+				+ ", createdDate=" + createdDate + "]";
 	}
+
+	
 
 	
 }

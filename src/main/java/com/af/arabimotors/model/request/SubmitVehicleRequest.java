@@ -39,6 +39,8 @@ public class SubmitVehicleRequest {
 	
 	private FuelTypeEntity fuelTypeEntity;
 	
+	private String vehicleFeatures;
+	
 	@NotBlank(message = "{field.not_empty}")
 	private String mileage;
 	
@@ -235,6 +237,17 @@ public class SubmitVehicleRequest {
 
 	public void setCityEntity(CityEntity cityEntity) {
 		this.cityEntity = cityEntity;
+	}
+
+	
+
+	public String getVehicleFeatures() {
+		return vehicleFeatures;
+	}
+
+
+	public void setVehicleFeatures(String vehicleFeatures) {
+		this.vehicleFeatures = vehicleFeatures;
 	}
 
 

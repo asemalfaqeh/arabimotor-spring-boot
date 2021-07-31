@@ -52,7 +52,7 @@
 													<select>
 														<option value="0">أقصى سعر</option>
 														<th:block th:each="price : ${prices}">
-														 <option th:value="${price.id}" th:text="${price.name}"></option>
+															<option th:value="${price.id}" th:text="${price.name}"></option>
 														</th:block>
 													</select>
 												</div>
@@ -97,7 +97,7 @@
 													<select>
 														<option value="0">أقصى سعر</option>
 														<th:block th:each="price : ${prices}">
-														 <option th:value="${price.id}" th:text="${price.name}"></option>
+															<option th:value="${price.id}" th:text="${price.name}"></option>
 														</th:block>
 													</select>
 												</div>
@@ -122,10 +122,10 @@
 							<th:block th:each="type : ${body_types}">
 								<div class="list">
 									<div class="icon">
-										<a href="pickups.html"><i th:class="${type.image}"></i></a>
+										<a href=""><i th:class="${type.image}"></i></a>
 									</div>
 									<h3>
-										<a href="pickups.html" th:text="${type.name}">${type.name}</a>
+										<a href="" th:text="${type.name}">${type.name}</a>
 									</h3>
 									<span>(30)</span>
 								</div>
@@ -147,42 +147,44 @@
 					<p>انظر إلى أفضل السيارات في التصنيف</p>
 
 					<div class="section-btn">
-						<a href="#" class="default-btn"> عرض جميع السيارات <span></span>
+						<a th:href="@{/all-vehicles}" class="default-btn"> عرض جميع السيارات <span></span>
 						</a>
 					</div>
 				</div>
 
 				<div class="row">
-				 <th:block th:each="vbr : ${vehicles_best_ranking}">
-					<div class="col-lg-3 col-sm-6">
-						<div class="single-car-ranking">
-							
-							<div class="car-ranking-image">
-								<a href="car-details.html"><img
-									th:src="@{${vbr.main_image}}" alt="image"></a>
-								<div class="icon">
-									<a href="car-details.html"> 
-									<i class="flaticon-gallery" th:text="${vbr.vehicleImagesEntity.size()}"></i>
-									</a>
+					<th:block th:each="vbr : ${vehicles_best_ranking}">
+						<div class="col-lg-3 col-sm-6">
+							<div class="single-car-ranking">
+
+								<div class="car-ranking-image">
+									<a th:href="@{/vehicle-details/}+${vbr.id}"><img
+										th:src="@{${vbr.main_image}}" alt="image"></a>
+									<div class="icon">
+										<a th:href="@{/vehicle-details/}+${vbr.id}"> <i
+											class="flaticon-gallery"
+											th:text="${vbr.vehicleImagesEntity.size()}"></i>
+										</a>
+									</div>
 								</div>
+
+								<div class="car-ranking-content">
+									<div class="tag" th:text="${vbr.price}"></div>
+									<h3>
+										<a th:href="@{/vehicle-details/}+${vbr.id}"
+											th:text="${vbr.ad_title}">...</a>
+									</h3>
+									<p>
+										<b
+											th:text="${#dates.format(vbr.createdDate,'aa HH:mm, yyyy/MM/dd')}"></b>
+										<label>,</label> <label th:text="${vbr.cityEntity.name}"></label>
+										<label>,</label> <label
+											th:text="${vbr.vehicle_type.conditionName}">...</label>
+									</p>
+								</div>
+
 							</div>
-							
-							<div class="car-ranking-content">
-								<div class="tag" th:text="${vbr.price}"></div>
-								<h3>
-									<a href="car-details.html" th:text="${vbr.ad_title}">...</a>
-								</h3>
-								<p>
-									 <b th:text="${#dates.format(vbr.createdDate,'aa HH:mm, yyyy/MM/dd')}"></b>
-									 <label>,</label>
-									 <label th:text="${vbr.cityEntity.name}"></label>
-									 <label>,</label>
-									 <label th:text="${vbr.vehicle_type.conditionName}">...</label>
-								</p>
-							</div>
-							
 						</div>
-					</div>
 					</th:block>
 
 				</div>
@@ -194,56 +196,68 @@
 		<section class="featured-cars-area bg-161c2d pt-100 pb-70">
 			<div class="container">
 				<div class="section-title">
-					<h2>FEATURED CARS</h2>
-					<p>Find the best car of your choice</p>
+					<h2>سيارات مميزة</h2>
+					<p>اعثر على أفضل سيارة من اختيارك</p>
 				</div>
 
 				<div class="row">
 					<div class="col-lg-3 col-md-6 offset-lg-0 offset-md-3">
 						<div class="single-featured-cars-box">
 							<div class="box-image">
-								<a href="car-details.html"><img
-									src="assets/images/featured-cars/featured-cars-7.jpg"
-									alt="image"></a>
+								<a th:href="@{/vehicle-details/}+${feature_vehicles.get(0).id}"><img
+									th:src="@{${feature_vehicles.get(0).main_image}}" alt="image"></a>
 
 								<div class="icon">
-									<a href="car-details.html"> <i class="flaticon-gallery">
-											5</i>
+									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(0).id}">
+										<i class="flaticon-gallery"
+										th:text="${feature_vehicles.get(0).vehicleImagesEntity.size()}">....</i>
 									</a>
 								</div>
 							</div>
 
 							<div class="box-content">
-								<div class="tag">$30,000</div>
+								<div class="tag" th:text="${feature_vehicles.get(0).price}">...</div>
 								<h3>
-									<a href="car-details.html">2021 VOLVO XC60</a>
+									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(0).id}"
+										th:text="${feature_vehicles.get(0).ad_title}">...</a>
 								</h3>
 								<p>
-									<b>MILEAGES</b> 4 Miles, Orland Park
+									<b
+										th:text="${#dates.format(feature_vehicles.get(0).createdDate,'aa HH:mm, yyyy/MM/dd')}"></b>
+									<label>,</label> <label
+										th:text="${feature_vehicles.get(0).cityEntity.name}"></label>
+									<label>,</label> <label
+										th:text="${feature_vehicles.get(0).vehicle_type.conditionName}">...</label>
 								</p>
 							</div>
 						</div>
 
 						<div class="single-featured-cars-box">
 							<div class="box-image">
-								<a href="car-details.html"><img
-									src="assets/images/featured-cars/featured-cars-8.jpg"
-									alt="image"></a>
+								<a th:href="@{/vehicle-details/}+${feature_vehicles.get(1).id}"><img
+									th:src="@{${feature_vehicles.get(1).main_image}}" alt="image"></a>
 
 								<div class="icon">
-									<a href="car-details.html"> <i class="flaticon-gallery">
-											4</i>
+									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(1).id}">
+										<i class="flaticon-gallery"
+										th:text="${feature_vehicles.get(1).vehicleImagesEntity.size()}">....</i>
 									</a>
 								</div>
 							</div>
 
 							<div class="box-content">
-								<div class="tag">$55,000</div>
+								<div class="tag" th:text="${feature_vehicles.get(1).price}">...</div>
 								<h3>
-									<a href="car-details.html">2021 TOYOTA RAV4</a>
+									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(1).id}"
+										th:text="${feature_vehicles.get(1).ad_title}">...</a>
 								</h3>
 								<p>
-									<b>MILEAGES</b> 5 Miles, Orland Park
+									<b
+										th:text="${#dates.format(feature_vehicles.get(1).createdDate,'aa HH:mm, yyyy/MM/dd')}"></b>
+									<label>,</label> <label
+										th:text="${feature_vehicles.get(1).cityEntity.name}"></label>
+									<label>,</label> <label
+										th:text="${feature_vehicles.get(1).vehicle_type.conditionName}">...</label>
 								</p>
 							</div>
 						</div>
@@ -252,24 +266,30 @@
 					<div class="col-lg-6">
 						<div class="single-featured-cars-box">
 							<div class="box-image">
-								<a href="car-details.html"><img
-									src="assets/images/featured-cars/featured-cars-9.jpg"
-									alt="image"></a>
+								<a th:href="@{/vehicle-details/}+${feature_vehicles.get(2).id}"><img
+									th:src="@{${feature_vehicles.get(2).main_image}}" alt="image"></a>
 
 								<div class="icon">
-									<a href="car-details.html"> <i class="flaticon-gallery">
-											6</i>
+									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(2).id}">
+										<i class="flaticon-gallery"
+										th:text="${feature_vehicles.get(2).vehicleImagesEntity.size()}">....</i>
 									</a>
 								</div>
 							</div>
 
 							<div class="box-content">
-								<div class="tag">$99,000</div>
+								<div class="tag" th:text="${feature_vehicles.get(2).price}">...</div>
 								<h3>
-									<a href="car-details.html">2021 MAZDA CX-30</a>
+									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(2).id}"
+										th:text="${feature_vehicles.get(2).ad_title}">...</a>
 								</h3>
 								<p>
-									<b>MILEAGES</b> 5 Miles, Willoughby Hills OH
+									<b
+										th:text="${#dates.format(feature_vehicles.get(2).createdDate,'aa HH:mm, yyyy/MM/dd')}"></b>
+									<label>,</label> <label
+										th:text="${feature_vehicles.get(2).cityEntity.name}"></label>
+									<label>,</label> <label
+										th:text="${feature_vehicles.get(2).vehicle_type.conditionName}">...</label>
 								</p>
 							</div>
 						</div>
@@ -278,48 +298,59 @@
 					<div class="col-lg-3 col-md-6 offset-lg-0 offset-md-3">
 						<div class="single-featured-cars-box">
 							<div class="box-image">
-								<a href="car-details.html"><img
-									src="assets/images/featured-cars/featured-cars-10.jpg"
-									alt="image"></a>
+								<a th:href="@{/vehicle-details/}+${feature_vehicles.get(3).id}"><img
+									th:src="@{${feature_vehicles.get(3).main_image}}" alt="image"></a>
 
 								<div class="icon">
-									<a href="car-details.html"> <i class="flaticon-gallery">
-											9</i>
+									<a href="car-details.html"> <i class="flaticon-gallery"
+										th:text="${feature_vehicles.get(3).vehicleImagesEntity.size()}">....</i>
 									</a>
 								</div>
 							</div>
 
 							<div class="box-content">
-								<div class="tag">$45,000</div>
+								<div class="tag" th:text="${feature_vehicles.get(3).price}">...</div>
 								<h3>
-									<a href="car-details.html">2021 NISSAN CX-10</a>
+									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(1).id}"
+										th:text="${feature_vehicles.get(3).ad_title}">...</a>
 								</h3>
 								<p>
-									<b>MILEAGES</b> 7 Miles, Orland Park
+									<b
+										th:text="${#dates.format(feature_vehicles.get(3).createdDate,'aa HH:mm, yyyy/MM/dd')}"></b>
+									<label>,</label> <label
+										th:text="${feature_vehicles.get(3).cityEntity.name}"></label>
+									<label>,</label> <label
+										th:text="${feature_vehicles.get(3).vehicle_type.conditionName}">...</label>
 								</p>
 							</div>
 						</div>
 
 						<div class="single-featured-cars-box">
 							<div class="box-image">
-								<a href="car-details.html"><img
-									src="assets/images/featured-cars/featured-cars-11.jpg"
-									alt="image"></a>
+								<a th:href="@{/vehicle-details/}+${feature_vehicles.get(4).id}"><img
+									th:src="@{${feature_vehicles.get(4).main_image}}" alt="image"></a>
 
 								<div class="icon">
-									<a href="car-details.html"> <i class="flaticon-gallery">
-											2</i>
+									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(4).id}">
+										<i class="flaticon-gallery"
+										th:text="${feature_vehicles.get(4).vehicleImagesEntity.size()}">....</i>
 									</a>
 								</div>
 							</div>
 
 							<div class="box-content">
-								<div class="tag">$65,000</div>
+								<div class="tag" th:text="${feature_vehicles.get(4).price}">...</div>
 								<h3>
-									<a href="car-details.html">2021 VOLVO XC10</a>
+									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(4).id}"
+										th:text="${feature_vehicles.get(4).ad_title}">...</a>
 								</h3>
 								<p>
-									<b>MILEAGES</b> 6 Miles, Ramsey, NJ
+									<b
+										th:text="${#dates.format(feature_vehicles.get(4).createdDate,'aa HH:mm, yyyy/MM/dd')}"></b>
+									<label>,</label> <label
+										th:text="${feature_vehicles.get(4).cityEntity.name}"></label>
+									<label>,</label> <label
+										th:text="${feature_vehicles.get(4).vehicle_type.conditionName}">...</label>
 								</p>
 							</div>
 						</div>
@@ -333,164 +364,70 @@
 		<section class="models-area pt-100">
 			<div class="container">
 				<div class="models-slides owl-carousel owl-theme">
-					<div class="models-box-item">
-						<div class="row">
-							<div class="col-lg-8">
-								<div class="models-image four"></div>
-							</div>
-
-							<div class="col-lg-4">
-								<div class="models-title">
-									<h3>MOST POPULAR MODELS</h3>
+					<th:block th:each="most_popular_vehicle : ${most_popular_vehicles}">
+						<div class="models-box-item">
+							<div class="row">
+								<div class="col-lg-8">
+									<img class="models-image four" th:src="@{${feature_vehicles.get(3).main_image}}"></img>
 								</div>
-								<div class="models-item">
-									<div class="models-content">
-										<h3>LISTING INFORMATION</h3>
-										<div class="tag">$75,000</div>
-										<h4>2020 TESLA MODEL SXP-502D</h4>
+
+								<div class="col-lg-4">
+									<div class="models-title">
+										<h3>الموديلات الأكثر رواجًا</h3>
 									</div>
+									<div class="models-item">
+										<div class="models-content">
+											<h3>معلومات السيارة</h3>
+											<div class="tag" th:text="${most_popular_vehicle.price}">...</div>
+											<div>
+				                            <a th:href="@{/vehicle-details/}+${most_popular_vehicle.id}">	
+											 <h4 th:text="${most_popular_vehicle.ad_title}">...</h4>
+											</a></div>
+										</div>
 
-									<ul class="models-list">
-										<li>Mileage</li>
-										<li><span>: 128569 miles</span></li>
+										<ul class="models-list">
+											<li>الممشى (كم)</li>
+											<li><span th:text="${most_popular_vehicle.mileage}">:
+											</span></li>
 
-										<li>Body Type</li>
-										<li><span>: Sedan</span></li>
+											<li>نوع الشكل</li>
+											<li><span
+												th:text="${most_popular_vehicle.bodyTypeEntity.name}">...</span></li>
 
-										<li>Doors</li>
-										<li><span>: Two Door</span></li>
+											<li>نوع الوقود</li>
+											<li><span
+												th:text="${most_popular_vehicle.fuelTypeEntity.name}">...</span></li>
 
-										<li>Engine</li>
-										<li><span>: 2.4L I4 16V MPFI DOHC</span></li>
+											<li>الماركة</li>
+											<li><span
+												th:text="${most_popular_vehicle.vehicleModelsEntity.name}">...</span></li>
 
-										<li>Transmission</li>
-										<li><span>: 4-Speed Automatic</span></li>
+											<li>سعة المحرك</li>
+											<li><span
+												th:text="${most_popular_vehicle.engineCapicityEntity.name}">...</span></li>
 
-										<li>Drive Train</li>
-										<li><span>: Front Wheel Drive</span></li>
+											<li>سنة الموديل</li>
+											<li><span
+												th:text="${most_popular_vehicle.yearsEntities.name}">...</span></li>
 
-										<li>Exterior Color</li>
-										<li><span>: Red</span></li>
+											<li>نوع القير</li>
+											<li><span
+												th:text="${most_popular_vehicle.gearTypeEntity.name}">...</span></li>
 
-										<li>Interior Color</li>
-										<li><span>: Beige</span></li>
+											<li>المنطقة</li>
+											<li><span
+												th:text="${most_popular_vehicle.cityEntity.name}">...</span></li>
 
-										<li>Condition</li>
-										<li><span>: New</span></li>
+											<li>حالة السيارة</li>
+											<li><span
+												th:text="${most_popular_vehicle.vehicle_type.conditionName}"></span></li>
 
-										<li>Fuel</li>
-										<li><span>: GAS</span></li>
-									</ul>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="models-box-item">
-						<div class="row">
-							<div class="col-lg-8">
-								<div class="models-image"></div>
-							</div>
-
-							<div class="col-lg-4">
-								<div class="models-title">
-									<h3>MOST POPULAR MODELS</h3>
-								</div>
-								<div class="models-item">
-									<div class="models-content">
-										<h3>LISTING INFORMATION</h3>
-										<div class="tag">$95,000</div>
-										<h4>2021 KIA SOUL XC 60</h4>
-									</div>
-
-									<ul class="models-list">
-										<li>Mileage</li>
-										<li><span>: 128569 miles</span></li>
-
-										<li>Body Type</li>
-										<li><span>: Sedan</span></li>
-
-										<li>Doors</li>
-										<li><span>: Two Door</span></li>
-
-										<li>Engine</li>
-										<li><span>: 2.4L I4 16V MPFI DOHC</span></li>
-
-										<li>Transmission</li>
-										<li><span>: 4-Speed Automatic</span></li>
-
-										<li>Drive Train</li>
-										<li><span>: Front Wheel Drive</span></li>
-
-										<li>Exterior Color</li>
-										<li><span>: Red</span></li>
-
-										<li>Interior Color</li>
-										<li><span>: Beige</span></li>
-
-										<li>Condition</li>
-										<li><span>: New</span></li>
-
-										<li>Fuel</li>
-										<li><span>: GAS</span></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="models-box-item">
-						<div class="row">
-							<div class="col-lg-8">
-								<div class="models-image two"></div>
-							</div>
-
-							<div class="col-lg-4">
-								<div class="models-title">
-									<h3>MOST POPULAR MODELS</h3>
-								</div>
-								<div class="models-item">
-									<div class="models-content">
-										<h3>LISTING INFORMATION</h3>
-										<div class="tag">$99,000</div>
-										<h4>2021 SUBARU XC-60</h4>
-									</div>
-
-									<ul class="models-list">
-										<li>Mileage</li>
-										<li><span>: 128569 miles</span></li>
-
-										<li>Body Type</li>
-										<li><span>: Sedan</span></li>
-
-										<li>Doors</li>
-										<li><span>: Two Door</span></li>
-
-										<li>Engine</li>
-										<li><span>: 2.4L I4 16V MPFI DOHC</span></li>
-
-										<li>Transmission</li>
-										<li><span>: 4-Speed Automatic</span></li>
-
-										<li>Drive Train</li>
-										<li><span>: Front Wheel Drive</span></li>
-
-										<li>Exterior Color</li>
-										<li><span>: Red</span></li>
-
-										<li>Interior Color</li>
-										<li><span>: Beige</span></li>
-
-										<li>Condition</li>
-										<li><span>: New</span></li>
-
-										<li>Fuel</li>
-										<li><span>: GAS</span></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
+					</th:block>
 				</div>
 			</div>
 		</section>

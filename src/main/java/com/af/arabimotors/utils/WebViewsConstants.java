@@ -19,5 +19,7 @@ public interface WebViewsConstants {
 	String FORGOT_PASSWORD_VIEW = "website/forgot-password";
 	String RESET_PASSWORD_VIEW = "website/reset-password";
 	String SUBMIT_VEHICL_VIEW = "website/submit-vehicle";
+	String VEHICLE_DETAILS_VIEW = "website/car-details";
+	String ALL_VEHICLES_VIEW ="website/all-vehicles";
 	
 }

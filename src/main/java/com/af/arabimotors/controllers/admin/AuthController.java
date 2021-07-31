@@ -228,12 +228,12 @@ public class AuthController {
 			
 			if (confirmationEmailEntity == null) {
 				confirmUserEmail.save(confirmationEmail);
-			} else {
+			} else { // update token
 				confirmationEmail.setId(confirmationEmailEntity.getId());
 				confirmUserEmail.save(confirmationEmail);
 			}
 			
-			token = confirmationEmailEntity.getConfirmationToken();
+			token = confirmationEmail.getConfirmationToken();
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setTo(userEntity.getEmail());
 			mailMessage.setSubject("Reset Password");

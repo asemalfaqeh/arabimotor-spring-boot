@@ -78,6 +78,7 @@ public class UserVehiclesController {
 	@Autowired
 	private VehicleService vehicleService;
 
+	
 	@RequestMapping(value = WebUrlsConstants.SUBMIT_VEHICLE, method = RequestMethod.GET)
 	public ModelAndView getSubmitVehicle() {
 
@@ -94,6 +95,7 @@ public class UserVehiclesController {
 		}
 
 		return modelAndView;
+		
 	}
 
 	@RequestMapping(value = WebUrlsConstants.SUBMIT_VEHICLE, method = RequestMethod.POST)

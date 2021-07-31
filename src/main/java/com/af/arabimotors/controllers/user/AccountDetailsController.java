@@ -249,7 +249,7 @@ public class AccountDetailsController {
 	
 	@RequestMapping(value = WebUrlsConstants.SOCIAL_MEDIA_LINKS, method = RequestMethod.POST)
 	public ModelAndView userSocialMediaPost(UserSocialRequest userSocialRequest) {
-		
+	    
 		ModelAndView modelAndView = new ModelAndView();
 	
 		UserEntity userEntity = customUserSevice.findUserByEmail(UserAuthenticationHelper.getUserName());
@@ -260,10 +260,10 @@ public class AccountDetailsController {
 		}
 		
 		UserSocialEntity userSocialEntity = new UserSocialEntity();
-
+	
 	    BeanUtils.copyProperties(userSocialRequest, userSocialEntity);
 	    userSocialEntity.setUserEntity(userEntity);
-	     
+	    userSocialService.saveOrUpdate(userSocialEntity);
         modelAndView.setViewName("redirect:" + WebUrlsConstants.SOCIAL_MEDIA_LINKS);			    
 		
         return modelAndView;
