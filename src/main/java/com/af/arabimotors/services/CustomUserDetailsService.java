@@ -57,7 +57,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 		userRepository.save(userEntity);
 	}
 	
-
 	@Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 

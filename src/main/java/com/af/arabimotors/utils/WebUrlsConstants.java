@@ -31,7 +31,9 @@ public interface WebUrlsConstants {
       String SUBMIT_VEHICLE = "/post-vehicle";
       String VEHICLE_DETAILS = "/vehicle-details";
       String ALL_VEHICLES = "/all-vehicles";
+      String BODY_TYPE = "/body-types";
       String VEHICLES_SORT = "/sort-vehicles";
+      String ADVANCED_SEARCH = "/advanced-search";
       
     
 }

@@ -91,8 +91,20 @@ public class VehiclesEntity {
 
 	 @Temporal(TemporalType.TIMESTAMP)
 	 private Date createdDate;
+	 
+	 @Column(name = "views", nullable = false, columnDefinition = "Integer default 0")
+	 private Integer views;
 	
 	 
+	 
+	public Integer getViews() {
+		return views;
+	}
+
+	public void setViews(Integer views) {
+		this.views = views;
+	}
+
 	public Date getCreatedDate() {
 		return createdDate;
 	}

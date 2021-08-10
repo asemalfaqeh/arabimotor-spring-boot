@@ -21,5 +21,6 @@ public interface WebViewsConstants {
 	String SUBMIT_VEHICL_VIEW = "website/submit-vehicle";
 	String VEHICLE_DETAILS_VIEW = "website/car-details";
 	String ALL_VEHICLES_VIEW ="website/all-vehicles";
+	String ADVANCED_SEARCH_VIEW = "website/advanced-search";
 	
 }

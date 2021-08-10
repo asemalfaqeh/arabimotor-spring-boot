@@ -101,7 +101,7 @@
 
 								<ul class="info-list">
 						         <th:block th:each="feature : ${features}">
-									<li th:text="${feature}"><i class="flaticon-tick"></i>.</li>
+									<li><i class="flaticon-tick"></i><label th:text="${feature}">...</label></li>
 								   </th:block>
 								</ul>
 							</div>
@@ -149,43 +149,40 @@
 
 					<div class="col-lg-4 col-md-12">
 						<div class="car-details-contact">
-							<h3>EMAIL SELLER</h3>
+							<h3>تواصل مع البائع</h3>
 
-							<form>
-								<div class="form-group">
-									<label>Your Name</label>
-									<input type="text" class="form-control">
-								</div>
+	                    <div th:if="${error}">
+							<th:block th:each="e : ${error}">
+								<label class="alert danger" th:text="${e.defaultMessage}"></label>
+								<br>
+							</th:block>
+						</div>
 
+							<form th:action="@{/vehicle-details/}+${vehicle.id}" method="post">
 								<div class="form-group">
-									<label>Your Email</label>
-									<input type="text" class="form-control">
-								</div>
-
-								<div class="form-group">
-									<label>Your Phone</label>
-									<input type="text" class="form-control">
+									<label>الاسم الكامل</label>
+									<input type="text" name="customerName" class="form-control">
 								</div>
 
 								<div class="form-group">
-									<label>Zip Code</label>
-									<input type="text" class="form-control">
+									<label>بريد الالكتروني</label>
+									<input name="customerEmail" type="text" class="form-control">
 								</div>
 
 								<div class="form-group">
-									<label>Your Message</label>
-									<textarea name="message" class="form-control"></textarea>
+									<label>رقم الهاتف المحمول</label>
+									<input name="customerPhone" type="text" class="form-control">
 								</div>
 
-								<div class="form-check">
-									<input type="checkbox" class="form-check-input" id="checkme">
-
-									<label class="form-check-label" for="checkme">Send me price drop & new listing
-										alerts via email.</label>
+								<div class="form-group">
+									<label>الرسالة</label>
+									<textarea name="customerMsg" class="form-control"></textarea>
 								</div>
+								
+								<input type="hidden" name="vehiclesEntity" th:value="${vehicle.id}"/>
 
 								<button type="submit" class="default-btn">
-									Send Email
+									ارسال
 									<span></span>
 								</button>
 							</form>

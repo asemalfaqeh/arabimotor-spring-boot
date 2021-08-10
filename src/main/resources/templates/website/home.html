@@ -23,11 +23,12 @@
 
 							<div class="tab_content">
 								<div class="tabs_item">
-									<form>
+									<form th:action="@{/all-vehicles}" method="post">
 										<div class="row">
+										<input type="hidden" value="1" name="conditionType"/>
 											<div class="col-lg-4 col-md-6">
 												<div class="form-group">
-													<select>
+													<select name="year">
 														<option value="0">السنة</option>
 														<th:block th:each="year : ${years}">
 															<option th:value="${year.id}" th:text="${year.name}"></option>
@@ -38,7 +39,7 @@
 
 											<div class="col-lg-4 col-md-6">
 												<div class="form-group">
-													<select>
+													<select name="model">
 														<option value="0">الموديل</option>
 														<th:block th:each="model : ${models}">
 															<option th:value="${model.id}" th:text="${model.name}"></option>
@@ -49,10 +50,10 @@
 
 											<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3">
 												<div class="form-group">
-													<select>
+													<select name="price">
 														<option value="0">أقصى سعر</option>
 														<th:block th:each="price : ${prices}">
-															<option th:value="${price.id}" th:text="${price.name}"></option>
+															<option th:value="${price.name}" th:text="${price.name}"></option>
 														</th:block>
 													</select>
 												</div>
@@ -68,11 +69,14 @@
 								</div>
 
 								<div class="tabs_item">
-									<form>
+									<form th:action="@{/all-vehicles}" method="post">
 										<div class="row">
+										
+											<input type="hidden" value="2" name="conditionType"/>
+										
 											<div class="col-lg-4 col-md-6">
 												<div class="form-group">
-													<select>
+													<select name="year">
 														<option value="0">السنة</option>
 														<th:block th:each="year : ${years}">
 															<option th:value="${year.id}" th:text="${year.name}"></option>
@@ -83,7 +87,7 @@
 
 											<div class="col-lg-4 col-md-6">
 												<div class="form-group">
-													<select>
+													<select name="model">
 														<option value="0">الموديل</option>
 														<th:block th:each="model : ${models}">
 															<option th:value="${model.id}" th:text="${model.name}"></option>
@@ -94,10 +98,10 @@
 
 											<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3">
 												<div class="form-group">
-													<select>
+													<select name="price">
 														<option value="0">أقصى سعر</option>
 														<th:block th:each="price : ${prices}">
-															<option th:value="${price.id}" th:text="${price.name}"></option>
+															<option th:value="${price.name}" th:text="${price.name}"></option>
 														</th:block>
 													</select>
 												</div>
@@ -113,7 +117,7 @@
 								</div>
 
 								<div class="advanced-search">
-									<a href="advanced-search.html">بحث متقدم</a>
+									<a th:href="@{/advanced-search}">بحث متقدم</a>
 								</div>
 							</div>
 						</div>
@@ -122,12 +126,13 @@
 							<th:block th:each="type : ${body_types}">
 								<div class="list">
 									<div class="icon">
-										<a href=""><i th:class="${type.image}"></i></a>
+										<a th:href="@{/body-types?id=}+${type.id}">
+										<i th:class="${type.image}"></i>
+										</a>
 									</div>
 									<h3>
-										<a href="" th:text="${type.name}">${type.name}</a>
+										<a href="" th:text="${type.name}">...</a>
 									</h3>
-									<span>(30)</span>
 								</div>
 							</th:block>
 
