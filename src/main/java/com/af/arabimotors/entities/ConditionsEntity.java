@@ -33,7 +33,6 @@ public class ConditionsEntity implements Serializable{
         this.enabled = enabled;
     }
 
-    
 
 	public Long getId() {
 		return id;

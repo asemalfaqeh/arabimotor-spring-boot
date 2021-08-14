@@ -1,8 +1,11 @@
 package com.af.arabimotors.model.request;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.af.arabimotors.entities.UserEntity;
 import com.af.arabimotors.entities.VehiclesEntity;
 
 public class ContactSellerRequest {
@@ -23,8 +26,24 @@ public class ContactSellerRequest {
 	@Size(max = 500, message = "يجب تم لا يحتوي الحقل على اكثر من 500 حرف")
 	private String customerMsg;
 	
+	private UserEntity userEntity;
+	
 	private VehiclesEntity vehiclesEntity;
 	
+	private Date createDate;
+	
+	
+	
+	
+	
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
 	public VehiclesEntity getVehiclesEntity() {
 		return vehiclesEntity;
 	}
@@ -64,14 +83,24 @@ public class ContactSellerRequest {
 	public void setCustomerMsg(String customerMsg) {
 		this.customerMsg = customerMsg;
 	}
+	
+
+	public UserEntity getUserEntity() {
+		return userEntity;
+	}
+
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
 
 	@Override
 	public String toString() {
 		return "ContactSellerRequest [customerName=" + customerName + ", customerEmail=" + customerEmail
-				+ ", customerPhone=" + customerPhone + ", customerMsg=" + customerMsg + ", vehicleId="
-				+ "]";
+				+ ", customerPhone=" + customerPhone + ", customerMsg=" + customerMsg + ", userEntity=" + userEntity
+				+ ", vehiclesEntity=" + vehiclesEntity + ", createDate=" + createDate + "]";
 	}
 
+	
 	
 	
 }

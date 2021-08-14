@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{front-end-template.html}">
 
 <head>
-	<title>ArabiMotor - Home</title>
+<title>ArabiMotor - Home</title>
 </head>
 
 <body>
@@ -37,21 +36,21 @@
 					<div class="col-lg-8 col-md-12">
 						<div class="car-details-gallery">
 							<div class="car-details-main">
-							
-							<th:block th:each="img : ${images}">
-								<div class="item">
-									<img th:src="${img}" alt="image">
-								</div>
-							</th:block>
-							
+
+								<th:block th:each="img : ${images}">
+									<div class="item">
+										<img th:src="${img}" alt="image">
+									</div>
+								</th:block>
+
 							</div>
 
 							<div class="car-details-preview">
-							<th:block th:each="img : ${images}">
-								<div class="item">
-									<img th:src="${img}" alt="image">
-								</div>
-							</th:block>
+								<th:block th:each="img : ${images}">
+									<div class="item">
+										<img th:src="${img}" alt="image">
+									</div>
+								</th:block>
 							</div>
 						</div>
 
@@ -65,10 +64,10 @@
 								<h3>بيانات السيارة</h3>
 
 								<ul class="info-list">
-								   
+
 									<li>حالة السيارة</li>
 									<li><span th:text="${vehicle.vehicle_type.conditionName}"></span></li>
-								   
+
 									<li>الممشى (كم)</li>
 									<li><span th:text="${vehicle.mileage}">...</span></li>
 
@@ -88,7 +87,8 @@
 									<li><span th:text=${vehicle.yearsEntities.name}></span></li>
 
 									<li>نوع القير</li>
-									<li><span th:text="${vehicle.gearTypeEntity.name}">: Red</span></li>
+									<li><span th:text="${vehicle.gearTypeEntity.name}">:
+											Red</span></li>
 
 									<li>المنطقة</li>
 									<li><span th:text="${vehicle.cityEntity.name}"></span></li>
@@ -100,9 +100,11 @@
 								<h3>ميزات السيارة</h3>
 
 								<ul class="info-list">
-						         <th:block th:each="feature : ${features}">
-									<li><i class="flaticon-tick"></i><label th:text="${feature}">...</label></li>
-								   </th:block>
+						
+									<th:block th:each="feature : ${features}">
+										<li> <i  class="flaticon-tick"></i>
+										<label th:text="${feature}"></label></li>
+									</th:block>
 								</ul>
 							</div>
 
@@ -116,9 +118,9 @@
 
 								<div class="share-list">
 									<a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
-									<a href="#" target="_blank"><i class='bx bx-camera'></i></a>
-									<a href="#" target="_blank"><i class='bx bxl-twitter'></i></a>
-									<a href="#" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
+									<a href="#" target="_blank"><i class='bx bx-camera'></i></a> <a
+										href="#" target="_blank"><i class='bx bxl-twitter'></i></a> <a
+										href="#" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
 								</div>
 							</div>
 
@@ -132,58 +134,63 @@
 
 								<div class="info-list">
 									<h4>البريد الالكتروني</h4>
-									<a href="mailto:mund@gamil.com" th:text="${vehicle.userEntity.email}"></a>
+									<a href="mailto:mund@gamil.com"
+										th:text="${vehicle.userEntity.email}"></a>
 								</div>
 
 								<div class="info-list">
 									<h4>رقم الهاتف المحمول</h4>
-									<a href="tel:815-249-4756" th:text="${vehicle.userEntity.phone}">...</a>
+									<a href="tel:815-249-4756"
+										th:text="${vehicle.userEntity.phone}">...</a>
 								</div>
 
-								
+
 							</div>
 
-							
+
 						</div>
 					</div>
 
 					<div class="col-lg-4 col-md-12">
 						<div class="car-details-contact">
-							<h3>تواصل مع البائع</h3>
-
-	                    <div th:if="${error}">
-							<th:block th:each="e : ${error}">
-								<label class="alert danger" th:text="${e.defaultMessage}"></label>
-								<br>
-							</th:block>
-						</div>
-
-							<form th:action="@{/vehicle-details/}+${vehicle.id}" method="post">
+							<h3>مراسلة البائع</h3>
+							<div th:if="${error}">
+								<th:block th:each="e : ${error}">
+									<label class="alert danger" th:text="${e.defaultMessage}"></label>
+									<br>
+								</th:block>
+							</div>
+							<form th:action="@{/vehicle-details/}+${vehicle.id}"
+								method="post">
 								<div class="form-group">
-									<label>الاسم الكامل</label>
-									<input type="text" name="customerName" class="form-control">
+									<label>الاسم الكامل</label> <input type="text"
+										name="customerName" class="form-control">
+
 								</div>
 
 								<div class="form-group">
-									<label>بريد الالكتروني</label>
-									<input name="customerEmail" type="text" class="form-control">
+									<label>بريد الالكتروني</label> <input name="customerEmail"
+										type="text" class="form-control">
+
 								</div>
 
 								<div class="form-group">
-									<label>رقم الهاتف المحمول</label>
-									<input name="customerPhone" type="text" class="form-control">
+									<label>رقم الهاتف المحمول</label> <input name="customerPhone"
+										type="text" class="form-control">
+
 								</div>
 
 								<div class="form-group">
 									<label>الرسالة</label>
 									<textarea name="customerMsg" class="form-control"></textarea>
+
 								</div>
-								
-								<input type="hidden" name="vehiclesEntity" th:value="${vehicle.id}"/>
+
+								<input type="hidden" name="vehiclesEntity"
+									th:value="${vehicle.id}" />
 
 								<button type="submit" class="default-btn">
-									ارسال
-									<span></span>
+									ارسال <span></span>
 								</button>
 							</form>
 						</div>

@@ -34,6 +34,5 @@ public interface WebUrlsConstants {
       String BODY_TYPE = "/body-types";
       String VEHICLES_SORT = "/sort-vehicles";
       String ADVANCED_SEARCH = "/advanced-search";
-      
-    
+      String MESSAGES = "/messages";    
 }

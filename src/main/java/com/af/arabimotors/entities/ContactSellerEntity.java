@@ -1,5 +1,7 @@
 package com.af.arabimotors.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.core.sym.Name;
+
+import jdk.jfr.Timestamp;
 
 @Entity
 @Table(name = "contact_seller")
@@ -33,7 +41,25 @@ public class ContactSellerEntity {
 	@OneToOne(fetch  = FetchType.LAZY)
 	@JoinColumn(name = "vehicle_id", referencedColumnName = "id")
 	private VehiclesEntity vehiclesEntity;
+
+	@Column(name = "enable", nullable = false, columnDefinition = "boolean default false")
+	private boolean enable;
 	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private UserEntity userEntity;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createDate;
+	
+	
+	
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -71,12 +97,31 @@ public class ContactSellerEntity {
 	public void setVehiclesEntity(VehiclesEntity vehiclesEntity) {
 		this.vehiclesEntity = vehiclesEntity;
 	}
+		
+	public UserEntity getUserEntity() {
+		return userEntity;
+	}
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
 	
+	
+	
+	public boolean isEnable() {
+		return enable;
+	}
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
 	@Override
 	public String toString() {
 		return "ContactSellerEntity [id=" + id + ", customerName=" + customerName + ", customerEmail=" + customerEmail
-				+ ", customerPhone=" + customerPhone + ", customerMsg=" + customerMsg + "]";
+				+ ", customerPhone=" + customerPhone + ", customerMsg=" + customerMsg + ", vehiclesEntity="
+				+ vehiclesEntity + ", enable=" + enable + ", userEntity=" + userEntity + ", createDate=" + createDate
+				+ "]";
 	}
+
+	
 	
 	
 	

@@ -88,7 +88,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				  WebUrlsConstants.CHANGE_PASSWORD,
 				  WebUrlsConstants.SOCIAL_MEDIA_LINKS,
 				  WebUrlsConstants.RESEND_VERIFY_EMAIL,
-				  WebUrlsConstants.SUBMIT_VEHICLE
+				  WebUrlsConstants.SUBMIT_VEHICLE,
+				  WebUrlsConstants.MESSAGES
 				  
 		};
 	}

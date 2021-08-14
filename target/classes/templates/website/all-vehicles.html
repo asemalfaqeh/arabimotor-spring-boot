@@ -60,7 +60,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-car-shop-box">
                             <div class="image">
-                                <a th:href="@{/vehicle-details/}+${v.id}"><img th:src="${v.main_image}" alt="image"></a>
+                                <a th:href="@{/vehicle-details/}+${v.id}"><img th:src="@{${v.main_image}}" alt="image"></a>
                                 
                                 <div class="icon">
                                     <a href="car-details.html">

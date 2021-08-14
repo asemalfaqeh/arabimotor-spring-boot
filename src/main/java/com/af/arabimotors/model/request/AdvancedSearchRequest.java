@@ -12,7 +12,6 @@ public class AdvancedSearchRequest {
 	private String adTitle;
 	
 	
-	
 	public String getAdTitle() {
 		return adTitle;
 	}

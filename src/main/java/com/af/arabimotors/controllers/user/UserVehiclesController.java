@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.af.arabimotors.entities.BodyTypeEntity;
 import com.af.arabimotors.entities.CityEntity;
 import com.af.arabimotors.entities.ConditionsEntity;
+import com.af.arabimotors.entities.ContactSellerEntity;
 import com.af.arabimotors.entities.EngineCapicityEntity;
 import com.af.arabimotors.entities.FuelTypeEntity;
 import com.af.arabimotors.entities.GearTypeEntity;
@@ -33,6 +34,7 @@ import com.af.arabimotors.model.request.SubmitVehicleRequest;
 import com.af.arabimotors.services.BodyTypeService;
 import com.af.arabimotors.services.CityService;
 import com.af.arabimotors.services.ConditionsService;
+import com.af.arabimotors.services.ContactSellerService;
 import com.af.arabimotors.services.CustomUserDetailsService;
 import com.af.arabimotors.services.EngineCapacityService;
 import com.af.arabimotors.services.FuelTypeService;
@@ -77,6 +79,9 @@ public class UserVehiclesController {
 
 	@Autowired
 	private VehicleService vehicleService;
+	
+	@Autowired
+	private ContactSellerService contactSellerService;
 
 	
 	@RequestMapping(value = WebUrlsConstants.SUBMIT_VEHICLE, method = RequestMethod.GET)
@@ -159,12 +164,22 @@ public class UserVehiclesController {
 		}
 
 		vehiclesEntity.setVehicleImagesEntity(vehicleImagesEntities);
+		vehiclesEntity.setViews(0);
 		vehicleService.saveVehicle(vehiclesEntity);
 
 		modelAndView.setViewName("redirect:" + WebUrlsConstants.WEB_HOME_PAGE);
 		System.err.println("VehicleEntity: " + vehiclesEntity.toString());
 		return modelAndView;
 
+	}
+	
+	@RequestMapping(value = WebUrlsConstants.MESSAGES, method = RequestMethod.GET)
+	public ModelAndView messagesController() {
+		ModelAndView modelAndView = new ModelAndView();
+		List<ContactSellerEntity> contactSellerEntities = contactSellerService.getContactSellerEntitiesService();
+		modelAndView.addObject("messages", contactSellerEntities);
+		modelAndView.setViewName(WebViewsConstants.MESSAGES_VIEW);
+		return modelAndView;
 	}
 
 	private void updateVehicleModelAndViewObjects(ModelAndView modelAndView, String email) {
@@ -191,5 +206,6 @@ public class UserVehiclesController {
 		modelAndView.addObject("cities", cityEntities);
 
 	}
+ 
 
 }

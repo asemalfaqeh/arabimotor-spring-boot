@@ -23,7 +23,8 @@ import com.sun.istack.NotNull;
 public class UserEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
 
 	@Column(name = "email", nullable = false, unique = true, length = 50)

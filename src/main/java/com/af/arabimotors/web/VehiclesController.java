@@ -1,10 +1,12 @@
 package com.af.arabimotors.web;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -127,12 +129,10 @@ public class VehiclesController {
 				modelAndView.addObject("error", bindingResult.getAllErrors());
 			} else {
 				ContactSellerEntity contactSellerEntity = new ContactSellerEntity();
-				contactSellerEntity.setCustomerEmail(contactSellerRequest.getCustomerEmail());
-				contactSellerEntity.setCustomerMsg(contactSellerRequest.getCustomerMsg());
-				contactSellerEntity.setCustomerName(contactSellerRequest.getCustomerName());
-				contactSellerEntity.setCustomerPhone(contactSellerRequest.getCustomerPhone());
-				contactSellerEntity.setVehiclesEntity(contactSellerRequest.getVehiclesEntity());
+				contactSellerRequest.setCreateDate(new Date());
+				BeanUtils.copyProperties(contactSellerRequest, contactSellerEntity);
 				contactSellerService.saveContactSellerInfo(contactSellerEntity);
+				logger.info(contactSellerRequest.getCreateDate()+"");
 				logger.info("Success Save Contact Seller Info");
 			}
 		}

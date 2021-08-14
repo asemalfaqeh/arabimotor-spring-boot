@@ -1,5 +1,7 @@
 package com.af.arabimotors.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class ContactSellerService {
 	
 	public void saveContactSellerInfo(ContactSellerEntity contactSellerEntity) {
 		contactSellerRepository.save(contactSellerEntity);
+	}
+	
+	public List<ContactSellerEntity> getContactSellerEntitiesService(){
+		return contactSellerRepository.findAll();
 	}
 	
 }
