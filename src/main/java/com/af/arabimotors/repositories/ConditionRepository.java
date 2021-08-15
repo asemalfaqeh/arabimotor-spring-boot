@@ -26,7 +26,7 @@ public interface ConditionRepository extends JpaRepository<ConditionsEntity, Lon
 	
 	@Modifying
 	@Query(value = "update conditions e set e.enabled = 0 where e.id = :id", nativeQuery = true)
-	public void disableCondition(@Param("id") String id);
+	void disableCondition(@Param("id") String id);
 	
 	public ConditionsEntity findById(String id);
 

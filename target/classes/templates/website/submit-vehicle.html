@@ -98,10 +98,16 @@
 										<p class="description">يجب ان لا يحتوى النص على اكثر من 500 حرف</p>
 									</div>
 
+									<div class="form-group">
+										<label>ميزات السيارة</label>
+										<textarea name="vehicleFeatures" class="form-control"></textarea>
+										<p class="description" aria-placeholder="مكيف،اغلاق مركزي،">يجب ان لا يحتوى النص على اكثر من 500 حرف</p>
+									</div>
+
 
 									<div class="col-lg-6 col-md-6">
 										<div class="form-group">
-											<label>السعر (شيكل)</label> <input type="text" name="price"
+											<label>السعر (شيكل)</label> <input required type="text" name="price"
 												class="form-control">
 										</div>
 									</div>
@@ -154,7 +160,7 @@
 									</div>
 
 									<div class="col-lg-6 col-md-12">
-										<label for="year">الموديل</label>
+										<label >الموديل</label>
 										<div class="form-group">
 											<select id="yearsEntities" name="yearsEntities">
 												<th:block th:each="year : ${years}">
@@ -177,7 +183,7 @@
 
 									<div class="col-lg-6 col-md-6">
 										<div class="form-group">
-											<label>الممشى (كم) </label> <input type="text" name="mileage"
+											<label>الممشى (كم) </label> <input required type="text" name="mileage"
 												class="form-control">
 										</div>
 									</div>
@@ -206,6 +212,45 @@
 									</div>
 
 
+									<div class="col-lg-6 col-md-12">
+										<label >الزجاج</label>
+										<div class="form-group">
+											<select id="glass" name="glass">
+												<option th:value="زجاج" th:text="زجاج"></option>
+												<option th:value="عادي" th:text="عادي"></option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label >الزجاج</label>
+										<div class="form-group">
+											<select id="drivingLicence" name="drivingLicence">
+												<option th:value="اسرائيلية" th:text="اسرائيلية"></option>
+												<option th:value="فلسطينية" th:text="فلسطينية"></option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label >الزجاج</label>
+										<div class="form-group">
+											<select id="paymentMethod" name="paymentMethod">
+												<option th:value="نقدي" th:text="نقدي"></option>
+												<option th:value="اقساط" th:text="اقساط"></option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label >الزجاج</label>
+										<div class="form-group">
+											<select id="originalCar" name="originalCar">
+												<option th:value="عمومي" th:text="عمومي"></option>
+												<option th:value="خصوصي" th:text="خصوصي"></option>
+											</select>
+										</div>
+									</div>
 
 									<div class="col-lg-12 col-md-12">
 										<div class="form-group">

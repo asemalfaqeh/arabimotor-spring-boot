@@ -1,8 +1,10 @@
 package com.af.arabimotors.model.request;
 
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -58,6 +60,10 @@ public class SubmitVehicleRequest {
 	// igonre in vehicle entity //
 	private MultipartFile[] multipartFiles;
 
+	private String originalCar;
+	private String drivingLicence;
+	private String paymentMethod;
+	private String glass;
 
 	@NotBlank(message = "{field.not_empty}")
 	@Size(max = 500, message = "{field.too_long}")
@@ -70,8 +76,38 @@ public class SubmitVehicleRequest {
 	private CityEntity cityEntity;
 
 
-	
-	
+	public String getOriginalCar() {
+		return originalCar;
+	}
+
+	public void setOriginalCar(String originalCar) {
+		this.originalCar = originalCar;
+	}
+
+	public String getDrivingLicence() {
+		return drivingLicence;
+	}
+
+	public void setDrivingLicence(String drivingLicence) {
+		this.drivingLicence = drivingLicence;
+	}
+
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public String getGlass() {
+		return glass;
+	}
+
+	public void setGlass(String glass) {
+		this.glass = glass;
+	}
+
 	public MultipartFile[] getMultipartFiles() {
 		return multipartFiles;
 	}
@@ -253,18 +289,31 @@ public class SubmitVehicleRequest {
 
 	@Override
 	public String toString() {
-		return "SubmitVehicleRequest [ad_title=" + ad_title + ", price=" + price + ", vehicle_type=" + vehicle_type
-				+ ", bodyTypeEntity=" + bodyTypeEntity + ", vehicleModelsEntity=" + vehicleModelsEntity
-				+ ", fuelTypeEntity=" + fuelTypeEntity + ", mileage=" + mileage + ", gearTypeEntity=" + gearTypeEntity
-				+ ", engineCapicityEntity=" + engineCapicityEntity + ", main_image=" + main_image
-				+ ", description=" + description + ", userEntity="
-				+ userEntity + ", yearsEntities=" + yearsEntities + ", cityEntity=" + cityEntity + "]";
+		return "SubmitVehicleRequest{" +
+				"ad_title='" + ad_title + '\'' +
+				", price='" + price + '\'' +
+				", vehicle_type=" + vehicle_type +
+				", bodyTypeEntity=" + bodyTypeEntity +
+				", vehicleModelsEntity=" + vehicleModelsEntity +
+				", fuelTypeEntity=" + fuelTypeEntity +
+				", vehicleFeatures='" + vehicleFeatures + '\'' +
+				", mileage='" + mileage + '\'' +
+				", gearTypeEntity=" + gearTypeEntity +
+				", engineCapicityEntity=" + engineCapicityEntity +
+				", main_image='" + main_image + '\'' +
+				", createdDate=" + createdDate +
+				", mainImageMultipartFile=" + mainImageMultipartFile +
+				", multipartFiles=" + Arrays.toString(multipartFiles) +
+				", originalCar='" + originalCar + '\'' +
+				", drivingLicence='" + drivingLicence + '\'' +
+				", paymentMethod='" + paymentMethod + '\'' +
+				", glass='" + glass + '\'' +
+				", description='" + description + '\'' +
+				", userEntity=" + userEntity +
+				", yearsEntities=" + yearsEntities +
+				", cityEntity=" + cityEntity +
+				'}';
 	}
-
-
-	
-	
-	
 }
 
 

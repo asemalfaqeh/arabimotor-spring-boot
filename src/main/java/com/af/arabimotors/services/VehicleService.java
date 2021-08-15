@@ -74,6 +74,13 @@ public class VehicleService {
 	public List<VehiclesEntity> findbyAdTitleService(String adTitle) {
 		return vehicleRepository.findByAd_title(adTitle);
 	}
-	
+
+	public List<VehiclesEntity> findAllByUserEntityService(String userId){
+		return vehicleRepository.findAllByUserEntity(userId);
+	}
+
+	public void deleteUserVehicle(String id){
+		vehicleRepository.deleteById(Long.parseLong(id));
+	}
 
 }

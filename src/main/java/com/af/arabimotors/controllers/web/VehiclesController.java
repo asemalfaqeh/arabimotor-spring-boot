@@ -1,9 +1,9 @@
-package com.af.arabimotors.web;
+package com.af.arabimotors.controllers.web;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
+import com.af.arabimotors.entities.*;
+import com.af.arabimotors.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -16,28 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.af.arabimotors.entities.BodyTypeEntity;
-import com.af.arabimotors.entities.ConditionsEntity;
-import com.af.arabimotors.entities.ContactSellerEntity;
-import com.af.arabimotors.entities.FuelTypeEntity;
-import com.af.arabimotors.entities.GearTypeEntity;
-import com.af.arabimotors.entities.VehicleImagesEntity;
-import com.af.arabimotors.entities.VehicleModelsEntity;
-import com.af.arabimotors.entities.VehiclesEntity;
-import com.af.arabimotors.entities.YearsEntity;
 import com.af.arabimotors.model.request.AdvancedSearchRequest;
 import com.af.arabimotors.model.request.ContactSellerRequest;
-import com.af.arabimotors.services.BodyTypeService;
-import com.af.arabimotors.services.ConditionsService;
-import com.af.arabimotors.services.ContactSellerService;
-import com.af.arabimotors.services.FuelTypeService;
-import com.af.arabimotors.services.GearTypeService;
-import com.af.arabimotors.services.MaxPricesService;
-import com.af.arabimotors.services.VehicleModelsService;
-import com.af.arabimotors.services.VehicleService;
-import com.af.arabimotors.services.YearsService;
 import com.af.arabimotors.utils.WebUrlsConstants;
 import com.af.arabimotors.utils.WebViewsConstants;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class VehiclesController {
@@ -69,6 +53,9 @@ public class VehiclesController {
 	@Autowired
 	private ContactSellerService contactSellerService;
 
+	@Autowired
+	private UserSocialService userSocialService;
+
 	private Logger logger = LoggerFactory.getLogger(VehiclesController.class);
 
 	@RequestMapping(value = WebUrlsConstants.VEHICLE_DETAILS + "/{id}", method = { RequestMethod.GET,
@@ -91,7 +78,7 @@ public class VehiclesController {
 
 			vehicle = vehiclesEntity.get();
 
-			System.err.println("Vehicle: " + vehicle.toString());
+			System.err.println("Vehicle: " + vehicle);
 
 			for (VehicleImagesEntity vehicleImagesEntity : vehicle.getVehicleImagesEntity()) {
 				images.add("/" + vehicleImagesEntity.getImage());
@@ -113,10 +100,11 @@ public class VehiclesController {
 						featuresArr = featuresStr.split(",");
 					}
 
-					for (String featuers : featuresArr) {
-						featureList.add(featuers);
-					}
-					
+					featureList.addAll(Arrays.asList(featuresArr));
+
+					UserSocialEntity userSocialEntity = userSocialService.findUserSocialEntity(vehicle.getUserEntity());
+					modelAndView.addObject("social",userSocialEntity);
+
 				} catch (Exception e) {
 					// TODO: handle exception
 					System.err.println(e.getMessage());
@@ -137,6 +125,7 @@ public class VehiclesController {
 			}
 		}
 
+
 		modelAndView.addObject("vehicle", vehicle);
 		modelAndView.addObject("images", images);
 		modelAndView.addObject("features", featureList);
@@ -149,13 +138,14 @@ public class VehiclesController {
 
 	@RequestMapping(value = WebUrlsConstants.ALL_VEHICLES, method = RequestMethod.GET)
 	public ModelAndView allVehicles(@RequestParam("sort") Optional<String> sortName,
-			@RequestParam("condition_type") Optional<String> conditionType) {
+									@RequestParam("condition_type") Optional<String> conditionType, HttpSession httpSession) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
 		modelAndView.setViewName(WebViewsConstants.ALL_VEHICLES_VIEW);
 		List<VehiclesEntity> vehiclesEntities = new ArrayList<>();
 		// modelAndView.addObject("select_sort",1);
+
 		if (sortName.isPresent()) {
 			if (sortName.get().equals("1")) {
 				vehiclesEntities = vehicleService.findAllOrderByPriceDESC();
@@ -181,6 +171,9 @@ public class VehiclesController {
 		} else {
 			vehiclesEntities = vehicleService.findAll();
 		}
+/*
+
+ */
 
 		modelAndView.addObject("vehicles", vehiclesEntities);
 		logger.debug("Vehicles Size: " + vehiclesEntities.size());

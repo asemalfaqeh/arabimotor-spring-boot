@@ -9,5 +9,4 @@ import com.af.arabimotors.entities.UserSocialEntity;
 @Repository
 public interface UserSocialRepository extends JpaRepository<UserSocialEntity, Long>{
     UserSocialEntity findByUserEntity(UserEntity userEntity);
-    
 }

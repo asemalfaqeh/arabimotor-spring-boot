@@ -3,16 +3,14 @@ package com.af.arabimotors.controllers.user;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -96,7 +94,6 @@ public class UserVehiclesController {
 		} else {
 			updateVehicleModelAndViewObjects(modelAndView, email);
 			modelAndView.setViewName(WebViewsConstants.SUBMIT_VEHICL_VIEW);
-
 		}
 
 		return modelAndView;
@@ -104,8 +101,7 @@ public class UserVehiclesController {
 	}
 
 	@RequestMapping(value = WebUrlsConstants.SUBMIT_VEHICLE, method = RequestMethod.POST)
-	public ModelAndView postNewVehicle(@Validated SubmitVehicleRequest submitVehicleRequest,
-			BindingResult bindingResult) {
+	public ModelAndView postNewVehicle(@Validated SubmitVehicleRequest submitVehicleRequest, BindingResult bindingResult) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -179,6 +175,34 @@ public class UserVehiclesController {
 		List<ContactSellerEntity> contactSellerEntities = contactSellerService.getContactSellerEntitiesService();
 		modelAndView.addObject("messages", contactSellerEntities);
 		modelAndView.setViewName(WebViewsConstants.MESSAGES_VIEW);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = WebUrlsConstants.MY_VEHICLES, method = RequestMethod.GET)
+	public ModelAndView allUserVehicles(){
+		String email = UserAuthenticationHelper.getUserName();
+		UserEntity userEntity = customUserDetailsService.findUserByEmail(email);
+		List<VehiclesEntity> vehiclesEntities = vehicleService.findAllByUserEntityService(userEntity.getId()+"");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("vehicles", vehiclesEntities);
+		modelAndView.setViewName(WebViewsConstants.MY_CARS);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = WebUrlsConstants.DELETE_VEHICLE+"/{id}", method = RequestMethod.GET)
+	public ModelAndView deleteVehicle(@PathVariable("id") String id){
+		ModelAndView modelAndView = new ModelAndView();
+		String email = UserAuthenticationHelper.getUserName();
+		UserEntity userEntity = customUserDetailsService.findUserByEmail(email);
+
+		Optional<VehiclesEntity> vehiclesEntity = vehicleService.findVehicleById(id);
+		if (vehiclesEntity.isPresent()) {
+			if (vehiclesEntity.get().getUserEntity().getId().equals(userEntity.getId())) {
+				vehicleService.deleteUserVehicle(id);
+			}
+		}
+
+		modelAndView.setViewName("redirect:" + WebUrlsConstants.MY_VEHICLES);
 		return modelAndView;
 	}
 

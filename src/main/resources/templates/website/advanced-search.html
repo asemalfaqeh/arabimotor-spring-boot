@@ -14,12 +14,11 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-banner-content">
-                            <h2>Advanced Search</h2>
+                            <h2>بحث متقدم</h2>
 
                             <ul class="pages-list">
-                                <li><a href="index.html">Home</a></li>
-                                <li>Pages</li>
-                                <li><span>Advanced Search</span></li>
+                                <li><a th:href="@{/home}">الرئيسية</a></li>
+                                <li><span>بحث متقدم</span></li>
                             </ul>
                         </div>
                     </div>
@@ -35,10 +34,9 @@
                     <div class="col-lg-3 col-md-12">
                         <aside class="widget-area">
                             <div class="widget widget_search">
-                                <form class="search-form">
-                                    <label>
-                                        <span class="screen-reader-text">Search for:</span>
-                                        <input type="search" class="search-field" placeholder="Search...">
+                                <form class="search-form" th:action="@{/advanced-search}" method="post">
+                                    <label> <span class="screen-reader-text">بحث..</span> <input
+                                            type="search" name="adTitle" class="search-field" placeholder="البحث...">
                                     </label>
                                     <button type="submit">
                                         <i class='bx bx-search-alt'></i>
@@ -47,130 +45,86 @@
                             </div>
 
                             <div class="widget widget_filter_results">
-                                <h3 class="widget-title">FILTER RESULTS</h3>
-    
-                                <form>
+                                <h3 class="widget-title">تصفية النتائج</h3>
+
+                                <form th:action="@{/advanced-search}" method="post">
                                     <div class="form-group">
-                                        <label>Search Radius</label>
-                                        
-                                        <select>
-                                            <option>Any</option>
-                                            <option>Sedan</option>
-                                            <option>MPV</option>
-                                            <option>SUV</option>
-                                            <option>Crossover</option>
-                                            <option>Coupe</option>
-                                            <option>Convertible</option>
-                                        </select>
+                                        <label>الموديل</label> <select name="model">
+                                        <th:block th:each="model : ${models}">
+                                            <option th:value="${model.id}" th:text="${model.name}">...</option>
+                                        </th:block>
+                                    </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Year</label>
-                                        
-                                        <select>
-                                            <option>2020</option>
-                                            <option>2021</option>
-                                            <option>2022</option>
-                                            <option>2023</option>
-                                            <option>2024</option>
-                                            <option>2025</option>
-                                            <option>2026</option>
-                                            <option>2027</option>
-                                            <option>2028</option>
-                                        </select>
+                                        <label>السنة</label> <select name="year">
+                                        <th:block th:each="year : ${years}">
+                                            <option th:value="${year.id}" th:text="${year.name}">...</option>
+                                        </th:block>
+                                    </select>
                                     </div>
-                                </form>
 
-                                <div class="condition">
-                                    <h3>Condition</h3>
+                                    <div class="form-group">
+                                        <label>حالة السيارة</label> <select name="conditionType">
+                                        <th:block th:each="condition : ${conditions}">
+                                            <option th:value="${condition.id}"
+                                                    th:text="${condition.conditionName}">...</option>
+                                        </th:block>
+                                    </select>
+                                    </div>
 
-                                    <ul class="condition-list">
-                                        <li class="active"><a href="advanced-search.html">All</a></li>
-                                        <li><a href="new-cars.html">New</a></li>
-                                        <li><a href="used-cars.html">Used</a></li>
-                                    </ul>
-                                </div>
+                                    <div class="price-range-content">
+                                        <h4>السعر</h4>
 
-                                <div class="price-range-content">
-                                    <h4>Price</h4>
-
-                                    <div class="price-range-bar" id="range-slider"></div>
-                                    <div class="price-range-filter">
-                                        <div class="price-range-filter-item">
-                                            <input type="text" id="price-amount" readonly>
+                                        <div class="price-range-bar" id="range-slider"></div>
+                                        <div class="price-range-filter">
+                                            <div class="price-range-filter-item">
+                                                <input type="text" name="price" id="price-amount" readonly>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <button type="submit">
+                                        <i class='bx bx-search-alt'></i>
+                                    </button>
+                                </form>
+
                             </div>
 
                             <div class="widget widget_make_model_body_style">
-                                <h3 class="widget-title">MAKE / MODEL / BODY STYLE</h3>
-    
+                                <h3 class="widget-title">نوع الوقود / نوع القير /  نوع
+                                    الشكل</h3>
+
                                 <form>
+
                                     <div class="form-group">
-                                        <label>Make</label>
-                                        
-                                        <select>
-                                            <option>All Make</option>
-                                            <option>Sedan</option>
-                                            <option>MPV</option>
-                                            <option>SUV</option>
-                                            <option>Crossover</option>
-                                            <option>Coupe</option>
-                                            <option>Convertible</option>
-                                        </select>
+                                        <label>نوع الوقود</label> <select name="fuelType">
+                                        <th:block th:each="f_t : ${fuel_type}">
+                                            <option th:value="${f_t.id}" th:text="${f_t.name}">...</option>
+                                        </th:block>
+                                    </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Model</label>
-                                        
-                                        <select>
-                                            <option>All Model</option>
-                                            <option>Sedan</option>
-                                            <option>MPV</option>
-                                            <option>SUV</option>
-                                            <option>Crossover</option>
-                                            <option>Coupe</option>
-                                            <option>Convertible</option>
-                                        </select>
+                                        <label>نوع القير</label> <select name="gearType">
+                                        <th:block th:each="gear_t : ${gear_type}">
+                                            <option th:value="${gear_t.id}" th:text="${gear_t.name}">...</option>
+                                        </th:block>
+                                    </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Body Style</label>
-                                        
-                                        <select>
-                                            <option>Pickups</option>
-                                            <option>Minivans</option>
-                                            <option>Sedans</option>
-                                            <option>Hatchbacks</option>
-                                            <option>SUVs</option>
-                                            <option>Minivans</option>
-                                            <option>Sedans</option>
-                                        </select>
+                                        <label>نوع الشكل</label> <select name="bodyType">
+                                        <th:block th:each="body_t : ${body_type}">
+                                            <option th:value="${body_t.id}" th:text="${body_t.name}"></option>
+                                        </th:block>
+                                    </select>
                                     </div>
+                                    <button type="submit">
+                                        <i class='bx bx-search-alt'></i>
+                                    </button>
                                 </form>
                             </div>
 
-                            <div class="widget widget_filter_color">
-                                <h3 class="widget-title">VEHICLE FILTERS</h3>
-                                
-                                <span>Exterior Color</span>
-                                <ul class="color-list-row">
-                                    <li class="active"><a href="#" title="Black" class="color-black"></a></li>
-                                    <li><a href="#" title="Red" class="color-red"></a></li>
-                                    <li><a href="#" title="Yellow" class="color-yellow"></a></li>
-                                    <li><a href="#" title="White" class="color-white"></a></li>
-                                    <li><a href="#" title="Blue" class="color-blue"></a></li>
-                                    <li><a href="#" title="Green" class="color-green"></a></li>
-                                    <li><a href="#" title="Yellow Green" class="color-yellowgreen"></a></li>
-                                    <li><a href="#" title="Pink" class="color-pink"></a></li>
-                                    <li><a href="#" title="Violet" class="color-violet"></a></li>
-                                    <li><a href="#" title="Blue Violet" class="color-blueviolet"></a></li>
-                                    <li><a href="#" title="Lime" class="color-lime"></a></li>
-                                    <li><a href="#" title="Plum" class="color-plum"></a></li>
-                                    <li><a href="#" title="Teal" class="color-teal"></a></li>
-                                </ul>
-                            </div>
                         </aside>
                     </div>
 
@@ -178,554 +132,79 @@
                         <div class="car-shop-filter-options">
                             <div class="row align-items-center">
                                 <div class="col-lg-7 col-md-6">
-                                    <p>Showing 1 - 10 of 3,75 results</p>
+                                    <p th:text="${' عدد النتائج ' + vehicles.size()}"></p>
                                 </div>
-        
-                                <div class="col-lg-5 col-md-6">
-                                    <div class="car-shop-ordering-list">
-                                        <select>
-                                            <option>Most Relevant</option>
-                                            <option>Sort by price: low to high</option>
-                                            <option>Default sorting</option>
-                                            <option>Sort by popularity</option>
-                                            <option>Sort by average rating</option>
-                                            <option>Sort by latest</option>
-                                            <option>Sort by price: high to low</option>
-                                        </select>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
 
-                        <div class="single-car-shop-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-image">
-                                        <a href="car-details.html"><img src="assets/images/car-shop/car-shop-1.jpg" alt="image"></a>
+                        <th:block th:each="v : ${vehicles}">
+                            <div class="single-car-shop-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="car-shop-image">
 
-                                        <div class="icon">
-                                            <a href="favorites.html"><i class="flaticon-love"></i></a>
+                                            <a th:href="@{/vehicle-details/}+${v.id}"> <img
+                                                    th:src="@{${v.main_image}}" alt="image"></a>
+                                            <div class="icon">
+                                                <a href="favorites.html"><i class="flaticon-love"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="car-shop-content">
+                                            <div class="tag" th:text="${v.price}">....</div>
+                                            <h3>
+                                                <a th:href="@{/vehicle-details/}+${v.id}"
+                                                   th:text="${v.ad_title}">...</a>
+                                            </h3>
+                                            <b>الممشى</b> <label th:text="${v.mileage}"> ....</label>
+
+                                            <ul class="list">
+                                                <li>نوع الوقود <span th:text="${v.fuelTypeEntity.name}">...</span>
+                                                </li>
+                                                <li>نوع القير <span th:text="${v.gearTypeEntity.name}">....</span>
+                                                </li>
+                                                <li>حالة السيارة <span
+                                                        th:text="${v.vehicle_type.conditionName}">...</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="car-shop-list">
+                                            <h4 th:text="${v.userEntity.fullname}"></h4>
+                                            <ul class="list">
+                                                <li><i class="flaticon-pin"></i> <label
+                                                        th:text="${v.cityEntity.name}"></label></li>
+                                                <li><i class="flaticon-calendar"></i> <label
+                                                        th:text="${#dates.format(v.createdDate,'yyyy/MM/dd')}"></label></li>
+                                                <li><i class="flaticon-view"></i><label th:text="${v.views}">...</label></li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-content">
-                                        <div class="tag">$30,000</div>
-                                        <h3>
-                                            <a href="car-details.html">2021 VOLVO XC60</a>
-                                        </h3>
-                                        <p><b>MILEAGES</b> 4 Miles</p>
-
-                                        <ul class="list">
-                                            <li>
-                                                Engine
-                                                <span>: 2.4L I4 16V MPFI DOHC</span>
-                                            </li>
-                                            <li>
-                                                Transmission
-                                                <span>: 4-Speed Automatic</span>
-                                            </li>
-                                            <li>
-                                                Fuel
-                                                <span>: GAS</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-list">
-                                        <h4>Jim Coleman  Motors</h4>
-
-                                        <ul class="list">
-                                            <li><i class="flaticon-pin"></i> West Palm Beach, FL</li>
-                                            <li><i class="flaticon-calendar"></i> Listed 1 Day</li>
-                                            <li><i class="flaticon-view"></i> 1 View</li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-
-                        <div class="single-car-shop-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-image">
-                                        <a href="car-details.html"><img src="assets/images/car-shop/car-shop-2.jpg" alt="image"></a>
-
-                                        <div class="icon">
-                                            <a href="favorites.html"><i class="flaticon-love"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-content">
-                                        <div class="tag">$45,000</div>
-                                        <h3>
-                                            <a href="car-details.html">2021 NISSAN CX-10</a>
-                                        </h3>
-                                        <p><b>MILEAGES</b> 7 Miles</p>
-
-                                        <ul class="list">
-                                            <li>
-                                                Engine
-                                                <span>: JN5AY2LC2KX512350</span>
-                                            </li>
-                                            <li>
-                                                Transmission
-                                                <span>: 4-Speed Automatic</span>
-                                            </li>
-                                            <li>
-                                                Fuel
-                                                <span>: GAS</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-list">
-                                        <h4>Intenrit Auto Group</h4>
-
-                                        <ul class="list">
-                                            <li><i class="flaticon-pin"></i> Orland Park</li>
-                                            <li><i class="flaticon-calendar"></i> Listed 2 Day</li>
-                                            <li><i class="flaticon-view"></i> 5 View</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-car-shop-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-image">
-                                        <a href="car-details.html"><img src="assets/images/car-shop/car-shop-3.jpg" alt="image"></a>
-
-                                        <div class="icon">
-                                            <a href="favorites.html"><i class="flaticon-love"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-content">
-                                        <div class="tag">$35,000</div>
-                                        <h3>
-                                            <a href="car-details.html">2021 TOYOTA RAV4</a>
-                                        </h3>
-                                        <p><b>MILEAGES</b> 4 Miles</p>
-
-                                        <ul class="list">
-                                            <li>
-                                                Engine
-                                                <span>: 1C4PJMCS7HD231285</span>
-                                            </li>
-                                            <li>
-                                                Transmission
-                                                <span>: 4-Speed Automatic</span>
-                                            </li>
-                                            <li>
-                                                Fuel
-                                                <span>: GAS</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-list">
-                                        <h4>Foothills Auto Mart</h4>
-
-                                        <ul class="list">
-                                            <li><i class="flaticon-pin"></i> Waterford, MI</li>
-                                            <li><i class="flaticon-calendar"></i> Listed 1 Day</li>
-                                            <li><i class="flaticon-view"></i> 3 View</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-car-shop-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-image">
-                                        <a href="car-details.html"><img src="assets/images/car-shop/car-shop-4.jpg" alt="image"></a>
-
-                                        <div class="icon">
-                                            <a href="favorites.html"><i class="flaticon-love"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-content">
-                                        <div class="tag">$65,000</div>
-                                        <h3>
-                                            <a href="car-details.html">2021 VOLVO XC10</a>
-                                        </h3>
-                                        <p><b>MILEAGES</b> 7 Miles</p>
-
-                                        <ul class="list">
-                                            <li>
-                                                Engine
-                                                <span>: W1KZF8EB8LA8016370</span>
-                                            </li>
-                                            <li>
-                                                Transmission
-                                                <span>: 4-Speed Automatic</span>
-                                            </li>
-                                            <li>
-                                                Fuel
-                                                <span>: GAS</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-list">
-                                        <h4>Jim Coleman  Motors</h4>
-
-                                        <ul class="list">
-                                            <li><i class="flaticon-pin"></i> Ramsey, NJ</li>
-                                            <li><i class="flaticon-calendar"></i> Listed 4 Day</li>
-                                            <li><i class="flaticon-view"></i> 1 View</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-car-shop-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-image">
-                                        <a href="car-details.html"><img src="assets/images/car-shop/car-shop-5.jpg" alt="image"></a>
-
-                                        <div class="icon">
-                                            <a href="favorites.html"><i class="flaticon-love"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-content">
-                                        <div class="tag">$25,000</div>
-                                        <h3>
-                                            <a href="car-details.html">2021 MAZDA CX-30</a>
-                                        </h3>
-                                        <p><b>MILEAGES</b> 3 Miles</p>
-
-                                        <ul class="list">
-                                            <li>
-                                                Engine
-                                                <span>: JM1BM1W74F12345879</span>
-                                            </li>
-                                            <li>
-                                                Transmission
-                                                <span>: 4-Speed Automatic</span>
-                                            </li>
-                                            <li>
-                                                Fuel
-                                                <span>: GAS</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-list">
-                                        <h4>Paul Sevag Motors</h4>
-
-                                        <ul class="list">
-                                            <li><i class="flaticon-pin"></i> Orland Park</li>
-                                            <li><i class="flaticon-calendar"></i> Listed 2 Day</li>
-                                            <li><i class="flaticon-view"></i> 5 View</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-car-shop-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-image">
-                                        <a href="car-details.html"><img src="assets/images/car-shop/car-shop-6.jpg" alt="image"></a>
-
-                                        <div class="icon">
-                                            <a href="favorites.html"><i class="flaticon-love"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-content">
-                                        <div class="tag">$45,000</div>
-                                        <h3>
-                                            <a href="car-details.html">2021 MAZDA CX-30</a>
-                                        </h3>
-                                        <p><b>MILEAGES</b> 7 Miles</p>
-
-                                        <ul class="list">
-                                            <li>
-                                                Engine
-                                                <span>: JN8AY2NC2KX512370</span>
-                                            </li>
-                                            <li>
-                                                Transmission
-                                                <span>: 4-Speed Automatic</span>
-                                            </li>
-                                            <li>
-                                                Fuel
-                                                <span>: GAS</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-list">
-                                        <h4>Jim Coleman  Motors</h4>
-
-                                        <ul class="list">
-                                            <li><i class="flaticon-pin"></i> Blauvelt, NY</li>
-                                            <li><i class="flaticon-calendar"></i> Listed 3 Day</li>
-                                            <li><i class="flaticon-view"></i> 8 View</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-car-shop-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-image">
-                                        <a href="car-details.html"><img src="assets/images/car-shop/car-shop-7.jpg" alt="image"></a>
-
-                                        <div class="icon">
-                                            <a href="favorites.html"><i class="flaticon-love"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-content">
-                                        <div class="tag">$65,000</div>
-                                        <h3>
-                                            <a href="car-details.html">2021 NISSAN XX-50</a>
-                                        </h3>
-                                        <p><b>MILEAGES</b> 5 Miles</p>
-
-                                        <ul class="list">
-                                            <li>
-                                                Engine
-                                                <span>: JN8AY2NB2KD51y4580</span>
-                                            </li>
-                                            <li>
-                                                Transmission
-                                                <span>: 4-Speed Automatic</span>
-                                            </li>
-                                            <li>
-                                                Fuel
-                                                <span>: GAS</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-list">
-                                        <h4>The Car Source</h4>
-
-                                        <ul class="list">
-                                            <li><i class="flaticon-pin"></i> Nyack, NY</li>
-                                            <li><i class="flaticon-calendar"></i> Listed 2 Day</li>
-                                            <li><i class="flaticon-view"></i> 5 View</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-car-shop-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-image">
-                                        <a href="car-details.html"><img src="assets/images/car-shop/car-shop-8.jpg" alt="image"></a>
-
-                                        <div class="icon">
-                                            <a href="favorites.html"><i class="flaticon-love"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-content">
-                                        <div class="tag">$75,000</div>
-                                        <h3>
-                                            <a href="car-details.html">2021 KIA SOUL XC 60</a>
-                                        </h3>
-                                        <p><b>MILEAGES</b> 9 Miles</p>
-
-                                        <ul class="list">
-                                            <li>
-                                                Engine
-                                                <span>: YK8AY2NC2KX515870</span>
-                                            </li>
-                                            <li>
-                                                Transmission
-                                                <span>: 4-Speed Automatic</span>
-                                            </li>
-                                            <li>
-                                                Fuel
-                                                <span>: GAS</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-list">
-                                        <h4>Auto Brokers Motors</h4>
-
-                                        <ul class="list">
-                                            <li><i class="flaticon-pin"></i> Charlotte, NC</li>
-                                            <li><i class="flaticon-calendar"></i> Listed 4 Day</li>
-                                            <li><i class="flaticon-view"></i> 9 View</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-car-shop-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-image">
-                                        <a href="car-details.html"><img src="assets/images/car-shop/car-shop-9.jpg" alt="image"></a>
-
-                                        <div class="icon">
-                                            <a href="favorites.html"><i class="flaticon-love"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-content">
-                                        <div class="tag">$30,000</div>
-                                        <h3>
-                                            <a href="car-details.html">2021 VOLVO XC60</a>
-                                        </h3>
-                                        <p><b>MILEAGES</b> 4 Miles</p>
-
-                                        <ul class="list">
-                                            <li>
-                                                Engine
-                                                <span>: KV8AN2MC2KX512681</span>
-                                            </li>
-                                            <li>
-                                                Transmission
-                                                <span>: 4-Speed Automatic</span>
-                                            </li>
-                                            <li>
-                                                Fuel
-                                                <span>: GAS</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-list">
-                                        <h4>RAK Motorsport</h4>
-
-                                        <ul class="list">
-                                            <li><i class="flaticon-pin"></i> Buena Park, CA</li>
-                                            <li><i class="flaticon-calendar"></i> Listed 6 Day</li>
-                                            <li><i class="flaticon-view"></i> 11 View</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-car-shop-item">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-image">
-                                        <a href="car-details.html"><img src="assets/images/car-shop/car-shop-10.jpg" alt="image"></a>
-
-                                        <div class="icon">
-                                            <a href="favorites.html"><i class="flaticon-love"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-content">
-                                        <div class="tag">$40,000</div>
-                                        <h3>
-                                            <a href="car-details.html">2021 MAZDA CX-10</a>
-                                        </h3>
-                                        <p><b>MILEAGES</b> 5 Miles</p>
-
-                                        <ul class="list">
-                                            <li>
-                                                Engine
-                                                <span>: JN9AY2NC2KK512399</span>
-                                            </li>
-                                            <li>
-                                                Transmission
-                                                <span>: 4-Speed Automatic</span>
-                                            </li>
-                                            <li>
-                                                Fuel
-                                                <span>: GAS</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="car-shop-list">
-                                        <h4>Hedemger Motors</h4>
-
-                                        <ul class="list">
-                                            <li><i class="flaticon-pin"></i> Lenoir, NC</li>
-                                            <li><i class="flaticon-calendar"></i> Listed 3 Day</li>
-                                            <li><i class="flaticon-view"></i> 20 View</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </th:block>
 
                         <div class="col-lg-12 col-md-12">
                             <div class="pagination-area">
-                                <a href="#" class="prev page-numbers">
-                                    <i class='flaticon-left-arrow'></i>
-                                </a>
-                                <span class="page-numbers current" aria-current="page">1</span>
-                                <a href="#" class="page-numbers">2</a>
-                                <a href="#" class="page-numbers">3</a>
-                                <a href="#" class="next page-numbers">
-                                    <i class='flaticon-right-arrow'></i>
-                                </a>
+                                <a href="#" class="prev page-numbers"> <i
+                                        class='flaticon-left-arrow'></i>
+                                </a> <span class="page-numbers current" aria-current="page">1</span>
+                                <a href="#" class="page-numbers">2</a> <a href="#"
+                                                                          class="page-numbers">3</a> <a href="#"
+                                                                                                        class="next page-numbers"> <i class='flaticon-right-arrow'></i>
+                            </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-        <!-- Start Car Shop Area -->
- 
+    </div>
+    <!-- Start Car Shop Area -->
     </body>
 </html>

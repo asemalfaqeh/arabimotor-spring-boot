@@ -4,12 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import com.af.arabimotors.entities.VehiclesEntity;
+
+import javax.transaction.Transactional;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<VehiclesEntity, Long>{
@@ -18,6 +22,7 @@ public interface VehicleRepository extends JpaRepository<VehiclesEntity, Long>{
 	List<VehiclesEntity> findFirstFourVehicles();
 	
 	Optional<VehiclesEntity> findById(Long id);
+
     List<VehiclesEntity> findAll();
     
     @Query(nativeQuery = true,value="SELECT * FROM vehicles v ORDER BY v.price ASC")
@@ -62,6 +67,9 @@ public interface VehicleRepository extends JpaRepository<VehiclesEntity, Long>{
     
     @Query(nativeQuery=true,value="SELECT * FROM vehicles WHERE body_type=:bodyType")
     List<VehiclesEntity> findByBodyTypeEntity(String bodyType);
-    
-    
+
+    @Query(nativeQuery = true, value = "SELECT * FROM vehicles WHERE user_id=:userId")
+    List<VehiclesEntity> findAllByUserEntity(@Param("userId") String userId);
+
+    void deleteById(Long aLong);
 }

@@ -89,8 +89,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				  WebUrlsConstants.SOCIAL_MEDIA_LINKS,
 				  WebUrlsConstants.RESEND_VERIFY_EMAIL,
 				  WebUrlsConstants.SUBMIT_VEHICLE,
-				  WebUrlsConstants.MESSAGES
-				  
+				  WebUrlsConstants.MESSAGES,
+				  WebUrlsConstants.DELETE_VEHICLE,WebUrlsConstants.EDIT_VEHICLE,WebUrlsConstants.MY_VEHICLES
 		};
 	}
 

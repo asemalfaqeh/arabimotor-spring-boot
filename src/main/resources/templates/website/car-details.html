@@ -87,11 +87,19 @@
 									<li><span th:text=${vehicle.yearsEntities.name}></span></li>
 
 									<li>نوع القير</li>
-									<li><span th:text="${vehicle.gearTypeEntity.name}">:
-											Red</span></li>
+									<li><span th:text="${vehicle.gearTypeEntity.name}">:Red</span></li>
 
 									<li>المنطقة</li>
 									<li><span th:text="${vehicle.cityEntity.name}"></span></li>
+
+									<li>اصل السيارة</li>
+									<li><span th:text="${vehicle.originalCar}"></span></li>
+									<li>رخصة السيارة</li>
+									<li><span th:text="${vehicle.drivingLicence}"></span></li>
+									<li>الزجاج</li>
+									<li><span th:text="${vehicle.glass}"></span></li>
+									<li>وسيلة الدفع</li>
+									<li><span th:text="${vehicle.paymentMethod}"></span></li>
 
 								</ul>
 							</div>
@@ -114,13 +122,13 @@
 							</div>
 
 							<div class="desc-share">
-								<h3>SHARE THIS LISTING:</h3>
+								<h3>وسائل تواصل الاجتماعي للبائع</h3>
 
 								<div class="share-list">
-									<a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
-									<a href="#" target="_blank"><i class='bx bx-camera'></i></a> <a
-										href="#" target="_blank"><i class='bx bxl-twitter'></i></a> <a
-										href="#" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
+									<a th:href="${social.facebook_link}" target="_blank"><i class='bx bxl-facebook'></i></a>
+									<a th:href="${social.instagram_link}" target="_blank"><i class='bx bx-camera'></i></a> <a
+										th:href="${social.twitter_link}" target="_blank"><i class='bx bxl-twitter'></i></a> <a
+										th:href="${social.linkedin_link}" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
 								</div>
 							</div>
 

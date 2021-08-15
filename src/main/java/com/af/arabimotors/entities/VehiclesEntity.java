@@ -85,6 +85,9 @@ public class VehiclesEntity {
 	
 	@Column(name = "is_featured", columnDefinition = "boolean default false", nullable = false)
 	private boolean isFeagtured;
+
+	@Column(name = "is_deleted", columnDefinition = "boolean default false", nullable = false)
+	private boolean isDeleted;
 	
 	@Column(name = "is_most_popular", columnDefinition = "boolean default false", nullable = false)
 	private boolean isMostPopular;
@@ -94,9 +97,59 @@ public class VehiclesEntity {
 	 
 	 @Column(name = "views", nullable = false, columnDefinition = "Integer default 0")
 	 private Integer views;
-	
-	 
-	 
+
+	 @Column(name = "original_car", nullable = false)
+	 private String originalCar;
+
+	 @Column(name = "driving_licence", nullable = false)
+	 private String drivingLicence;
+
+	 @Column(name = "payment_method", nullable = false)
+	 private String paymentMethod;
+
+	 @Column(name = "glass", nullable = false)
+	 private String glass;
+
+	public String getOriginalCar() {
+		return originalCar;
+	}
+
+	public void setOriginalCar(String originalCar) {
+		this.originalCar = originalCar;
+	}
+
+	public String getDrivingLicence() {
+		return drivingLicence;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		isDeleted = deleted;
+	}
+
+	public void setDrivingLicence(String drivingLicence) {
+		this.drivingLicence = drivingLicence;
+	}
+
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public String getGlass() {
+		return glass;
+	}
+
+	public void setGlass(String glass) {
+		this.glass = glass;
+	}
+
 	public Integer getViews() {
 		return views;
 	}
