@@ -26,6 +26,4 @@ public class PageConfig implements WebMvcConfigurer {
 	    
 	}
 
-
-
 }

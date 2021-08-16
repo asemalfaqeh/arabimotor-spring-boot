@@ -38,4 +38,5 @@ public interface WebUrlsConstants {
       String DELETE_VEHICLE = "/delete-vehicle";
       String MY_VEHICLES = "/my-vehicles";
       String EDIT_VEHICLE = "/edit-vehicle";
+      String ABOUT_US = "/about-us";
 }

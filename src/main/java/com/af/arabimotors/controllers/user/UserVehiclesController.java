@@ -108,8 +108,21 @@ public class UserVehiclesController {
 		String email = UserAuthenticationHelper.getUserName();
 		UserEntity userEntity = customUserDetailsService.findUserByEmail(email);
 
-		for (MultipartFile multipartFile : submitVehicleRequest.getMultipartFiles()) {
-			System.err.println("ddd " + multipartFile.getOriginalFilename());
+		if (submitVehicleRequest.getId() != null) {
+			if (customUserDetailsService.findUserByEmail(email).getEmail().equals("anonymousUser")) {
+				modelAndView.setViewName("redirect:" + WebUrlsConstants.LOGIN);
+			} else {
+				Optional<VehiclesEntity> vehiclesEntity = vehicleService.findVehicleById(submitVehicleRequest.getId());
+				if (vehiclesEntity.isPresent()){
+					if (!vehiclesEntity.get().getUserEntity().getEmail().equals(email)){
+						submitVehicleRequest.setId(null);
+					}else {
+						submitVehicleRequest.setFeagtured(vehiclesEntity.get().isFeagtured());
+						submitVehicleRequest.setMostPopular(vehiclesEntity.get().isMostPopular());
+						submitVehicleRequest.setMain_image(vehiclesEntity.get().getMain_image());
+					}
+				}
+			}
 		}
 
 		if (bindingResult.hasErrors()) {
@@ -120,28 +133,28 @@ public class UserVehiclesController {
 			return modelAndView;
 		}
 
-		try {
+		if (submitVehicleRequest.getMainImageMultipartFile() != null) {
+			try {
 
-			// get original file name //
-			Path absouletPath = Paths.get(".");
-			String uploadDir = absouletPath + "/src/main/resources/static/uploads/";
-			// set upload image path //
-			FileUploadUtil.saveFile(uploadDir, submitVehicleRequest.getMainImageMultipartFile().getOriginalFilename(),
-					submitVehicleRequest.getMainImageMultipartFile());
+				// get original file name //
+				Path absouletPath = Paths.get(".");
+				String uploadDir = absouletPath + "/src/main/resources/static/uploads/";
+				// set upload image path //
+				FileUploadUtil.saveFile(uploadDir, submitVehicleRequest.getMainImageMultipartFile().getOriginalFilename(),
+						submitVehicleRequest.getMainImageMultipartFile());
+				// save gallery images //
+				for (MultipartFile multipartFile : submitVehicleRequest.getMultipartFiles()) {
 
-			// save gallery images //
-			for (MultipartFile multipartFile : submitVehicleRequest.getMultipartFiles()) {
+					System.err.println(multipartFile.getOriginalFilename());
+					FileUploadUtil.saveFile(uploadDir, multipartFile.getOriginalFilename(), multipartFile);
+				}
 
-				System.err.println(multipartFile.getOriginalFilename());
-				FileUploadUtil.saveFile(uploadDir, multipartFile.getOriginalFilename(), multipartFile);
+				submitVehicleRequest.setMain_image("uploads/" + submitVehicleRequest.getMainImageMultipartFile().getOriginalFilename());
 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.err.println("Error: " + e.getMessage());
 			}
-
-			submitVehicleRequest.setMain_image("uploads/"+submitVehicleRequest.getMainImageMultipartFile().getOriginalFilename());
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.err.println("Error: " + e.getMessage());
 		}
 
 		VehiclesEntity vehiclesEntity = new VehiclesEntity();
@@ -152,15 +165,22 @@ public class UserVehiclesController {
 
 		List<VehicleImagesEntity> vehicleImagesEntities = new ArrayList<>();
 
-		for (MultipartFile multipartFile : submitVehicleRequest.getMultipartFiles()) {
-			VehicleImagesEntity vehicleImagesRequest = new VehicleImagesEntity();
-			vehicleImagesRequest.setImage("uploads/"+multipartFile.getOriginalFilename());
-			vehicleImagesRequest.setVehiclesEntity(vehiclesEntity);
-			vehicleImagesEntities.add(vehicleImagesRequest);
+		if (submitVehicleRequest.getMultipartFiles() != null) {
+			if (submitVehicleRequest.getMultipartFiles().length > 0) {
+				for (MultipartFile multipartFile : submitVehicleRequest.getMultipartFiles()) {
+					VehicleImagesEntity vehicleImagesRequest = new VehicleImagesEntity();
+					vehicleImagesRequest.setImage("uploads/" + multipartFile.getOriginalFilename());
+					vehicleImagesRequest.setVehiclesEntity(vehiclesEntity);
+					vehicleImagesEntities.add(vehicleImagesRequest);
+				}
+			}
 		}
 
 		vehiclesEntity.setVehicleImagesEntity(vehicleImagesEntities);
 		vehiclesEntity.setViews(0);
+		if (submitVehicleRequest.getId() != null){
+			vehiclesEntity.setId(Long.valueOf(submitVehicleRequest.getId()));
+		}
 		vehicleService.saveVehicle(vehiclesEntity);
 
 		modelAndView.setViewName("redirect:" + WebUrlsConstants.WEB_HOME_PAGE);
@@ -203,6 +223,31 @@ public class UserVehiclesController {
 		}
 
 		modelAndView.setViewName("redirect:" + WebUrlsConstants.MY_VEHICLES);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = WebUrlsConstants.EDIT_VEHICLE+"/{id}", method = RequestMethod.GET)
+	public ModelAndView editVehicle(@PathVariable("id") String id){
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (id != null){
+			String email = UserAuthenticationHelper.getUserName();
+			if (customUserDetailsService.findUserByEmail(email).getEmail().equals("anonymousUser")) {
+				modelAndView.setViewName("redirect:" + WebUrlsConstants.LOGIN);
+			} else {
+				Optional<VehiclesEntity> vehiclesEntity = vehicleService.findVehicleById(id);
+				if (vehiclesEntity.isPresent()) {
+					if (vehiclesEntity.get().getUserEntity().getEmail().equals(email)) {
+						vehiclesEntity.get().setId(Long.parseLong(id));
+						modelAndView.addObject("vehicle", vehiclesEntity.get());
+					}
+				}
+				updateVehicleModelAndViewObjects(modelAndView, email);
+				modelAndView.setViewName(WebViewsConstants.EDIT_VEHICLE_VIEW);
+			}
+		}
+
 		return modelAndView;
 	}
 

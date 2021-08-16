@@ -67,13 +67,13 @@
 
           <div class="profile-info">
             <ul class="info-list">
-              <li><a href="submit-vehicle.html">اعرض سيارتك للبيع</a></li>
+              <li><a th:href="@{/post-vehicle}">اعرض سيارتك للبيع</a></li>
               <li><a href="favorites.html">المفضلة</a></li>
-              <li><a href="account-details.html">حسابي</a>
+              <li><a th:href="@{/account-details}" class="active">حسابي</a>
               </li>
               <li><a th:href="@{/messages}">الرسائل</a></li>
-              <li><a th:href="@{/my-vehicles}" class="active">اعلاناتي</a></li>
-              <li><a href="social-media.html">وسائل التواصل
+              <li><a th:href="@{/my-vehicles}">اعلاناتي</a></li>
+              <li><a th:href="@{/user-social}">وسائل التواصل
                 الاجتماعي</a></li>
               <li><a th:href="@{/change-password}">تحديث كلمة المرور</a></li>
               <li><a th:href="@{/logout}">تسجيل الخروج</a></li>
@@ -85,10 +85,18 @@
 
       <div class="col-lg-9 col-md-12">
 
+        <div class="car-shop-filter-options">
+          <div class="row align-items-center">
+            <div class="col-lg-7 col-md-6">
+              <p th:text="${' عدد النتائج ' + vehicles.size()}"></p>
+            </div>
+
+          </div>
+        </div>
 
 
         <div class="dashboard-title">
-          <h3>FAVORITES</h3>
+          <h3>اعلاناتي</h3>
         </div>
 
         <th:block th:each="v : ${vehicles}">
@@ -132,7 +140,7 @@
                     <li><i class="flaticon-calendar"></i> <label
                             th:text="${#dates.format(v.createdDate,'yyyy/MM/dd')}"></label></li>
                     <li><a th:href="@{/delete-vehicle/}+${v.id}"><b>حذف الاعلان</b></a></li>
-                    <li><a href=""><b>تعديل الاعلان</b></a></li>
+                    <li><a th:href="@{/edit-vehicle/}+${v.id}"><b>تعديل الاعلان</b></a></li>
                   </ul>
                 </div>
               </div>

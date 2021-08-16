@@ -28,7 +28,8 @@ public class SubmitVehicleRequest {
 	@NotBlank(message = "{field.not_empty}")
 	@Size(max = 50, message = "{ad_title.too_long}")
 	private String ad_title;
-	
+
+	private String id;
 	@NotBlank(message = "{price.not_empty}")
 	@Size(max = 8, message = "{price.too_long}")
 	private String price;
@@ -75,6 +76,24 @@ public class SubmitVehicleRequest {
 	
 	private CityEntity cityEntity;
 
+	private boolean isFeagtured;
+	private boolean isMostPopular;
+
+	public boolean isFeagtured() {
+		return isFeagtured;
+	}
+
+	public void setFeagtured(boolean feagtured) {
+		isFeagtured = feagtured;
+	}
+
+	public boolean isMostPopular() {
+		return isMostPopular;
+	}
+
+	public void setMostPopular(boolean mostPopular) {
+		isMostPopular = mostPopular;
+	}
 
 	public String getOriginalCar() {
 		return originalCar;
@@ -286,6 +305,13 @@ public class SubmitVehicleRequest {
 		this.vehicleFeatures = vehicleFeatures;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	@Override
 	public String toString() {

@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.af.arabimotors.utils.WebUrlsConstants;
@@ -85,6 +86,14 @@ public class HomeController {
 		model.setViewName(WebViewsConstants.USER_HOME);
 		
 		return model;
+	}
+
+	@RequestMapping(value = WebUrlsConstants.ABOUT_US, method = RequestMethod.GET)
+	public ModelAndView aboutUsController(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("","");
+		modelAndView.setViewName(WebViewsConstants.ABOUT_VIEW);
+		return modelAndView;
 	}
 	
 	@RequestMapping("/")
