@@ -11,16 +11,13 @@ import com.af.arabimotors.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.af.arabimotors.utils.WebUrlsConstants;
 import com.af.arabimotors.utils.WebViewsConstants;
-
-
-
 
 @Controller
 public class HomeController {
@@ -33,7 +30,10 @@ public class HomeController {
 	
 	@Autowired
 	private YearsService yearsService;
-	
+
+	@Autowired
+	private CustomUserDetailsService customUserDetailsService;
+
 	@Autowired
 	private MaxPricesService maxPriceService;
 	
@@ -91,8 +91,32 @@ public class HomeController {
 	@RequestMapping(value = WebUrlsConstants.ABOUT_US, method = RequestMethod.GET)
 	public ModelAndView aboutUsController(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("","");
+		modelAndView.addObject("photo","uploads/cover.jpeg");
 		modelAndView.setViewName(WebViewsConstants.ABOUT_VIEW);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = WebUrlsConstants.USER_PROFILE, method = RequestMethod.GET)
+	public ModelAndView userProfileController(@RequestParam("id") String userId){
+		logger.info("UserIdProfile: " + userId);
+		ModelAndView modelAndView = new ModelAndView();
+		List<VehiclesEntity> vehiclesEntities = vehicleService.findAllByUserId(userId);
+		if (vehiclesEntities.size() > 0) {
+			UserEntity user = vehiclesEntities.get(0).getUserEntity();
+			String photo;
+			if (user.getUser_photo() != null){
+				photo = user.getPhotosImagePath(user.getId(), user.getUser_photo());
+				logger.info("UserProfilePhoto: " + photo);
+			}else {
+				photo = "images/user.png";
+			}
+			modelAndView.addObject("photo", photo);
+			modelAndView.addObject("user",user);
+			modelAndView.addObject("vehicles", vehiclesEntities);
+			modelAndView.setViewName(WebViewsConstants.USER_PROFILE_VIEW);
+		}else {
+			modelAndView.setViewName("redirect:" + WebUrlsConstants.WEB_HOME_PAGE);
+		}
 		return modelAndView;
 	}
 	

@@ -130,6 +130,9 @@
 										th:href="${social.twitter_link}" target="_blank"><i class='bx bxl-twitter'></i></a> <a
 										th:href="${social.linkedin_link}" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
 								</div>
+								<br>
+								<a th:href="@{/user-profile?id=}+${vehicle.userEntity.id}"><b>تفاصيل البائع</b></a>
+
 							</div>
 
 							<div class="desc-seller-info">

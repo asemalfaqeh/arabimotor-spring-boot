@@ -193,8 +193,6 @@ public class AccountDetailsController {
 	    if (bindingResult.hasErrors()) {
 			modelAndView.addObject("error", bindingResult.getAllErrors());			
 		}
-	    
-	  
 	    if (!bcryptPasswordEncoder.matches(userChangePasswordRequest.getOld_password(), userEntity.getPassword())) {  
 	    	String messageString = "كلمة المرور الحالية غير صحيحة";
 	    	bindingResult.addError(new ObjectError("error", messageString));

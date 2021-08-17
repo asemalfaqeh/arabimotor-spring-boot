@@ -39,4 +39,5 @@ public interface WebUrlsConstants {
       String MY_VEHICLES = "/my-vehicles";
       String EDIT_VEHICLE = "/edit-vehicle";
       String ABOUT_US = "/about-us";
+      String USER_PROFILE = "/user-profile";
 }

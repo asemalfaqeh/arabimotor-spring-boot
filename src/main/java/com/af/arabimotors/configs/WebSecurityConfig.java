@@ -74,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		  WebUrlsConstants.ERROR_PAGE,
 		  WebUrlsConstants.VEHICLE_DETAILS,
 		  WebUrlsConstants.ALL_VEHICLES,
-		  WebUrlsConstants.ADVANCED_SEARCH
+		  WebUrlsConstants.ADVANCED_SEARCH,WebUrlsConstants.USER_PROFILE
 		};
 	}
 	

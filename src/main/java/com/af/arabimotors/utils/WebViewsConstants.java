@@ -26,4 +26,5 @@ public interface WebViewsConstants {
 	String MY_CARS = "website/my-cars";
 	String EDIT_VEHICLE_VIEW = "website/edit-vehicle";
 	String  ABOUT_VIEW = "website/about-us";
+	String USER_PROFILE_VIEW = "website/user-profile";
 }

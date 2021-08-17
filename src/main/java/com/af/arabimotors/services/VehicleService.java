@@ -49,6 +49,11 @@ public class VehicleService {
 		return vehicleRepository.findAllByCondition(conditionType);
 	}
 
+	public List<VehiclesEntity> findAllByUserId(String userId) {
+		return vehicleRepository.findAllByUserId(userId);
+	}
+
+
 	public List<VehiclesEntity> findAdvanceSearch(AdvancedSearchRequest advancedSearchRequest) {
 		return vehicleRepository.findAdvancedSearch(Integer.parseInt(advancedSearchRequest.getPrice()),
 				advancedSearchRequest.getModel(), advancedSearchRequest.getYear(),

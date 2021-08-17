@@ -39,8 +39,12 @@ public interface VehicleRepository extends JpaRepository<VehiclesEntity, Long>{
     
     @Query(nativeQuery = true, value="SELECT * FROM vehicles WHERE condition_type = :conditionType")
     List<VehiclesEntity> findAllByCondition(@Param("conditionType") String conditionType);
-    
-    
+
+    @Query(nativeQuery = true, value="SELECT * FROM vehicles WHERE user_id = :userId")
+    List<VehiclesEntity> findAllByUserId(@Param("userId") String conditionType);
+
+
+
     @Query(nativeQuery = true,value="SELECT * FROM vehicles WHERE price <= :priceMax && price >= :priceMin && model = :modelId && year = :yearId && condition_type = :conditionType")
     List<VehiclesEntity> findAdvancedSearchPrice(
     		@Param("priceMin") int priceMin,

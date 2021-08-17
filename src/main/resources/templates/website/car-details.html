@@ -17,7 +17,6 @@
 					<div class="container">
 						<div class="page-banner-content">
 							<h2>تفاصيل السيارة</h2>
-
 							<ul class="pages-list">
 								<li><a th:href="@{/home}">الرئيسية</a></li>
 								<li><span>تفاصيل السيارة</span></li>
@@ -57,7 +56,7 @@
 						<div class="car-details-desc">
 							<div class="desc-content">
 								<div class="tag" th:text="${vehicle.price}">...</div>
-								<h3>2020 TESLA MODEL SXP-502D</h3>
+								<h3 th:text="${vehicle.ad_title}}"></h3>
 							</div>
 
 							<div class="desc-information">
@@ -130,6 +129,9 @@
 										th:href="${social.twitter_link}" target="_blank"><i class='bx bxl-twitter'></i></a> <a
 										th:href="${social.linkedin_link}" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
 								</div>
+								<br>
+								<a th:href="@{/user-profile?id=}+${vehicle.userEntity.id}"><b>تفاصيل البائع</b></a>
+
 							</div>
 
 							<div class="desc-seller-info">
