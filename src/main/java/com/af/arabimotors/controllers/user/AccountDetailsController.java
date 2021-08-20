@@ -66,15 +66,14 @@ public class AccountDetailsController {
 		UserEntity userEntity = customUserSevice.findUserByEmail(UserAuthenticationHelper.getUserName());
 		UserResponse userResponse = new UserResponse();
 		BeanUtils.copyProperties(userEntity, userResponse);
-		
-		
+
 		modelAndView.addObject("photo", userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo()));
 		modelAndView.addObject("isphoto",userEntity.getUser_photo());
 		modelAndView.addObject("userdetails", userResponse);
 		modelAndView.addObject("cities", cityEntities);
 		modelAndView.addObject("types", sellerTypeEntities);
 		
-		System.out.println("UserResponse: " + userResponse.toString());
+		System.out.println("UserResponse: " + userResponse);
 		modelAndView.setViewName(WebViewsConstants.ACCOUNT_DETAILS_VIEW);
 		
 		return modelAndView;

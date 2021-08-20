@@ -53,15 +53,18 @@
         <div class="dashboard-profile">
           <div class="profile-box">
             <div class="profile-icon">
-              <a href="#">
-                <i class='bx bxs-user'></i>
-              </a>
 
-              <div class="camera-icon">
-                <a href="#">
-                  <i class="flaticon-camera"></i>
+              <div th:if="${isphoto == null}" class="profile-icon">
+                <a href="#"> <i class='bx bxs-user'></i>
                 </a>
               </div>
+
+              <div th:unless="${isphoto == null}">
+                <a target="_blank" th:href="@{${photo}}"> <img
+                        th:src="@{${photo}}" />
+                </a>
+              </div>
+
             </div>
           </div>
 
@@ -69,17 +72,16 @@
             <ul class="info-list">
               <li><a th:href="@{/post-vehicle}">اعرض سيارتك للبيع</a></li>
               <li><a href="favorites.html">المفضلة</a></li>
-              <li><a th:href="@{/account-details}" class="active">حسابي</a>
+              <li><a th:href="@{/account-details}">حسابي</a>
               </li>
               <li><a th:href="@{/messages}">الرسائل</a></li>
-              <li><a th:href="@{/my-vehicles}">اعلاناتي</a></li>
+              <li><a th:href="@{/my-vehicles}"  class="active">اعلاناتي</a></li>
               <li><a th:href="@{/user-social}">وسائل التواصل
                 الاجتماعي</a></li>
               <li><a th:href="@{/change-password}">تحديث كلمة المرور</a></li>
               <li><a th:href="@{/logout}">تسجيل الخروج</a></li>
             </ul>
           </div>
-
         </div>
       </div>
 

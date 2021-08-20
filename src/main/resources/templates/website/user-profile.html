@@ -63,10 +63,13 @@
                             </ul>
 
                             <div class="profile-contact">
-                                <form method="post">
+
+                                <form th:action="@{/user-profile}" method="post">
+
                                     <div class="form-group">
                                         <label>الاسم الكامل</label> <input type="text" name="customerName" class="form-control">
                                     </div>
+                                    <input type="hidden" name="userEntity" th:value="${user.id}">
 
                                     <div class="form-group">
                                         <label>بريد الالكتروني</label> <input name="customerEmail" type="text" class="form-control">
@@ -85,6 +88,12 @@
                                         ارسال <span></span>
                                     </button>
                                 </form>
+                                <div th:if="${error}">
+                                    <th:block th:each="e : ${error}">
+                                        <label class="alert danger" th:text="${e.defaultMessage}"></label>
+                                        <br>
+                                    </th:block>
+                                </div>
                             </div>
                         </div>
                     </div>

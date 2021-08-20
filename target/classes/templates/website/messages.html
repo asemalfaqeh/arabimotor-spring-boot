@@ -36,19 +36,18 @@
 						<div class="dashboard-profile">
 							<div class="profile-box">
 								<div class="profile-icon">
-								
-								<div th:if="${isphoto == null}" class="profile-icon">
-									 <a href="#">
-                                        <i class='bx bxs-user'></i>
-                                     </a>
-								</div>
-								
-								<div th:unless="${isphoto == null}" >
-								   <a target="_blank" th:href="@{${photo}}">
-									<img th:src="@{${photo}}"/>
-									</a>
-								</div>
-								
+
+									<div th:if="${isphoto == null}" class="profile-icon">
+										<a href="#"> <i class='bx bxs-user'></i>
+										</a>
+									</div>
+
+									<div th:unless="${isphoto == null}">
+										<a target="_blank" th:href="@{${photo}}"> <img
+												th:src="@{${photo}}" />
+										</a>
+									</div>
+
 								</div>
 							</div>
 
@@ -56,10 +55,10 @@
 								<ul class="info-list">
 									<li><a th:href="@{/post-vehicle}">اعرض سيارتك للبيع</a></li>
 									<li><a href="favorites.html">المفضلة</a></li>
-									<li><a th:href="@{/account-details}" class="active">حسابي</a>
+									<li><a th:href="@{/account-details}">حسابي</a>
 									</li>
-									<li><a th:href="@{/messages}">الرسائل</a></li>
-									<li><a th:href="@{/my-vehicles}">اعلاناتي</a></li>
+									<li><a th:href="@{/messages}" class="active">الرسائل</a></li>
+									<li><a th:href="@{/my-vehicles}" >اعلاناتي</a></li>
 									<li><a th:href="@{/user-social}">وسائل التواصل
 										الاجتماعي</a></li>
 									<li><a th:href="@{/change-password}">تحديث كلمة المرور</a></li>
@@ -77,7 +76,7 @@
                     <th:block th:each="msg : ${messages}">
                     <div class="single-car-shop-item">
                             <div class="row align-items-center">
-                        
+
                                 <div class="col-lg-6 col-md-6">
                                     <div class="car-shop-content">
                                         <div class="tag" th:text="${msg.customerName}">...</div>
@@ -92,8 +91,14 @@
 
                                 <div class="col-lg-4 col-md-4">
                                     <div class="car-shop-list">
-                                        <h4 th:text="${msg.vehiclesEntity.ad_title}"></h4><br>
-                                        <a target="balnk" th:href="@{/vehicle-details/}+${msg.vehiclesEntity.id}">عرض الاعلان</a>
+
+										<div th:if="${msg.vehiclesEntity != null}">
+											<h4 th:text="${msg.vehiclesEntity.ad_title}"></h4><br>
+										</div>
+
+										<div th:if="${msg.vehiclesEntity != null}">
+										<a target="balnk" th:href="@{/vehicle-details/}+${msg.vehiclesEntity.id}">عرض الاعلان</a>
+										</div>
                                         <ul class="list">
                                             <li><i class="flaticon-calendar"></i> 
                                             <label th:text="${#dates.format(msg.createDate,'aa HH:mm, yyyy/MM/dd')}">

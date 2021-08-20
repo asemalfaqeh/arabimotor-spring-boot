@@ -40,4 +40,9 @@ public interface WebUrlsConstants {
       String EDIT_VEHICLE = "/edit-vehicle";
       String ABOUT_US = "/about-us";
       String USER_PROFILE = "/user-profile";
+      String FAQ = "/faq";
+      String TERMS_OF_USE = "/terms-service";
+      String PRIVACY_POLICY = "/privacy-policy";
+      String CONTACT_US = "/contact-us";
+
 }

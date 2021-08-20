@@ -56,7 +56,10 @@ public class VehiclesController {
 	@Autowired
 	private UserSocialService userSocialService;
 
-	private Logger logger = LoggerFactory.getLogger(VehiclesController.class);
+	@Autowired
+	private ConfirmEmailService confirmEmailService;
+
+	private final Logger logger = LoggerFactory.getLogger(VehiclesController.class);
 
 	@RequestMapping(value = WebUrlsConstants.VEHICLE_DETAILS + "/{id}", method = { RequestMethod.GET,
 			RequestMethod.POST })
@@ -122,9 +125,10 @@ public class VehiclesController {
 				contactSellerService.saveContactSellerInfo(contactSellerEntity);
 				logger.info(contactSellerRequest.getCreateDate()+"");
 				logger.info("Success Save Contact Seller Info");
+				confirmEmailService.sendEmail(vehicle.getAd_title(), contactSellerEntity.getCustomerMsg()
+				,contactSellerEntity.getCustomerEmail(), vehicle.getUserEntity().getEmail());
 			}
 		}
-
 
 		modelAndView.addObject("vehicle", vehicle);
 		modelAndView.addObject("images", images);
@@ -158,8 +162,8 @@ public class VehiclesController {
 				modelAndView.addObject("select_sort", 3);
 			}
 		} else if (conditionType.isPresent()) {
-			logger.info("Condition Type: " + conditionType.get());
 
+			logger.info("Condition Type: " + conditionType.get());
 			if (conditionType.get().equals("new")) {
 				vehiclesEntities = vehicleService.findAllByConditionType("1");
 			} else if (conditionType.get().equals("used")) {
@@ -209,12 +213,13 @@ public class VehiclesController {
 		if (advancedSearchRequest.getModel() != null && advancedSearchRequest.getYear() != null
 				&& advancedSearchRequest.getConditionType() != null && advancedSearchRequest.getPrice() != null) {
 
-			String priceStr = advancedSearchRequest.getPrice().toString();
+			logger.info("Advanced Range Price: " + advancedSearchRequest.getPrice());
+			String priceStr = advancedSearchRequest.getPrice();
 			String[] arrOfStr = priceStr.split("-");
-			String minPrice = "0";
-			String maxPrice = "0";
-			minPrice = arrOfStr[1].substring(1, arrOfStr[0].length());
-			maxPrice = arrOfStr[0].substring(1, arrOfStr[1].length());
+			String minPrice;
+			String maxPrice;
+			maxPrice = arrOfStr[1].substring(1);
+			minPrice = arrOfStr[0].substring(1);
 			logger.info("MaxPrice: " + maxPrice + " MinPrice: " + minPrice);
 
 			vehiclesEntities = vehicleService.findAdvanceSearchPrice(minPrice, maxPrice, advancedSearchRequest);
@@ -254,6 +259,5 @@ public class VehiclesController {
 		return modelAndView;
 
 	}
-
 
 }

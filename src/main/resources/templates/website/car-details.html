@@ -56,7 +56,7 @@
 						<div class="car-details-desc">
 							<div class="desc-content">
 								<div class="tag" th:text="${vehicle.price}">...</div>
-								<h3 th:text="${vehicle.ad_title}}"></h3>
+								<h3 th:text="${vehicle.ad_title}"></h3>
 							</div>
 
 							<div class="desc-information">
@@ -126,11 +126,12 @@
 								<div class="share-list">
 									<a th:href="${social.facebook_link}" target="_blank"><i class='bx bxl-facebook'></i></a>
 									<a th:href="${social.instagram_link}" target="_blank"><i class='bx bx-camera'></i></a> <a
-										th:href="${social.twitter_link}" target="_blank"><i class='bx bxl-twitter'></i></a> <a
-										th:href="${social.linkedin_link}" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
+										th:href="${social.twitter_link}" target="_blank"><i class='bx bxl-twitter'></i></a>
 								</div>
 								<br>
-								<a th:href="@{/user-profile?id=}+${vehicle.userEntity.id}"><b>تفاصيل البائع</b></a>
+								<a th:href="@{/user-profile?id=}+${vehicle.userEntity.id}">
+									<b>الانتقال الى ملف الشخصي للبائع</b>
+								</a>
 
 							</div>
 
@@ -170,8 +171,7 @@
 									<br>
 								</th:block>
 							</div>
-							<form th:action="@{/vehicle-details/}+${vehicle.id}"
-								method="post">
+							<form th:action="@{/vehicle-details/}+${vehicle.id}" method="post">
 								<div class="form-group">
 									<label>الاسم الكامل</label> <input type="text"
 										name="customerName" class="form-control">
