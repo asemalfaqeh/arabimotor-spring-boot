@@ -44,5 +44,6 @@ public interface WebUrlsConstants {
       String TERMS_OF_USE = "/terms-service";
       String PRIVACY_POLICY = "/privacy-policy";
       String CONTACT_US = "/contact-us";
-
+      String MAGAZINE = "/magazine";
+      String FEATURED_USERS = "/featured-users";
 }

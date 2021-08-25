@@ -66,15 +66,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	public String[] permitPathes() {
 		return new String[] {
-		  WebUrlsConstants.LOGIN,
-		  WebUrlsConstants.SIGN_UP,
-		  WebUrlsConstants.WEB_HOME_PAGE,
-		  WebUrlsConstants.BASE_URL,
-		  WebUrlsConstants.CONFIRM_ACCOUNT,
-		  WebUrlsConstants.ERROR_PAGE,
-		  WebUrlsConstants.VEHICLE_DETAILS,
-		  WebUrlsConstants.ALL_VEHICLES,
-		  WebUrlsConstants.ADVANCED_SEARCH,WebUrlsConstants.USER_PROFILE
+		  WebUrlsConstants.LOGIN, WebUrlsConstants.SIGN_UP,
+		  WebUrlsConstants.WEB_HOME_PAGE, WebUrlsConstants.BASE_URL,
+		  WebUrlsConstants.CONFIRM_ACCOUNT, WebUrlsConstants.ERROR_PAGE,
+		  WebUrlsConstants.VEHICLE_DETAILS, WebUrlsConstants.ALL_VEHICLES,
+		  WebUrlsConstants.ADVANCED_SEARCH, WebUrlsConstants.USER_PROFILE,
+		  WebUrlsConstants.FEATURED_USERS
 		};
 	}
 	
@@ -88,8 +85,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				  WebUrlsConstants.CHANGE_PASSWORD,
 				  WebUrlsConstants.SOCIAL_MEDIA_LINKS,
 				  WebUrlsConstants.RESEND_VERIFY_EMAIL,
-				  WebUrlsConstants.SUBMIT_VEHICLE,
-				  WebUrlsConstants.MESSAGES,
+				  WebUrlsConstants.SUBMIT_VEHICLE, WebUrlsConstants.MESSAGES,
 				  WebUrlsConstants.DELETE_VEHICLE,WebUrlsConstants.EDIT_VEHICLE,WebUrlsConstants.MY_VEHICLES
 		};
 	}

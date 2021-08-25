@@ -53,6 +53,10 @@ public class HomeController {
 	@Autowired
 	private ContactSellerService contactSellerService;
 
+	@Autowired
+	private BloggerService bloggerService;
+
+
 	@RequestMapping("/home")
 	public ModelAndView homePage() {
 		
@@ -65,11 +69,22 @@ public class HomeController {
 		List<PriceEntity> priceEntities = maxPriceService.findAllPrices();
 		List<BodyTypeEntity> bodyTypeEntities = bodyTypeService.findAllBodyType();
 		List<VehiclesEntity> vehiclesEntities = vehicleService.findAll();
+		List<UserEntity> userEntityList = customUserDetailsService.findAll();
+		List<BloggerEntity> bloggerEntities = bloggerService.findAll();
+
+		int sizeUserList = userEntityList.size();
+		for (int i = 0; i < sizeUserList; i ++){
+			logger.info("UserEnt : " + userEntityList.get(i).getRoles().iterator().next().getRole());
+			String userRole = userEntityList.get(i).getRoles().iterator().next().getRole();
+			if (userRole.equals("USER")){
+				userEntityList.get(i).setUser_photo(userEntityList.get(i).getPhotosImagePath(userEntityList.get(i).getId(), userEntityList.get(i).getUser_photo()));
+			}else{
+				userEntityList.remove(i);
+				logger.error("ADMIN EQ");
+			}
+		}
 
 		vehiclesEntities.sort(new ComparableVehiclePrices());
-		for (VehiclesEntity vehiclesEntity : vehiclesEntities){
-			logger.info("After Comparable: " + vehiclesEntity.getPrice());
-		}
 
 		for(VehiclesEntity vehiclesEntity : vehiclesEntities) {
 			if (vehiclesEntity.isFeagtured()) {
@@ -77,7 +92,7 @@ public class HomeController {
 				logger.info(vehiclesEntities + "");
 			}
 		}
-		
+
 		for(VehiclesEntity vehiclesEntity : vehiclesEntities){
 			if (vehiclesEntity.isMostPopular()) {
 				mostPopularVehiclesEntities.add(vehiclesEntity);
@@ -97,7 +112,7 @@ public class HomeController {
 		// get new added vehicles and set limit four items  //
 		Collections.reverse(vehicleModelsEntities);
 		List<VehiclesEntity> firstFourVehiclesEntities = vehiclesEntities.stream().limit(4).collect(Collectors.toList());
-		
+
 		model.addObject("models", vehicleModelsEntities);
 		model.addObject("years", yearsEntities);
 		model.addObject("prices", priceEntities);
@@ -105,6 +120,8 @@ public class HomeController {
 		model.addObject("vehicles_best_ranking", firstFourVehiclesEntities);
 		model.addObject("feature_vehicles", fEntities);
 		model.addObject("most_popular_vehicles", mostPopularVehiclesEntities);
+		model.addObject("users", userEntityList);
+		model.addObject("bloggers", bloggerEntities);
 				
 		model.setViewName(WebViewsConstants.USER_HOME);
 		
@@ -167,6 +184,30 @@ public class HomeController {
 			} else {
 				modelAndView.setViewName("redirect:" + WebUrlsConstants.WEB_HOME_PAGE);
 			}
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = WebUrlsConstants.FEATURED_USERS, method = RequestMethod.GET)
+	public ModelAndView allFeaturedUserController(){
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		List<UserEntity> userEntityList = customUserDetailsService.findAll();
+
+		int sizeUserList = userEntityList.size();
+		for (int i = 0; i < sizeUserList; i ++){
+			String userRole = userEntityList.get(i).getRoles().iterator().next().getRole();
+			if (userRole.equals("USER")){
+				userEntityList.get(i).setUser_photo(userEntityList.get(i).getPhotosImagePath(userEntityList.get(i).getId(), userEntityList.get(i).getUser_photo()));
+			}else{
+				userEntityList.remove(i);
+			}
+		}
+
+		logger.info("allFeaturedUserController: " + userEntityList.get(0).getUser_photo());
+		modelAndView.addObject("f_u", userEntityList);
+		modelAndView.setViewName(WebViewsConstants.FEATURED_USERS_VIEW);
 
 		return modelAndView;
 	}

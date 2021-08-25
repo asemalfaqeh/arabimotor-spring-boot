@@ -56,7 +56,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public void updateCurrentUser(UserEntity userEntity) {
 		userRepository.save(userEntity);
 	}
-	
+
 	@Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -71,16 +71,17 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     }
 
+    public List<UserEntity> findAll(){
+	    return userRepository.findAll();
+    }
+
     private List<GrantedAuthority> getUserAuthority(Set<RoleEntity> userRoles) {
 
 	    Set<GrantedAuthority> roles = new HashSet<>();
 
-	    userRoles.forEach((role) -> {
-            roles.add(new SimpleGrantedAuthority(role.getRole()));
-        });
+	    userRoles.forEach((role) -> roles.add(new SimpleGrantedAuthority(role.getRole())));
 
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
-        return grantedAuthorities;
+        return new ArrayList<>(roles);
 
     }
 

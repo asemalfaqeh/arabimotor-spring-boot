@@ -27,4 +27,6 @@ public interface WebViewsConstants {
 	String EDIT_VEHICLE_VIEW = "website/edit-vehicle";
 	String  ABOUT_VIEW = "website/about-us";
 	String USER_PROFILE_VIEW = "website/user-profile";
+	String MAGAZINE_VIEW = "website/blog";
+	String FEATURED_USERS_VIEW = "website/our-team";
 }

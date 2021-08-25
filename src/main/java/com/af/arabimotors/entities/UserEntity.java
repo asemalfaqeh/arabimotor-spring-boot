@@ -3,28 +3,15 @@ package com.af.arabimotors.entities;
 import java.beans.Transient;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import com.sun.istack.NotNull;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class UserEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	private Long id;
 
 	@Column(name = "email", nullable = false, unique = true, length = 50)
@@ -64,7 +51,11 @@ public class UserEntity {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "seller_type", referencedColumnName = "id")
 	private SellerTypeEntity sellerTypeEntity;
-	
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "social_id", referencedColumnName = "id")
+	private UserSocialEntity socialEntity;
+
 	@Column(name = "user_photo", nullable = true)
 	private String user_photo;
 	
@@ -184,7 +175,6 @@ public class UserEntity {
 	public void setEmailVerified(boolean isEmailVerified) {
 		this.isEmailVerified = isEmailVerified;
 	}
-
 	
 	
     public String getEmailVerifiedAt() {
@@ -199,6 +189,14 @@ public class UserEntity {
         return "/user-photos/" + id + "/" + user_photo;
     }
 
+	public UserSocialEntity getSocialEntity() {
+		return socialEntity;
+	}
+
+	public void setSocialEntity(UserSocialEntity socialEntity) {
+		this.socialEntity = socialEntity;
+	}
+
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", email=" + email + ", password=" + password + ", fullname=" + fullname
@@ -208,6 +206,5 @@ public class UserEntity {
 				+ user_photo + ", roles=" + roles + "]";
 	}
     
-	
 
 }

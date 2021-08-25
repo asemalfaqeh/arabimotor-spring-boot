@@ -503,87 +503,35 @@
 		<section class="team-area pt-100 pb-70">
 			<div class="container">
 				<div class="section-title">
-					<h2>OUR TEAM</h2>
-					<p>Meet our professional team members</p>
-
+					<h2>مستخدمون مميزون</h2>
 					<div class="section-btn">
-						<a href="#" class="default-btn"> View All <span></span>
+						<a th:href="@{/featured-users}" class="default-btn">مشاهدة الكل <span></span>
 						</a>
 					</div>
 				</div>
 
 				<div class="row">
+					<th:block th:each="userDetails : ${users}">
 					<div class="col-lg-3 col-md-6">
-						<div class="single-team">
-							<img src="assets/images/team/team-1.jpg" alt="image">
+							<div class="single-team">
+								<img th:src="@{${userDetails.user_photo}}" alt="image">
 
-							<div class="team-content">
-								<h3>ANDERSON SMITH</h3>
-								<span>Team Leader</span>
+								<div class="team-content">
+									<a th:href="@{/user-profile?id=}+${userDetails.id}" target="_blank">
+										<h3 th:text="${userDetails.fullname}">...</h3>
+									</a>
+									<br>
+									<span th:text="${userDetails.sellerTypeEntity.name}">...</span>
 
-								<div class="share-link">
-									<a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
-									<a href="#" target="_blank"><i class='bx bx-camera'></i></a> <a
-										href="#" target="_blank"><i class='bx bxl-twitter'></i></a> <a
-										href="#" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
+									<div class="share-link">
+										<a th:href="@{${userDetails.socialEntity.facebook_link}}" target="_blank"><i class='bx bxl-facebook'></i></a>
+										<a th:href="@{${userDetails.socialEntity.twitter_link}}" target="_blank"><i class='bx bx-camera'></i></a>
+										<a th:href="@{${userDetails.socialEntity.twitter_link}}" target="_blank"><i class='bx bxl-twitter'></i></a>
+									</div>
 								</div>
 							</div>
-						</div>
 					</div>
-
-					<div class="col-lg-3 col-md-6">
-						<div class="single-team">
-							<img src="assets/images/team/team-2.jpg" alt="image">
-
-							<div class="team-content">
-								<h3>HENRY DAVID</h3>
-								<span>CEO/Founder</span>
-
-								<div class="share-link">
-									<a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
-									<a href="#" target="_blank"><i class='bx bx-camera'></i></a> <a
-										href="#" target="_blank"><i class='bx bxl-twitter'></i></a> <a
-										href="#" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-6">
-						<div class="single-team">
-							<img src="assets/images/team/team-3.jpg" alt="image">
-
-							<div class="team-content">
-								<h3>ROSALINA WILLM</h3>
-								<span>Customer Advisor</span>
-
-								<div class="share-link">
-									<a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
-									<a href="#" target="_blank"><i class='bx bx-camera'></i></a> <a
-										href="#" target="_blank"><i class='bx bxl-twitter'></i></a> <a
-										href="#" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-6">
-						<div class="single-team">
-							<img src="assets/images/team/team-4.jpg" alt="image">
-
-							<div class="team-content">
-								<h3>JUSTIN NOVAK</h3>
-								<span>Managing Director</span>
-
-								<div class="share-link">
-									<a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
-									<a href="#" target="_blank"><i class='bx bx-camera'></i></a> <a
-										href="#" target="_blank"><i class='bx bxl-twitter'></i></a> <a
-										href="#" target="_blank"><i class='bx bxl-pinterest-alt'></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
+					</th:block>
 				</div>
 			</div>
 		</section>
@@ -641,81 +589,37 @@
 		<section class="blog-area bg-ffffff pt-100 pb-70">
 			<div class="container">
 				<div class="section-title">
-					<h2>BLOG FEED</h2>
-					<p>Checkout latest news and articles from our blog</p>
+					<h2>مجلة عربي موتورز</h2>
+					<p>تحقق من آخر الأخبار والمقالات من مدونتنا</p>
 
 					<div class="section-btn">
-						<a href="#" class="default-btn"> View All <span></span>
+						<a th:href="@{/magazine}" class="default-btn"> مشاهدة الكل <span></span>
 						</a>
 					</div>
 				</div>
-
 				<div class="row">
-					<div class="col-lg-4 col-md-6">
-						<div class="single-blog">
-							<a href="blog-details.html"><img
-								src="assets/images/blog/blog-1.jpg" alt="image"></a>
+					<th:block th:each="blog : ${bloggers}">
+						<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3">
+							<div class="single-blog">
+								<a href="blog-details.html">
+									<img th:src="${blog.image}" alt="image"></a>
 
-							<div class="blog-content">
-								<div class="tag">News</div>
-								<h3>
-									<a href="blog-details.html">WHY CROSSOVERS ARE BETTER THAN
-										HATCHBACK</a>
-								</h3>
-								<ul class="post-meta">
-									<li><i class="flaticon-user"></i> By: <a href="#">Ander
-											Smith</a></li>
-									<li><i class="flaticon-calendar"></i> Nov 20, 2020</li>
-								</ul>
-								<p>Lorem ipsum dolor sit amet consetetur elitr sadipscing
-									sed diam nonumy...</p>
+								<div class="blog-content">
+									<div class="tag" th:text="${blog.tag}">...</div>
+									<h3>
+										<a href="blog-details.html" th:text="${blog.title}"></a>
+									</h3>
+									<ul class="post-meta">
+										<li><i class="flaticon-user"></i><a th:text="${blog.authorName}" href="#">...</a>
+										</li>
+										<li th:text="${#dates.format(blog.createdDate,'aa HH:mm, yyyy/MM/dd')}"><i class="flaticon-calendar">
+										</i> ...</li>
+									</ul>
+									<p th:text="${blog.content.substring(0,100)}">...</p>
+								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6">
-						<div class="single-blog">
-							<a href="blog-details.html"><img
-								src="assets/images/blog/blog-2.jpg" alt="image"></a>
-
-							<div class="blog-content">
-								<div class="tag">News</div>
-								<h3>
-									<a href="blog-details.html">NEW TESLA SXP-502D GETTING
-										FOUR-CYLINDER ENGINE</a>
-								</h3>
-								<ul class="post-meta">
-									<li><i class="flaticon-user"></i> By: <a href="#">Timothy</a>
-									</li>
-									<li><i class="flaticon-calendar"></i> Nov 19, 2020</li>
-								</ul>
-								<p>Lorem ipsum dolor sit amet consetetur elitr sadipscing
-									sed diam nonumy...</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3">
-						<div class="single-blog">
-							<a href="blog-details.html"><img
-								src="assets/images/blog/blog-3.jpg" alt="image"></a>
-
-							<div class="blog-content">
-								<div class="tag">News</div>
-								<h3>
-									<a href="blog-details.html">THE TOP TEN MOST VALUABLE CARS
-										BRANDS</a>
-								</h3>
-								<ul class="post-meta">
-									<li><i class="flaticon-user"></i> By: <a href="#">Vasquez</a>
-									</li>
-									<li><i class="flaticon-calendar"></i> Nov 18, 2020</li>
-								</ul>
-								<p>Lorem ipsum dolor sit amet consetetur elitr sadipscing
-									sed diam nonumy...</p>
-							</div>
-						</div>
-					</div>
+					</th:block>
 				</div>
 			</div>
 		</section>
