@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BloggerService {
@@ -15,6 +16,10 @@ public class BloggerService {
 
     public List<BloggerEntity> findAll(){
         return bloggerRepository.findAll();
+    }
+
+    public Optional<BloggerEntity> findBloggerByID(Long id){
+        return bloggerRepository.findById(id);
     }
 
 }

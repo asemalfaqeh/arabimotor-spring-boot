@@ -41,7 +41,7 @@
                                 <div class="blog-content">
                                     <div class="tag" th:text="${b.tag}">...</div>
                                     <h3>
-                                        <a href="blog-details.html" th:text="${b.title}">...</a>
+                                        <a th:href="@{magazine?id=}+${b.id}" th:text="${b.title}">...</a>
                                     </h3>
                                     <ul class="post-meta">
                                         <li>
@@ -54,7 +54,7 @@
                                     </ul>
                                     <p th:text="${b.content.substring(0,100)}">...</p>
                                     <div class="blog-btn">
-                                        <a href="blog-details.html" class="default-btn">
+                                        <a th:href="@{/magazine?id=}+${b.id}" class="default-btn">
                                             اقراء المزيد
                                             <span></span>
                                         </a>
