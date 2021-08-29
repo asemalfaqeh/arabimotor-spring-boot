@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.af.arabimotors.entities.*;
 import com.af.arabimotors.model.request.ContactSellerRequest;
+import com.af.arabimotors.model.request.ContactUsRequest;
 import com.af.arabimotors.services.*;
 
 import com.af.arabimotors.utils.ComparableVehiclePrices;
@@ -56,6 +57,8 @@ public class HomeController {
 	@Autowired
 	private BloggerService bloggerService;
 
+	@Autowired
+	private ContactUsService contactUsService;
 
 	@RequestMapping("/home")
 	public ModelAndView homePage() {
@@ -209,6 +212,28 @@ public class HomeController {
 		modelAndView.addObject("f_u", userEntityList);
 		modelAndView.setViewName(WebViewsConstants.FEATURED_USERS_VIEW);
 
+		return modelAndView;
+	}
+
+	@RequestMapping(value = WebUrlsConstants.CONTACT_US, method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView contactUsController(@Validated Optional<ContactUsRequest> contactUsRequest, BindingResult result){
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (contactUsRequest.isPresent()) {
+			if (contactUsRequest.get().getEmail() != null) {
+				if (result.hasErrors()) {
+					modelAndView.addObject("error", result.getAllErrors());
+				} else {
+					ContactUsEntity contactUsEntity = new ContactUsEntity();
+					BeanUtils.copyProperties(contactUsRequest.get(), contactUsEntity);
+					logger.info("ContactUs:" + contactUsRequest.toString());
+					contactUsService.saveContactUs(contactUsEntity);
+					modelAndView.setViewName("redirect:" + WebUrlsConstants.WEB_HOME_PAGE);
+				}
+			}
+		}
+
+		modelAndView.setViewName(WebViewsConstants.CONTACT_US_VIEW);
 		return modelAndView;
 	}
 	

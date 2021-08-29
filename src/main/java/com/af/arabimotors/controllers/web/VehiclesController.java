@@ -72,7 +72,7 @@ public class VehiclesController {
 		List<String> images = new ArrayList<>();
 		List<String> featureList = new ArrayList<>();
 		Logger logger = LoggerFactory.getLogger(VehiclesController.class);
-
+		
 		logger.warn("");
 		VehiclesEntity vehicle = new VehiclesEntity();
 		String mainVehicleImageString = "";

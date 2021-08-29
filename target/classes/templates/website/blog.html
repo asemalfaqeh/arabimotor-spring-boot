@@ -37,7 +37,7 @@
                     <div class="col-lg-8 col-md-12">
                         <th:block th:each="b : ${blog}">
                             <div class="single-blog">
-                                <a href="blog-details.html"><img th:src="${b.image}" alt="image"></a>
+                                <a th:href="@{magazine?id=}+${b.id}"><img th:src="${b.image}" alt="image"></a>
                                 <div class="blog-content">
                                     <div class="tag" th:text="${b.tag}">...</div>
                                     <h3>
@@ -67,10 +67,10 @@
                     <div class="col-lg-4 col-md-12">
                         <aside class="widget-area">
                             <div class="widget widget_search">
-                                <form class="search-form">
+                                <form class="search-form" th:action="@{/search-magazine}" method="post">
                                     <label>
-                                        <span class="screen-reader-text">Search for:</span>
-                                        <input type="search" class="search-field" placeholder="Search...">
+                                        <span class="screen-reader-text">البحث عن:</span>
+                                        <input type="search" name="search" class="search-field" placeholder="البحث...">
                                     </label>
                                     <button type="submit">
                                         <i class='bx bx-search-alt'></i>

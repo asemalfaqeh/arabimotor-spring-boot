@@ -46,4 +46,6 @@ public interface WebUrlsConstants {
       String CONTACT_US = "/contact-us";
       String MAGAZINE = "/magazine";
       String FEATURED_USERS = "/featured-users";
+      String SEARCH_MAGAZINE = "/search-magazine";
+
 }

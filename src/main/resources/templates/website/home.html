@@ -174,7 +174,7 @@
 								</div>
 
 								<div class="car-ranking-content">
-									<div class="tag" th:text="${vbr.price}"></div>
+									<div class="tag" th:text="${vbr.price} + ₪"></div>
 									<h3>
 										<a th:href="@{/vehicle-details/}+${vbr.id}"
 											th:text="${vbr.ad_title}">...</a>
@@ -221,7 +221,7 @@
 							</div>
 
 							<div class="box-content">
-								<div class="tag" th:text="${feature_vehicles.get(0).price}">...</div>
+								<div class="tag" th:text="${feature_vehicles.get(0).price}+₪">...</div>
 								<h3>
 									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(0).id}"
 										th:text="${feature_vehicles.get(0).ad_title}">...</a>
@@ -251,7 +251,7 @@
 							</div>
 
 							<div class="box-content">
-								<div class="tag" th:text="${feature_vehicles.get(1).price}">...</div>
+								<div class="tag" th:text="${feature_vehicles.get(1).price}+₪">...</div>
 								<h3>
 									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(1).id}"
 										th:text="${feature_vehicles.get(1).ad_title}">...</a>
@@ -283,7 +283,7 @@
 							</div>
 
 							<div class="box-content">
-								<div class="tag" th:text="${feature_vehicles.get(2).price}">...</div>
+								<div class="tag" th:text="${feature_vehicles.get(2).price}+₪">...</div>
 								<h3>
 									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(2).id}"
 										th:text="${feature_vehicles.get(2).ad_title}">...</a>
@@ -314,7 +314,7 @@
 							</div>
 
 							<div class="box-content">
-								<div class="tag" th:text="${feature_vehicles.get(3).price}">...</div>
+								<div class="tag" th:text="${feature_vehicles.get(3).price}+₪">...</div>
 								<h3>
 									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(1).id}"
 										th:text="${feature_vehicles.get(3).ad_title}">...</a>
@@ -344,7 +344,7 @@
 							</div>
 
 							<div class="box-content">
-								<div class="tag" th:text="${feature_vehicles.get(4).price}">...</div>
+								<div class="tag" th:text="${feature_vehicles.get(4).price}+₪">...</div>
 								<h3>
 									<a th:href="@{/vehicle-details/}+${feature_vehicles.get(4).id}"
 										th:text="${feature_vehicles.get(4).ad_title}">...</a>
@@ -383,7 +383,7 @@
 									<div class="models-item">
 										<div class="models-content">
 											<h3>معلومات السيارة</h3>
-											<div class="tag" th:text="${most_popular_vehicle.price}">...</div>
+											<div class="tag" th:text="${most_popular_vehicle.price}+₪">...</div>
 											<div>
 				                            <a th:href="@{/vehicle-details/}+${most_popular_vehicle.id}">	
 											 <h4 th:text="${most_popular_vehicle.ad_title}">...</h4>
@@ -445,50 +445,46 @@
 					<div class="col-lg-7">
 						<div class="choose-item">
 							<div class="content">
-								<h3>WHY CHOOSE MUND</h3>
-								<p>There are many reasons to like Mund</p>
+								<h3>لماذا اخترت عربي موتورز</h3>
+								<p>هناك اسباب كثيرة تجعلك تحب عربي موتورز</p>
 							</div>
 
 							<div class="choose-inner-content">
 								<div class="icon">
 									<i class="flaticon-handshake"></i>
 								</div>
-								<h4>TRANSPARENT DEAL</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-									sed do eiusmodtempor incididunt ut labore et dolore magna
-									aliqua. Quis ipsum suspendisse ultrices gravi maecenas.</p>
+								<h4>دفع ثمن سيارتك الجديدة
+								</h4>
+								<p>الشيء الوحيد الذي ستحتاجه بالتأكيد لشراء سيارتك هو المال.
+									سواء كنت تدفع من مدخراتك أو تقترض المال من خلال مؤسسة مالية أو من خلال التاجر الخاص بك ، بمجرد إتمام الصفقة ، ستحتاج إلى أن تكون قادرًا على التحرك بسرعة.</p>
 							</div>
 
 							<div class="choose-inner-content">
 								<div class="icon">
 									<i class="flaticon-perfect"></i>
 								</div>
-								<h4>HASSLE-FREE</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-									sed do eiusmodtempor incididunt ut labore et dolore magna
-									aliqua. Quis ipsum suspendisse ultrices gravi maecenas.</p>
+								<h4>إذا كنت تقترض المال</h4>
+								<p>يمكن أن يكون الحصول على قرض طريقة رائعة للحصول على سيارة أحلامك عاجلاً. ولكن عليك التأكد من قدرتك على إدارة عمليات السداد وأي تكاليف غير متوقعة. هذا هو الحال بشكل خاص إذا كانت سيارتك مستعملة ولا يغطيها الضمان.</p>
 							</div>
 
 							<div class="choose-inner-content">
 								<div class="icon">
 									<i class="flaticon-headache"></i>
 								</div>
-								<h4>WORRY-FREE</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-									sed do eiusmodtempor incididunt ut labore et dolore magna
-									aliqua. Quis ipsum suspendisse ultrices gravi maecenas.</p>
+								<h4>هل بحثك مانع للماء؟</h4>
+								<p>عندما يتعلق الأمر بمشتريات مهمة مثل السيارة ، فكلما زادت معرفتك كان ذلك أفضل. خذ وقتك في البحث عن مواقع السيارات الخاصة بالسيارات ، والتحدث إلى التجار أو خبراء السيارات الآخرين ، واقرأ مراجعات السيارات المستقلة على الويب أو في الصحف أو مجلات السيارات المتخصصة. يمكنك أيضًا التحقق مما إذا كانت الملحقات التي تريدها متوفرة مع السيارة التي تهتم بها أكثر.</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-lg-5">
 						<div class="choose-image">
-							<img src="assets/images/choose/choose-1.jpg" alt="image">
+							<img src="assets/images/choose/choose-1.jpeg" style="width:750px;height:450px" alt="image">
 
 							<div class="image-box">
-								<img src="assets/images/choose/choose-2.jpg" alt="image">
+								<img src="assets/images/choose/choose-2.jpeg" style="width:300px;height:250px" alt="image">
 
-								<a href="https://www.youtube.com/watch?v=nzm2GDQw9kE"
+								<a href="https://www.youtube.com/watch?v=K5hAnVPzfQc"
 									class="video-btn popup-youtube"> <i class='bx bx-play'></i>
 								</a>
 							</div>
@@ -601,13 +597,12 @@
 					<th:block th:each="blog : ${bloggers}">
 						<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3">
 							<div class="single-blog">
-								<a href="blog-details.html">
+								<a th:href="@{/magazine?id=}+${blog.id}">
 									<img th:src="${blog.image}" alt="image"></a>
-
 								<div class="blog-content">
 									<div class="tag" th:text="${blog.tag}">...</div>
 									<h3>
-										<a href="blog-details.html" th:text="${blog.title}"></a>
+										<a th:href="@{/magazine?id=}+${blog.id}" th:text="${blog.title}"></a>
 									</h3>
 									<ul class="post-meta">
 										<li><i class="flaticon-user"></i><a th:text="${blog.authorName}" href="#">...</a>

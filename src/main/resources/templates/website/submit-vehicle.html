@@ -52,16 +52,15 @@
 
 								</div>
 							</div>
-
 							<div class="profile-info">
 								<ul class="info-list">
-									<li><a th:href="@{/post-vehicle}" class="active">اعرض
-											سيارتك للبيع</a></li>
-									<li><a href="favorites.html">المفضلة</a></li>
-									<li><a th:href="@{/account-details}">حسابي</a></li>
-									<li><a href="messages.html">الرسائل</a></li>
+									<li><a th:href="@{/post-vehicle}" class="active">اعرض سيارتك للبيع</a></li>
+									<li><a th:href="@{/account-details}">حسابي</a>
+									</li>
+									<li><a th:href="@{/messages}">الرسائل</a></li>
+									<li><a th:href="@{/my-vehicles}">اعلاناتي</a></li>
 									<li><a th:href="@{/user-social}">وسائل التواصل
-											الاجتماعي</a></li>
+										الاجتماعي</a></li>
 									<li><a th:href="@{/change-password}">تحديث كلمة المرور</a></li>
 									<li><a th:href="@{/logout}">تسجيل الخروج</a></li>
 								</ul>
@@ -171,7 +170,7 @@
 									</div>
 
 									<div class="col-lg-6 col-md-12">
-										<label for="city">المنطقة</label>
+										<label for="cityEntity">المنطقة</label>
 										<div class="form-group">
 											<select id="cityEntity" name="cityEntity">
 												<th:block th:each="city : ${cities}">

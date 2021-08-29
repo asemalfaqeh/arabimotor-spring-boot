@@ -71,11 +71,10 @@
           <div class="profile-info">
             <ul class="info-list">
               <li><a th:href="@{/post-vehicle}">اعرض سيارتك للبيع</a></li>
-              <li><a href="favorites.html">المفضلة</a></li>
               <li><a th:href="@{/account-details}">حسابي</a>
               </li>
               <li><a th:href="@{/messages}">الرسائل</a></li>
-              <li><a th:href="@{/my-vehicles}"  class="active">اعلاناتي</a></li>
+              <li><a th:href="@{/my-vehicles}" class="active">اعلاناتي</a></li>
               <li><a th:href="@{/user-social}">وسائل التواصل
                 الاجتماعي</a></li>
               <li><a th:href="@{/change-password}">تحديث كلمة المرور</a></li>
@@ -114,7 +113,7 @@
 
               <div class="col-lg-4 col-md-4">
                 <div class="car-shop-content">
-                  <div class="tag" th:text="${v.price}">....</div>
+                  <div class="tag" th:text="${v.price}+₪">....</div>
                   <h3>
                     <a th:href="@{/vehicle-details/}+${v.id}"
                        th:text="${v.ad_title}">...</a>

@@ -22,4 +22,8 @@ public class BloggerService {
         return bloggerRepository.findById(id);
     }
 
+    public List<BloggerEntity> findAllByName(String searchName){
+        return bloggerRepository.findAllBySearchName(searchName);
+    }
+
 }
