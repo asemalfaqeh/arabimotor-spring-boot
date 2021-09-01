@@ -31,4 +31,6 @@ public interface WebViewsConstants {
 	String FEATURED_USERS_VIEW = "website/our-team";
 	String BLOG_DETAILS = "website/blog-details";
 	String CONTACT_US_VIEW = "website/contact";
+	String TERMS_OF_USE_VIEW = "website/terms-of-service";
+	String PRIVACY_POLICY_VIEW = "website/privacy-policy";
 }

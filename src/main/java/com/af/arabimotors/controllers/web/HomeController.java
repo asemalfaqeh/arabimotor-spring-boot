@@ -139,6 +139,13 @@ public class HomeController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = WebUrlsConstants.PRIVACY_POLICY, method = RequestMethod.GET)
+	public ModelAndView privacyPolicyController(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName(WebViewsConstants.PRIVACY_POLICY_VIEW);
+		return modelAndView;
+	}
+
 	@RequestMapping(value = {WebUrlsConstants.USER_PROFILE,WebUrlsConstants.USER_PROFILE+"/{userId}"}, method = {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView userProfileController(@RequestParam(value = "id", required = false) String userId,
 											  @Validated ContactSellerRequest contactSellerRequest,

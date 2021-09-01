@@ -62,7 +62,7 @@
 			<div class="container-fluid">
 				<nav class="navbar navbar-expand-md navbar-light">
 					<a class="navbar-brand" th:href="@{/home}">
-						<img style="width:120px;height:60px" src="assets/images/logo.jpeg" class="white-logo" alt="image">
+						<img style="width:120px;height:60px" src="/assets/images/logo.jpeg" class="white-logo" alt="image">
 						<img style="width:120px;height:60px" src="/assets/images/logo.jpeg" class="black-logo"
 						alt="image">
 					</a>
@@ -85,10 +85,10 @@
 
 								<ul class="dropdown-menu">
 
-									<li class="nav-item"><a href="terms-of-service.html"
+									<li class="nav-item"><a th:href="@{/terms-service}"
 										class="nav-link"> شروط الخدمة </a></li>
 
-									<li class="nav-item"><a href="privacy-policy.html"
+									<li class="nav-item"><a th:href="@{/privacy-policy}"
 										class="nav-link"> سياسة الخصوصية </a></li>
 
 								</ul></li>
@@ -245,7 +245,7 @@
 							<li>Phone: <span><a href="tel:15143126677">+1
 										(514) 312-6677</a></span>
 							</li>
-							<li>Email: <span><a href="mailto:hello@mund.com">hello@mund.com</a></span>
+							<li>Email: <span><a href="mailto:hello@mund.com">...</a></span>
 							</li>
 						</ul>
 					</div>
@@ -253,7 +253,7 @@
 
 				<div class="col-lg-3 col-sm-6">
 					<div class="single-footer-widget">
-						<h3>FOLLOW US ON INSTAGRAM</h3>
+						<h3>تابعنا على الفيسبوك</h3>
 
 						<ul class="instagram-list">
 							<li>
