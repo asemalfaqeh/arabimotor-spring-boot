@@ -124,9 +124,11 @@
 								<h3>وسائل تواصل الاجتماعي للبائع</h3>
 
 								<div class="share-list">
+									<div th:if="${social != null}">
 									<a th:href="${social.facebook_link}" target="_blank"><i class='bx bxl-facebook'></i></a>
 									<a th:href="${social.instagram_link}" target="_blank"><i class='bx bx-camera'></i></a> <a
 										th:href="${social.twitter_link}" target="_blank"><i class='bx bxl-twitter'></i></a>
+									</div>
 								</div>
 								<br>
 								<a th:href="@{/user-profile?id=}+${vehicle.userEntity.id}">

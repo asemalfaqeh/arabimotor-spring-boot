@@ -44,7 +44,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 //	    user.setRoles(new HashSet<>(Arrays.asList(userRole)));
 //	    userRepository.save(user);
 //	}
-	
+
+    // save user
 	public void saveUser(UserEntity user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
@@ -73,6 +74,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public List<UserEntity> findAll(){
 	    return userRepository.findAll();
+    }
+
+    public List<UserEntity> findAllPrimaryUsers(){
+	    return userRepository.findAllPrimary();
     }
 
     private List<GrantedAuthority> getUserAuthority(Set<RoleEntity> userRoles) {

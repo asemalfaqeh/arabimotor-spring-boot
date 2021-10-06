@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.af.arabimotors.model.request.AdvancedSearchRequest;
 import com.af.arabimotors.model.request.ContactSellerRequest;
@@ -23,7 +20,7 @@ import com.af.arabimotors.utils.WebViewsConstants;
 
 import javax.servlet.http.HttpSession;
 
-@Controller
+@RestController
 public class VehiclesController {
 
 	@Autowired
@@ -86,7 +83,7 @@ public class VehiclesController {
 			for (VehicleImagesEntity vehicleImagesEntity : vehicle.getVehicleImagesEntity()) {
 				images.add("/" + vehicleImagesEntity.getImage());
 			}
-
+  
 			if (images.size() != 0) {
 				mainVehicleImageString = images.get(0);
 			}
@@ -206,20 +203,35 @@ public class VehiclesController {
 	}
 
 	@RequestMapping(value = WebUrlsConstants.ADVANCED_SEARCH, method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView advancedSearchController(@Validated AdvancedSearchRequest advancedSearchRequest) {
+	public ModelAndView advancedSearchController(@Validated AdvancedSearchRequest advancedSearchRequest, HttpSession httpSession) {
 
 		ModelAndView modelAndView = new ModelAndView();
+
+		logger.info("Model Session Attr Old: " + httpSession.getAttribute("model"));
+		httpSession.setAttribute("model", advancedSearchRequest.getModel());
+		logger.info("Model Session Attr " + httpSession.getAttribute("model"));
+
 		List<VehiclesEntity> vehiclesEntities;
 		if (advancedSearchRequest.getModel() != null && advancedSearchRequest.getYear() != null
 				&& advancedSearchRequest.getConditionType() != null && advancedSearchRequest.getPrice() != null) {
 
 			logger.info("Advanced Range Price: " + advancedSearchRequest.getPrice());
-			String priceStr = advancedSearchRequest.getPrice();
+			String priceStr = advancedSearchRequest.getPrice().trim();
 			String[] arrOfStr = priceStr.split("-");
 			String minPrice;
 			String maxPrice;
 			maxPrice = arrOfStr[1].substring(1);
 			minPrice = arrOfStr[0].substring(1);
+
+
+			if (maxPrice.contains("$")){
+				maxPrice.replace("$","");
+			}
+
+			if (minPrice.contains("$")){
+				minPrice.replace("$","");
+			}
+
 			logger.info("MaxPrice: " + maxPrice + " MinPrice: " + minPrice);
 
 			vehiclesEntities = vehicleService.findAdvanceSearchPrice(minPrice, maxPrice, advancedSearchRequest);

@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,7 +37,7 @@ import com.af.arabimotors.utils.UserAuthenticationHelper;
 import com.af.arabimotors.utils.WebUrlsConstants;
 import com.af.arabimotors.utils.WebViewsConstants;
 
-@Controller
+@RestController
 public class AccountDetailsController {
 
 	@Autowired
@@ -67,12 +68,20 @@ public class AccountDetailsController {
 		UserResponse userResponse = new UserResponse();
 		BeanUtils.copyProperties(userEntity, userResponse);
 
-		modelAndView.addObject("photo", userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo()));
-		modelAndView.addObject("isphoto",userEntity.getUser_photo());
+		String userProfile = userEntity.getUser_photo();
+		System.out.println("UserProfile: " + userProfile);
+		if (userProfile.equals("thumb.png")){
+			userEntity.setUser_photo("uploads/thumb.png");
+			userProfile = userEntity.getUser_photo();
+		}else{
+			userProfile = userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo());
+		}
+
+		modelAndView.addObject("photo", userProfile);
+		modelAndView.addObject("isphoto", userEntity.getUser_photo());
 		modelAndView.addObject("userdetails", userResponse);
 		modelAndView.addObject("cities", cityEntities);
 		modelAndView.addObject("types", sellerTypeEntities);
-		
 		System.out.println("UserResponse: " + userResponse);
 		modelAndView.setViewName(WebViewsConstants.ACCOUNT_DETAILS_VIEW);
 		
@@ -91,8 +100,10 @@ public class AccountDetailsController {
 		
 		UserResponse userResponse = new UserResponse();
 		BeanUtils.copyProperties(userEntity, userResponse);
-		
 		String photoString = userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo());
+		if (photoString.contains("thumb.png")){
+
+		}
 		System.out.println("UserPhoto: " + photoString);
 		modelAndView.addObject("photo", photoString);
 		modelAndView.addObject("isphoto",userEntity.getUser_photo());
@@ -173,9 +184,18 @@ public class AccountDetailsController {
 	public ModelAndView changePassword() {
 		ModelAndView modelAndView = new ModelAndView();
 		UserEntity userEntity = customUserSevice.findUserByEmail(UserAuthenticationHelper.getUserName());
-		String photoString = userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo());
+
+		String userProfile = userEntity.getUser_photo();
+		System.out.println("UserProfile: " + userProfile);
+		if (userProfile.equals("thumb.png")){
+			userEntity.setUser_photo("uploads/thumb.png");
+			userProfile = userEntity.getUser_photo();
+		}else{
+			userProfile = userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo());
+		}
+
         modelAndView.addObject("isphoto", userEntity.getUser_photo());
-        modelAndView.addObject("photo", photoString);
+        modelAndView.addObject("photo", userProfile);
 		modelAndView.setViewName(WebViewsConstants.CHANGE_PASSWORD_VIEW);
 		return modelAndView;
 	}
@@ -235,9 +255,18 @@ public class AccountDetailsController {
 		}else {
 		    modelAndView.addObject("user_social", new UserSocialEntity());
 		}
-		String photoString = userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo());
+
+		String userProfile = userEntity.getUser_photo();
+		System.out.println("UserProfile: " + userProfile);
+		if (userProfile.equals("thumb.png")){
+			userEntity.setUser_photo("uploads/thumb.png");
+			userProfile = userEntity.getUser_photo();
+		}else{
+			userProfile = userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo());
+		}
+
 		modelAndView.addObject("isphoto", userEntity.getUser_photo());
-	    modelAndView.addObject("photo", photoString);
+	    modelAndView.addObject("photo", userProfile);
         modelAndView.setViewName(WebViewsConstants.SOCIAL_USER_VIEW);			    
 		return modelAndView;
 		

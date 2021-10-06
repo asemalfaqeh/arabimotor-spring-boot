@@ -53,9 +53,11 @@
                                     <span th:text="${f_u.sellerTypeEntity.name}">...</span>
 
                                     <div class="share-link">
+                                        <div th:if="${f_u.socialEntity != null}">
                                         <a th:href="@{${f_u.socialEntity.facebook_link}}" target="_blank"><i class='bx bxl-facebook'></i></a>
                                         <a th:href="@{${f_u.socialEntity.twitter_link}}" target="_blank"><i class='bx bx-camera'></i></a>
                                         <a th:href="@{${f_u.socialEntity.twitter_link}}" target="_blank"><i class='bx bxl-twitter'></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

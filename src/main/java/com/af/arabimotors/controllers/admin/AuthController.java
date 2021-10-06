@@ -4,7 +4,6 @@ import com.af.arabimotors.utils.WebViewsConstants;
 
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -12,22 +11,20 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.af.arabimotors.entities.CityEntity;
 import com.af.arabimotors.entities.ConfirmationEmailEntity;
 import com.af.arabimotors.entities.SellerTypeEntity;
 import com.af.arabimotors.entities.UserEntity;
 import com.af.arabimotors.model.request.ResetPasswordRequest;
 import com.af.arabimotors.model.request.UserRequest;
-import com.af.arabimotors.model.response.UserResponse;
 import com.af.arabimotors.services.CityService;
 import com.af.arabimotors.services.ConfirmEmailService;
 import com.af.arabimotors.services.ConfirmationUserEmailService;
@@ -36,7 +33,8 @@ import com.af.arabimotors.services.SellerTypeService;
 import com.af.arabimotors.utils.UserAuthenticationHelper;
 import com.af.arabimotors.utils.WebUrlsConstants;
 
-@Controller
+
+@RestController
 public class AuthController {
 
 	@Autowired
@@ -78,7 +76,6 @@ public class AuthController {
 
 			List<CityEntity> cityEntities = cityService.findlAllCities();
 			List<SellerTypeEntity> sellerTypeEntities = SellerTypeService.findAllSellerTypeEntities();
-
 			modelAndView.addObject("types", sellerTypeEntities);
 			modelAndView.addObject("cities", cityEntities);
 			modelAndView.setViewName(WebViewsConstants.REGISTER_VIEW);
@@ -122,6 +119,7 @@ public class AuthController {
 					UserEntity userEntity = new UserEntity();
 					BeanUtils.copyProperties(user, userEntity);
 					userEntity.setCreated_at(new Date() + "");
+					userEntity.setUser_photo("thumb.png");
 
 					System.err.println("UserEntity: " + userEntity.toString());
 
@@ -133,7 +131,7 @@ public class AuthController {
 					SimpleMailMessage mailMessage = new SimpleMailMessage();
 					mailMessage.setTo(user.getEmail());
 					mailMessage.setSubject("Complete Registration!");
-					mailMessage.setFrom("ahh1994store@gmail.com");
+					mailMessage.setFrom("support@arabimotors.com");
 					mailMessage.setText("Welcome To ArabiMotors, To Confirm your Account, Please click here : "
 							+ WebUrlsConstants.VERIFY_EMAIL_LINK + confirmationToken.getConfirmationToken());
 
@@ -225,22 +223,18 @@ public class AuthController {
 			ConfirmationEmailEntity confirmationEmailEntity = confirmUserEmail.findConfirmationEmailEntity(userEntity);
 			ConfirmationEmailEntity confirmationEmail = new ConfirmationEmailEntity(userEntity);
 			String token;
-			
-			if (confirmationEmailEntity == null) {
-				confirmUserEmail.save(confirmationEmail);
-			} else { // update token
+
+			if (confirmationEmailEntity != null) { // update token
 				confirmationEmail.setId(confirmationEmailEntity.getId());
-				confirmUserEmail.save(confirmationEmail);
 			}
-			
+
+			confirmUserEmail.save(confirmationEmail);
 			token = confirmationEmail.getConfirmationToken();
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setTo(userEntity.getEmail());
 			mailMessage.setSubject("Reset Password");
 			mailMessage.setFrom("ahh1994store@gmail.com");
-			mailMessage.setText("Welcome To ArabiMotors, To Reset Password your Account, Please click here : "
-					+ WebUrlsConstants.RESET_PASSWORD_LINK + token);
-
+			mailMessage.setText("Welcome To ArabiMotors, To Reset Password your Account, Please click here : " + WebUrlsConstants.RESET_PASSWORD_LINK + token);
 			modelAndView.setViewName(WebViewsConstants.FORGOT_PASSWORD_VIEW);
 			confirmMailService.sendMain(mailMessage);
 
@@ -253,13 +247,12 @@ public class AuthController {
 	public ModelAndView resetPassword(ModelAndView modelAndView, @RequestParam("token") String confirmationToken) {
 
 		ConfirmationEmailEntity token = confirmUserEmail.findByToken(confirmationToken);
-		if (token != null) {
 
+		if (token != null) {
 			UserEntity user = userService.findUserByEmail(token.getUserEntity().getEmail());
 			System.err.println("Email: " + user.getEmail());
 			modelAndView.addObject("token", confirmationToken);
 			modelAndView.setViewName(WebViewsConstants.RESET_PASSWORD_VIEW);
-
 		} else {
 			modelAndView.setViewName("redirect:" + WebUrlsConstants.ERROR_PAGE);
 		}

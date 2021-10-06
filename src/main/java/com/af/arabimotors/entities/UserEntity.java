@@ -56,7 +56,7 @@ public class UserEntity {
 	@JoinColumn(name = "social_id", referencedColumnName = "id")
 	private UserSocialEntity socialEntity;
 
-	@Column(name = "user_photo", nullable = true)
+	@Column(name = "user_photo", columnDefinition = "varchar(255) default 'thumb.png'")
 	private String user_photo;
 	
 	@ManyToMany(fetch = FetchType.EAGER)

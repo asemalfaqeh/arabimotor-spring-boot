@@ -1,3 +1,4 @@
+
 jQuery(function ($) {
     'use strict';
 	
@@ -63,7 +64,7 @@ jQuery(function ($) {
             smartSpeed: 200,
 			autoplay: true,
 		});
-		
+
 		// Testimonials Slides
 		$('.testimonials-slides').owlCarousel({
 			loop: true,

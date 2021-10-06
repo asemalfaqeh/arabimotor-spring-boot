@@ -16,7 +16,6 @@ public class FileUploadExceptionsAdvice {
       MaxUploadSizeExceededException exc, 
       HttpServletRequest request,
       HttpServletResponse response) {
- 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/");
         return modelAndView;

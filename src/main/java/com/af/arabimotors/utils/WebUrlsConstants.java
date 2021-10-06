@@ -24,8 +24,8 @@ public interface WebUrlsConstants {
       String CONFIRM_ACCOUNT = "/confirm-account";
       String ERROR_PAGE = "/error-404";
       String RESEND_VERIFY_EMAIL = "/resend-verify-email";
-      String VERIFY_EMAIL_LINK = "http://localhost:8080/confirm-account?token=";
-      String RESET_PASSWORD_LINK = "http://localhost:8080/reset-password?token=";
+      String VERIFY_EMAIL_LINK = "http://arabimotors.com/arabimotors/confirm-account?token=";
+      String RESET_PASSWORD_LINK = "http://arabimotors.com/arabimotors/reset-password?token=";
       String FORGOT_PASSWORD = "/forgot-password";
       String RESET_PASSWORD_POST = "/reset-password";
       String SUBMIT_VEHICLE = "/post-vehicle";

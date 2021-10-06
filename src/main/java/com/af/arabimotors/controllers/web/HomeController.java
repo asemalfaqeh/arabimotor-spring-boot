@@ -25,7 +25,7 @@ import com.af.arabimotors.utils.WebViewsConstants;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
+@RestController
 public class HomeController {
 
 	@Autowired
@@ -49,7 +49,7 @@ public class HomeController {
 	@Autowired
 	private ConfirmEmailService confirmEmailService;
 	
-	private Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
 	private ContactSellerService contactSellerService;
@@ -72,20 +72,18 @@ public class HomeController {
 		List<PriceEntity> priceEntities = maxPriceService.findAllPrices();
 		List<BodyTypeEntity> bodyTypeEntities = bodyTypeService.findAllBodyType();
 		List<VehiclesEntity> vehiclesEntities = vehicleService.findAll();
-		List<UserEntity> userEntityList = customUserDetailsService.findAll();
+		List<UserEntity> userEntityList = customUserDetailsService.findAllPrimaryUsers();
 		List<BloggerEntity> bloggerEntities = bloggerService.findAll();
 
-		int sizeUserList = userEntityList.size();
-		for (int i = 0; i < sizeUserList; i ++){
-			logger.info("UserEnt : " + userEntityList.get(i).getRoles().iterator().next().getRole());
-			String userRole = userEntityList.get(i).getRoles().iterator().next().getRole();
-			if (userRole.equals("USER")){
-				userEntityList.get(i).setUser_photo(userEntityList.get(i).getPhotosImagePath(userEntityList.get(i).getId(), userEntityList.get(i).getUser_photo()));
-			}else{
-				userEntityList.remove(i);
-				logger.error("ADMIN EQ");
+		for (UserEntity userEntity : userEntityList) {
+			if (userEntity.getUser_photo().equals("thumb.png")) {
+				userEntity.setUser_photo("uploads/" + userEntity.getUser_photo());
+			} else {
+				userEntity.setUser_photo(userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo()));
 			}
+
 		}
+
 
 		vehiclesEntities.sort(new ComparableVehiclePrices());
 
@@ -125,7 +123,7 @@ public class HomeController {
 		model.addObject("most_popular_vehicles", mostPopularVehiclesEntities);
 		model.addObject("users", userEntityList);
 		model.addObject("bloggers", bloggerEntities);
-				
+
 		model.setViewName(WebViewsConstants.USER_HOME);
 		
 		return model;
@@ -152,7 +150,6 @@ public class HomeController {
 											  BindingResult bindingResult){
 
 		    logger.info("UserIdProfile: " + userId);
-
 		    if (userId == null && contactSellerRequest.getUserEntity() != null) {
 				if (contactSellerRequest.getUserEntity().getId() != null) {
 					userId = contactSellerRequest.getUserEntity().getId().toString();
@@ -164,11 +161,11 @@ public class HomeController {
 			if (vehiclesEntities.size() > 0) {
 				UserEntity user = vehiclesEntities.get(0).getUserEntity();
 				String photo;
-				if (user.getUser_photo() != null) {
-					photo = user.getPhotosImagePath(user.getId(), user.getUser_photo());
-					logger.info("UserProfilePhoto: " + photo);
+				if (user.getUser_photo().equals("thumb.png")) {
+					user.setUser_photo("uploads/" + user.getUser_photo());
+					photo = user.getUser_photo();
 				} else {
-					photo = "images/user.png";
+					photo = user.getPhotosImagePath(user.getId(), user.getUser_photo());
 				}
 
 				if (contactSellerRequest.getUserEntity() != null) {
@@ -203,15 +200,13 @@ public class HomeController {
 
 		ModelAndView modelAndView = new ModelAndView();
 
-		List<UserEntity> userEntityList = customUserDetailsService.findAll();
+		List<UserEntity> userEntityList = customUserDetailsService.findAllPrimaryUsers();
 
-		int sizeUserList = userEntityList.size();
-		for (int i = 0; i < sizeUserList; i ++){
-			String userRole = userEntityList.get(i).getRoles().iterator().next().getRole();
-			if (userRole.equals("USER")){
-				userEntityList.get(i).setUser_photo(userEntityList.get(i).getPhotosImagePath(userEntityList.get(i).getId(), userEntityList.get(i).getUser_photo()));
-			}else{
-				userEntityList.remove(i);
+		for (UserEntity userEntity : userEntityList) {
+			if (userEntity.getUser_photo().equals("thumb.png")) {
+				userEntity.setUser_photo("uploads/" + userEntity.getUser_photo());
+			} else {
+				userEntity.setUser_photo(userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo()));
 			}
 		}
 
@@ -220,6 +215,7 @@ public class HomeController {
 		modelAndView.setViewName(WebViewsConstants.FEATURED_USERS_VIEW);
 
 		return modelAndView;
+
 	}
 
 	@RequestMapping(value = WebUrlsConstants.CONTACT_US, method = {RequestMethod.GET, RequestMethod.POST})

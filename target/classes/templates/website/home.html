@@ -471,7 +471,7 @@
 								<div class="icon">
 									<i class="flaticon-headache"></i>
 								</div>
-								<h4>هل بحثك مانع للماء؟</h4>
+								<h4>هل بحثك صحيح؟</h4>
 								<p>عندما يتعلق الأمر بمشتريات مهمة مثل السيارة ، فكلما زادت معرفتك كان ذلك أفضل. خذ وقتك في البحث عن مواقع السيارات الخاصة بالسيارات ، والتحدث إلى التجار أو خبراء السيارات الآخرين ، واقرأ مراجعات السيارات المستقلة على الويب أو في الصحف أو مجلات السيارات المتخصصة. يمكنك أيضًا التحقق مما إذا كانت الملحقات التي تريدها متوفرة مع السيارة التي تهتم بها أكثر.</p>
 							</div>
 						</div>
@@ -518,11 +518,12 @@
 									</a>
 									<br>
 									<span th:text="${userDetails.sellerTypeEntity.name}">...</span>
-
 									<div class="share-link">
-										<a th:href="@{${userDetails.socialEntity.facebook_link}}" target="_blank"><i class='bx bxl-facebook'></i></a>
-										<a th:href="@{${userDetails.socialEntity.twitter_link}}" target="_blank"><i class='bx bx-camera'></i></a>
-										<a th:href="@{${userDetails.socialEntity.twitter_link}}" target="_blank"><i class='bx bxl-twitter'></i></a>
+									 <div th:if="${userDetails.socialEntity != null}">
+										 <a th:href="@{${userDetails.socialEntity.facebook_link}}" target="_blank"><i class='bx bxl-facebook'></i></a>
+										 <a th:href="@{${userDetails.socialEntity.instagram_link}}" target="_blank"><i class='bx bx-camera'></i></a>
+										 <a th:href="@{${userDetails.socialEntity.twitter_link}}" target="_blank"><i class='bx bxl-twitter'></i></a>
+									 </div>
 									</div>
 								</div>
 							</div>
@@ -537,45 +538,35 @@
 		<div class="partner-area pb-100">
 			<div class="container">
 				<div class="partner-slides owl-carousel owl-theme">
+
 					<div class="partner-item">
-						<img src="assets/images/partner/partner-1.png" alt="image">
+						<img src="assets/images/partner/kia.png" alt="image">
 					</div>
 
 					<div class="partner-item">
-						<img src="assets/images/partner/partner-2.png" alt="image">
+						<img src="assets/images/partner/mercedes.png" alt="image">
 					</div>
 
 					<div class="partner-item">
-						<img src="assets/images/partner/partner-3.png" alt="image">
+						<img src="assets/images/partner/mitsubishi.png" alt="image">
 					</div>
 
 					<div class="partner-item">
-						<img src="assets/images/partner/partner-4.png" alt="image">
+						<img src="assets/images/partner/skoda.png" alt="image">
 					</div>
 
 					<div class="partner-item">
-						<img src="assets/images/partner/partner-5.png" alt="image">
+						<img src="assets/images/partner/volkswagen.png" alt="image">
 					</div>
 
 					<div class="partner-item">
-						<img src="assets/images/partner/partner-1.png" alt="image">
+						<img src="assets/images/partner/hyundai.png" alt="image">
 					</div>
 
 					<div class="partner-item">
-						<img src="assets/images/partner/partner-2.png" alt="image">
+						<img src="assets/images/partner/bmw.png" alt="image">
 					</div>
 
-					<div class="partner-item">
-						<img src="assets/images/partner/partner-3.png" alt="image">
-					</div>
-
-					<div class="partner-item">
-						<img src="assets/images/partner/partner-4.png" alt="image">
-					</div>
-
-					<div class="partner-item">
-						<img src="assets/images/partner/partner-5.png" alt="image">
-					</div>
 				</div>
 			</div>
 		</div>
@@ -620,5 +611,7 @@
 		</section>
 		<!-- End Blog Area -->
 	</div>
+<script>
+</script>
 </body>
 </html>

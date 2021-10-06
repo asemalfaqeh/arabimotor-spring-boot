@@ -12,10 +12,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.af.arabimotors.entities.UserEntity;
 import com.af.arabimotors.model.request.UserChangePasswordRequest;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
 	UserEntity findByEmail(final String email);
+
+	@Query(nativeQuery = true, value = "SELECT * FROM USERS WHERE is_primary = 1")
+	List<UserEntity> findAllPrimary();
+
 	/*
 	@Transactional
 	@Modifying

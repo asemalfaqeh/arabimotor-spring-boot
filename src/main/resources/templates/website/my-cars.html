@@ -140,7 +140,7 @@
                             th:text="${v.cityEntity.name}"></label></li>
                     <li><i class="flaticon-calendar"></i> <label
                             th:text="${#dates.format(v.createdDate,'yyyy/MM/dd')}"></label></li>
-                    <li><a th:href="@{/delete-vehicle/}+${v.id}"><b>حذف الاعلان</b></a></li>
+                    <li><a onclick="return confirm('هل انت متاكد تريد حذف هذا الاعلان ؟');" th:href="@{/delete-vehicle/}+${v.id}"><b>حذف الاعلان</b></a></li>
                     <li><a th:href="@{/edit-vehicle/}+${v.id}"><b>تعديل الاعلان</b></a></li>
                   </ul>
                 </div>

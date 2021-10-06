@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,7 +46,7 @@ import com.af.arabimotors.utils.UserAuthenticationHelper;
 import com.af.arabimotors.utils.WebUrlsConstants;
 import com.af.arabimotors.utils.WebViewsConstants;
 
-@Controller
+@RestController
 public class UserVehiclesController {
 
 	@Autowired
@@ -89,7 +90,7 @@ public class UserVehiclesController {
 
 		ModelAndView modelAndView = new ModelAndView();
 
-		if (email == "anonymousUser") {
+		if (email.equals("anonymousUser")) {
 			modelAndView.setViewName("redirect:" + WebUrlsConstants.LOGIN);
 		} else {
 			updateVehicleModelAndViewObjects(modelAndView, email);
@@ -135,7 +136,6 @@ public class UserVehiclesController {
 
 		if (submitVehicleRequest.getMainImageMultipartFile() != null) {
 			try {
-
 				// get original file name //
 				Path absouletPath = Paths.get(".");
 				String uploadDir = absouletPath + "/src/main/resources/static/uploads/";
@@ -144,7 +144,6 @@ public class UserVehiclesController {
 						submitVehicleRequest.getMainImageMultipartFile());
 				// save gallery images //
 				for (MultipartFile multipartFile : submitVehicleRequest.getMultipartFiles()) {
-
 					System.err.println(multipartFile.getOriginalFilename());
 					FileUploadUtil.saveFile(uploadDir, multipartFile.getOriginalFilename(), multipartFile);
 				}
@@ -160,7 +159,7 @@ public class UserVehiclesController {
 		VehiclesEntity vehiclesEntity = new VehiclesEntity();
 		submitVehicleRequest.setUserEntity(userEntity); // user details
 		submitVehicleRequest.setCreatedDate(new Date()); // created at date
-		submitVehicleRequest.setPrice("$"+submitVehicleRequest.getPrice());
+		submitVehicleRequest.setPrice(submitVehicleRequest.getPrice());
 		BeanUtils.copyProperties(submitVehicleRequest, vehiclesEntity);
 
 		List<VehicleImagesEntity> vehicleImagesEntities = new ArrayList<>();
@@ -262,8 +261,17 @@ public class UserVehiclesController {
 		List<EngineCapicityEntity> engineCapicityEntities = engineCapacityService.findallCapicityEntities();
 		List<YearsEntity> yearsEntities = yearService.findAllYears();
 		List<CityEntity> cityEntities = cityService.findlAllCities();
+		String userProfile = userEntity.getUser_photo();
 
-		modelAndView.addObject("photo", userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo()));
+		System.out.println("UserProfile: " + userProfile);
+		if (userProfile.equals("thumb.png")){
+			userEntity.setUser_photo("uploads/thumb.png");
+			userProfile = userEntity.getUser_photo();
+		}else{
+			userProfile = userEntity.getPhotosImagePath(userEntity.getId(), userEntity.getUser_photo());
+		}
+
+		modelAndView.addObject("photo", userProfile);
 		modelAndView.addObject("isphoto", userEntity.getUser_photo());
 		modelAndView.addObject("vehicles_types", conditionsEntities);
 		modelAndView.addObject("bodytypes", bodyTypeEntities);

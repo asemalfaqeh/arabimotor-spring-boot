@@ -17,16 +17,16 @@ public class UserSocialEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "facebook_link", nullable = true)
+	@Column(name = "facebook_link", columnDefinition = "varchar(50) default 'facebook.com'")
 	private String facebook_link;
 	
-	@Column(name = "instagram_link", nullable = true)
+	@Column(name = "instagram_link", columnDefinition = "varchar(50) default 'instagram.com'")
 	private String instagram_link;
 	
-	@Column(name = "twitter_link", nullable = true)
+	@Column(name = "twitter_link", columnDefinition = "varchar(50) default 'twitter.com'")
 	private String twitter_link;
 	
-	@Column(name = "linkedin_link", nullable = true)
+	@Column(name = "linkedin_link", columnDefinition = "varchar(50) default 'linkedin.com'")
 	private String linkedin_link;
 
 	@OneToOne
