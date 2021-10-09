@@ -50,7 +50,7 @@ public class BloggerController {
             Optional<BloggerEntity> bloggerEntity = bloggerService.findBloggerByID(aLong);
             List<BlogCommentsEntity> blogCommentsEntities = blogCommentService.commentsBlogCount(bloggerEntity.get().getId()+"");
             logger.info("Comments Size: " + blogCommentsEntities.size());
-            List<BloggerEntity> bloggerEntities = bloggerService.findAll().stream().limit(5).collect(Collectors.toList());
+            List<BloggerEntity> bloggerEntities = bloggerService.findAllByLimit("5");
             modelAndView.setViewName(WebViewsConstants.MAGAZINE_VIEW);
             bloggerEntity.ifPresent(entity -> modelAndView.addObject("blog", entity));
             modelAndView.addObject("comments", blogCommentsEntities);

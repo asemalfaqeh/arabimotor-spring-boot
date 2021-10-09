@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
 	UserEntity findByEmail(final String email);
 
-	@Query(nativeQuery = true, value = "SELECT * FROM USERS WHERE is_primary = 1")
+	@Query(nativeQuery = true, value = "SELECT * FROM users WHERE is_primary = 1")
 	List<UserEntity> findAllPrimary();
 
 	/*

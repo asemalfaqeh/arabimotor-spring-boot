@@ -18,6 +18,10 @@ public class BloggerService {
         return bloggerRepository.findAll();
     }
 
+    public List<BloggerEntity> findAllByLimit(String limit){
+        return bloggerRepository.findAllByLimitRepo(Integer.parseInt(limit));
+    }
+
     public Optional<BloggerEntity> findBloggerByID(Long id){
         return bloggerRepository.findById(id);
     }

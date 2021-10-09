@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front-end-template.html}">
+
+<head>
+    <title>ArabiMotor - Home</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+    <!-- End Page Banner -->
+
+    <!-- Start Page Banner -->
+        <div class="page-banner-area">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-banner-content">
+                            <ul class="pages-list">
+                                <li><a th:href="@{/home}">الرئيسية</a></li>
+                                <li><span>الملف الشخصي</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Banner -->
+
+        <!-- Start User Profile Area -->
+        <section class="user-profile-area pt-100 pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="user-profile-information">
+                            <div class="profile-title">
+                                <img th:src="@{${photo}}" alt="image">
+                                <h3 th:text="${user.fullname}">...</h3>
+                                <span th:text="${user.sellerTypeEntity.name}"></span>
+                            </div>
+
+                            <p th:text="${user.address}"></p>
+
+                            <ul class="profile-info">
+                                <li>
+                                    <span>البريد الالكتروني</span>
+                                    <a th:href="${user.email}" th:text="${user.email}">...</a>
+                                </li>
+
+                                <li>
+                                    <span>رقم الهاتف المحمول</span>
+                                    <a th:href="${user.phone}" th:text="${user.phone}">....</a>
+                                </li>
+
+                                <li>
+                                    <span>المدينة</span>
+                                    <label th:text="${user.city.name}"></label>
+                                </li>
+                            </ul>
+
+                            <div class="profile-contact">
+
+                                <form th:action="@{/user-profile}" method="post">
+
+                                    <div class="form-group">
+                                        <label>الاسم الكامل</label> <input type="text" name="customerName" class="form-control">
+                                    </div>
+                                    <input type="hidden" name="userEntity" th:value="${user.id}">
+
+                                    <div class="form-group">
+                                        <label>بريد الالكتروني</label> <input name="customerEmail" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>رقم الهاتف المحمول</label> <input name="customerPhone" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>الرسالة</label>
+                                        <textarea name="customerMsg" class="form-control"></textarea>
+                                    </div>
+
+                                    <button type="submit" class="default-btn">
+                                        ارسال <span></span>
+                                    </button>
+                                </form>
+                                <div th:if="${error}">
+                                    <th:block th:each="e : ${error}">
+                                        <label class="alert danger" th:text="${e.defaultMessage}"></label>
+                                        <br>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-md-12">
+                        <div class="user-profile-title">
+                            <h3 th:text="${user.fullname}"></h3>
+                        </div>
+
+                       <div class="row">
+                        <th:block th:each=" v : ${vehicles}">
+                                <div class="col-lg-6 col-md-6">
+                                <div class="single-user-profile-car">
+                                    <div class="user-image">
+                                        <a th:href="@{/vehicle-details/}+${v.id}"><img th:src="@{${v.main_image}}" alt="image"></a>
+                                        <div class="icon">
+                                            <a href="#">
+                                                <i class="flaticon-gallery" th:text="${v.vehicleImagesEntity.size()}"> ...</i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="user-content">
+                                        <div class="tag" th:text="${v.price}+₪">...</div>
+                                        <h3>
+                                            <a th:href="@{/vehicle-details/}+${v.id}" th:text="${v.ad_title}">...</a>
+                                        </h3>
+                                        <p th:text="${#dates.format(v.createdDate,'aa HH:mm, yyyy/MM/dd')}">...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Start User Profile Area -->
+</div>
+    </body>
+</html>

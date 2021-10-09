@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{front-end-template.html}">
+<head>
+<title>حسابي</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+		<!-- Start Page Banner -->
+		<div class="page-banner-area item-bg-2">
+			<div class="d-table">
+				<div class="d-table-cell">
+					<div class="container">
+						<div class="page-banner-content">
+							<h2>حسابي</h2>
+
+							<ul class="pages-list">
+								<li><a th:href="@{/home}">الرئيسية</a></li>
+								<li><span>حسابي</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Page Banner -->
+
+		<!-- Start Dashboard Area -->
+		<div class="dashboard-area ptb-100">	
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-12">
+						<div class="dashboard-profile">
+							<div class="profile-box">
+								<div class="profile-icon">
+								
+								<div th:if="${isphoto == null}" class="profile-icon">
+									 <a href="#">
+                                        <i class='bx bxs-user'></i>
+                                     </a>
+								</div>
+								
+								<div th:unless="${isphoto == null}" >
+								   <a target="_blank" th:href="@{${photo}}">
+									<img th:src="@{${photo}}"/>
+									</a>
+								</div>
+								
+								</div>
+							</div>
+
+							<div class="profile-info">
+								<ul class="info-list">
+									<li><a th:href="@{/post-vehicle}">اعرض سيارتك للبيع</a></li>
+									<li><a href="favorites.html">المفضلة</a></li>
+									<li><a th:href="@{/account-details}" class="active">حسابي</a>
+									</li>
+									<li><a th:href="@{/messages}">الرسائل</a></li>
+									<li><a th:href="@{/my-vehicles}">اعلاناتي</a></li>
+									<li><a th:href="@{/user-social}">وسائل التواصل
+										الاجتماعي</a></li>
+									<li><a th:href="@{/change-password}">تحديث كلمة المرور</a></li>
+									<li><a th:href="@{/logout}">تسجيل الخروج</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-9 col-md-12">
+						<div class="dashboard-title">
+							<h3>حسابي</h3>
+						</div>
+
+              
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Start Dashboard Area -->
+
+</body>
+</html>

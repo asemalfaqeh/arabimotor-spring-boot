@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{front-end-template.html}">
+<head>
+<title>اعرض سيارتك للبيع</title>
+
+</head>
+<body>
+	<div layout:fragment="content">
+
+		<!-- Start Page Banner -->
+		<div class="page-banner-area item-bg-2">
+			<div class="d-table">
+				<div class="d-table-cell">
+					<div class="container">
+						<div class="page-banner-content">
+							<h2>اعرض سيارتك للبيع</h2>
+
+							<ul class="pages-list">
+								<li><a th:href="@{/home}">الرئيسية</a></li>
+								<li><span>اعرض سيارتك للبيع</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Start Dashboard Area -->
+		<div class="dashboard-area ptb-100">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-lg-3 col-md-12">
+						<div class="dashboard-profile">
+							<div class="profile-box">
+								<div class="profile-icon">
+
+									<div th:if="${isphoto == null}" class="profile-icon">
+										<a href="#"> <i class='bx bxs-user'></i>
+										</a>
+									</div>
+
+									<div th:unless="${isphoto == null}">
+										<a target="_blank" th:href="@{${photo}}"> <img
+											th:src="@{${photo}}" />
+										</a>
+									</div>
+
+								</div>
+							</div>
+							<div class="profile-info">
+								<ul class="info-list">
+									<li><a th:href="@{/post-vehicle}" class="active">اعرض سيارتك للبيع</a></li>
+									<li><a th:href="@{/account-details}">حسابي</a>
+									</li>
+									<li><a th:href="@{/messages}">الرسائل</a></li>
+									<li><a th:href="@{/my-vehicles}">اعلاناتي</a></li>
+									<li><a th:href="@{/user-social}">وسائل التواصل
+										الاجتماعي</a></li>
+									<li><a th:href="@{/change-password}">تحديث كلمة المرور</a></li>
+									<li><a th:href="@{/logout}">تسجيل الخروج</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-9 col-md-12">
+						<div class="dashboard-title">
+							<h3>اعرض سيارتك للبيع</h3>
+						</div>
+						<div th:if="${error}">
+							<th:block th:each="e : ${error}">
+								<label class="alert danger" th:text="${e.defaultMessage}"></label>
+								<br>
+							</th:block>
+						</div>
+
+						<div class="dashboard-form">
+							<form th:action="@{/post-vehicle}" method="post" enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-lg-12 col-md-12">
+										<div class="form-group">
+											<label>عنوان الاعلان</label> <input required type="text"
+												name="ad_title" class="form-control">
+                                         <p class="description">يجب ان لا يحتوى النص على اكثر من 500 حرف</p>
+											
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label>ملاحظات</label>
+										<textarea name="description" class="form-control"></textarea>
+										<p class="description">يجب ان لا يحتوى النص على اكثر من 500 حرف</p>
+									</div>
+
+									<div class="form-group">
+										 <label>ميزات السيارة(قم بوضع (،) بين كل ميزة)</label>
+										<textarea name="vehicleFeatures" class="form-control"></textarea>
+										<p class="description" aria-placeholder="مكيف،اغلاق مركزي،">يجب ان لا يحتوى النص على اكثر من 500 حرف</p>
+									</div>
+
+
+									<div class="col-lg-6 col-md-6">
+										<div class="form-group">
+											<label>السعر (شيكل)</label> <input required type="text" name="price"
+												class="form-control">
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label for="vehicle_type">حالة السيارة</label>
+										<div class="form-group">
+											<select id="vehicle_type" name="vehicle_type">
+												<th:block th:each="vehicle_type : ${vehicles_types}">
+													<option th:value="${vehicle_type.id}"
+														th:text="${vehicle_type.conditionName}"></option>
+												</th:block>
+											</select>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-12">
+										<label for="bodyTypeEntity">نوع الشكل</label>
+										<div class="form-group">
+											<select id="bodyTypeEntity" name="bodyTypeEntity">
+												<th:block th:each="bodytype : ${bodytypes}">
+													<option th:value="${bodytype.id}"
+														th:text="${bodytype.name}"></option>
+												</th:block>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label for="bodyTypeEntity">الماركة</label>
+										<div class="form-group">
+											<select id="vehicleModelsEntity" name="vehicleModelsEntity">
+												<th:block th:each="vehiclemodel : ${vehiclemodels}">
+													<option th:value="${vehiclemodel.id}"
+														th:text="${vehiclemodel.name}"></option>
+												</th:block>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label for="fuelTypeEntity">نوع الوقود</label>
+										<div class="form-group">
+											<select id="fuelTypeEntity" name="fuelTypeEntity">
+												<th:block th:each="fueltype : ${fueltypes}">
+													<option th:value="${fueltype.id}"
+														th:text="${fueltype.name}"></option>
+												</th:block>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label >الموديل</label>
+										<div class="form-group">
+											<select id="yearsEntities" name="yearsEntities">
+												<th:block th:each="year : ${years}">
+													<option th:value="${year.id}" th:text="${year.name}"></option>
+												</th:block>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label for="cityEntity">المنطقة</label>
+										<div class="form-group">
+											<select id="cityEntity" name="cityEntity">
+												<th:block th:each="city : ${cities}">
+													<option th:value="${city.id}" th:text="${city.name}"></option>
+												</th:block>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-6">
+										<div class="form-group">
+											<label>الممشى (كم) </label> <input required type="text" name="mileage"
+												class="form-control">
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label for="gearTypeEntity">نوع القير</label>
+										<div class="form-group">
+											<select id="gearTypeEntity" name="gearTypeEntity">
+												<th:block th:each="geartype : ${geartypes}">
+													<option th:value="${geartype.id}"
+														th:text="${geartype.name}"></option>
+												</th:block>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label for="engineCapicityEntity">سعة المحرك</label>
+										<div class="form-group">
+											<select id="engineCapicityEntity" name="engineCapicityEntity">
+												<th:block th:each="capcity : ${capcities}">
+													<option th:value="${capcity.id}" th:text="${capcity.name}"></option>
+												</th:block>
+											</select>
+										</div>
+									</div>
+
+
+									<div class="col-lg-6 col-md-12">
+										<label >نوع الزجاج</label>
+										<div class="form-group">
+											<select id="glass" name="glass">
+												<option th:value="زجاج" th:text="زجاج"></option>
+												<option th:value="عادي" th:text="عادي"></option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label >رخصة المركبة</label>
+										<div class="form-group">
+											<select id="drivingLicence" name="drivingLicence">
+												<option th:value="اسرائيلية" th:text="اسرائيلية"></option>
+												<option th:value="فلسطينية" th:text="فلسطينية"></option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label >وسيلة الدفع</label>
+										<div class="form-group">
+											<select id="paymentMethod" name="paymentMethod">
+												<option th:value="نقدي" th:text="نقدي"></option>
+												<option th:value="اقساط" th:text="اقساط"></option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-12">
+										<label >أصل السياروة</label>
+										<div class="form-group">
+											<select id="originalCar" name="originalCar">
+												<option th:value="عمومي" th:text="عمومي"></option>
+												<option th:value="خصوصي" th:text="خصوصي"></option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-12 col-md-12">
+										<div class="form-group">
+											<label>صورة الرئيسية</label> <input type="file"
+												name="mainImageMultipartFile" class="form-control-file" 
+														accept="image/png, image/jpeg, image/jpg">
+										</div>
+									</div>
+
+									<div class="col-lg-12 col-md-12">
+										<div class="form-group">
+											<label>الصور</label> <input type="file" multiple
+												class="form-control-file"  name="multipartFiles"
+														accept="image/png, image/jpeg, image/jpg">
+										</div>
+									</div>
+
+									<!-- 
+                                    <div class="map">
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1607627491607!5m2!1sen!2sbd"></iframe>
+                                    </div> -->
+									<label>قد يتم حذف الاعلان بعد شهر واحد فقط</label>
+								</div>
+
+								<button type="submit" class="default-btn">
+									ارسال <span></span>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Start Dashboard Area -->
+	</div>
+
+
+</body>
+</html>

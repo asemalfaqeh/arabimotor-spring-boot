@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front-end-template.html}">
+
+<head>
+    <title>ArabiMotor - Home</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+<!-- Start Page Banner -->
+        <div class="page-banner-area item-bg-2">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-banner-content">
+                            <h2>مجلة عربي موتورز</h2>
+
+                            <ul class="pages-list">
+                                <li><a th:href="@{/home}">الرئيسية</a></li>
+                                <li><span>مجلة عربي موتورز</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Banner -->
+     
+        <!-- Start Blog Details Area -->
+        <section class="blog-details-area ptb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="blog-details-desc">
+                            <div class="article-content-box">
+                                <img th:src="${blog.image}" alt="image">
+
+                                <div class="article-content">
+                                    <div class="tag" th:text="${blog.tag}">...</div>
+                                    <h3>
+                                        <label th:text="${blog.title}">...</label>
+                                    </h3>
+                                    <div class="entry-meta">
+                                        <ul>
+                                            <li>
+                                                <i class='bx bx-user'></i>
+                                                 <label th:text="${blog.authorName}"></label>
+                                            </li>
+                                            <li>
+                                                <i class='bx bx-calendar-event'></i>
+                                                <a href="#" th:text="${#dates.format(blog.createdDate,'aa HH:mm, yyyy/MM/dd')}">....</a>
+                                            </li>
+                                            <li>
+                                                <i class='bx bx-comment'></i>
+                                                <label href="#" th:text="${comments.size()}"></label><label> &nbsp;تعليقات</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p th:text="${blog.content}">...</p>
+
+                                    <ul class="article-tag">
+                                        <li>
+                                            <span>Tags:</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">Auto</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Luxury</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Sedan</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="comments-area">
+                                <p>
+                                    <h3>تعليقات:</h3>
+                                <h3 class="comments-title" th:text="${comments.size()}">...</h3>
+                                </p>
+
+                                <ol class="comment-list">
+                                    <li class="comment">
+                                        <th:block th:each="c : ${comments}">
+                                        <div class="comment-body">
+                                            <footer class="comment-meta">
+                                                <div class="comment-author vcard">
+                                                    <img src="assets/images/logo.jpeg" class="avatar" alt="image">
+                                                    <b class="fn" th:text="${c.name}">...</b>
+                                                </div>
+                                                <div class="comment-metadata">
+                                                    <a href="#">
+                                                        <span th:text="${#dates.format(c.createdAt,'aa HH:mm, yyyy/MM/dd')}"></span>
+                                                    </a>
+                                                </div>
+                                            </footer>
+                                            <div class="comment-content">
+                                                    <p th:text="${c.comment}"></p>
+                                            </div>
+                                        </div>
+                                       </th:block>
+                                    </li>
+                                </ol>
+                                <div class="comment-respond">
+                                    <h3 class="comment-reply-title">اترك رد</h3>
+                                    <p>لن يتم نشر عنوان بريدك الإلكتروني. الحقول المطلوبة محددة *</p>
+
+                                    <form class="comment-form" method="post" th:action="@{/magazine}">
+                                        <input type="hidden" name="bloggerEntity" th:value="${blog.id}">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <p class="comment-form-author">
+                                                    <label>اسم المستخدم</label>
+                                                    <input type="text" name="name" required="required">
+                                                </p>
+                                            </div>
+
+
+                                            <div class="col-lg-6">
+                                                <p class="comment-form-email">
+                                                    <label>البريد الالكتروني</label>
+                                                    <input type="email" id="email" name="email" required="required">
+                                                </p>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <p class="comment-form-comment">
+                                                    <label>التعليق</label>
+                                                    <textarea name="comment" id="comment" cols="45" rows="5" maxlength="65525" required="required"></textarea>
+                                                </p>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <p class="form-submit">
+                                                    <input type="submit" name="submit" id="submit" class="submit" value="ارسال">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12">
+                        <aside class="widget-area">
+                            <div class="widget widget_search">
+                                <form class="search-form" th:action="@{/search-magazine}" method="post">
+                                    <label>
+                                        <span class="screen-reader-text">البحث عن:</span>
+                                        <input type="search" name="search" class="search-field" placeholder="البحث...">
+                                    </label>
+                                    <button type="submit">
+                                        <i class='bx bx-search-alt'></i>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="widget widget_mund_posts_thumb">
+                                <h3 class="widget-title">المشاركات الاخيرة</h3>
+                                <th:block th:each="b : ${blogs}">
+                                    <article class="item">
+                                        <a href="#" class="thumb">
+                                            <image class="fullimage cover bg1" role="img" th:src="${b.image}"></image>
+                                        </a>
+                                        <div class="info">
+                                            <span th:text="${#dates.format(b.createdDate,'aa HH:mm, yyyy/MM/dd')}"></span>
+                                            <h4 class="title usmall"><a th:href="@{/magazine?id=}+${b.id}" th:text="${b.title}"></a></h4>
+                                        </div>
+                                    </article>
+                                </th:block>
+                            </div>
+
+                            <div class="widget widget_tag_cloud">
+                                <h3 class="widget-title">Popular tags</h3>
+
+                                <div class="tagcloud">
+                                    <a href="#">Auto</a>
+                                    <a href="#">Cars</a>
+                                    <a href="#">Sedan</a>
+                                    <a href="#">Premium</a>
+                                    <a href="#">Luxury</a>
+                                    <a href="#">Sport</a>
+                                    <a href="#">Suvs</a>
+                                    <a href="#">Pickups</a>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Blog Details Area -->
+      </div>
+    </body>
+</html>

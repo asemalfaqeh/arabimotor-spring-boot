@@ -73,7 +73,7 @@ public class HomeController {
 		List<BodyTypeEntity> bodyTypeEntities = bodyTypeService.findAllBodyType();
 		List<VehiclesEntity> vehiclesEntities = vehicleService.findAll();
 		List<UserEntity> userEntityList = customUserDetailsService.findAllPrimaryUsers();
-		List<BloggerEntity> bloggerEntities = bloggerService.findAll();
+		List<BloggerEntity> bloggerEntities = bloggerService.findAllByLimit("3");
 
 		for (UserEntity userEntity : userEntityList) {
 			if (userEntity.getUser_photo().equals("thumb.png")) {

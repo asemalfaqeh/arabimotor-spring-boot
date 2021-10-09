@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front-end-template.html}">
+
+<head>
+    <title>ArabiMotor - Home</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <!-- Start Page Banner -->
+    <div class="page-banner-area">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="page-banner-content">
+                        <h2>تفاصيل السيارة</h2>
+
+                        <ul class="pages-list">
+                            <li><a th:href="@{/home}">الرئيسية</a></li>
+                            <li><span>تفاصيل السيارة</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Banner -->
+
+    <!-- Start About Area -->
+        <section class="about-area ptb-100">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="about-image">
+                            <img th:src="@{${photo}}" alt="image">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="about-content">
+                            <div class="title">
+                                <h3>عن موقع عربي موتورز</h3>
+                                <span>تعرف على قصتنا القصيرة</span>
+                            </div>
+                            <p>
+                                بس سوقها!
+                                قريبا أكبر موقع في العالم العربي للسيارات والاول في المنطقة يوفر كل احتياجتكم .. شراء سيارة او قطع او اكسسوارات .. من بلاد الشام و دول الخليج العربي العربي .. شراء ، بيع تأمين ، ترخيص ، وتأجير وتمويلي ، تأجير .. و اسعار منافسة للسيارات بيع وشراء أستئجار والمزيد .. بس سوقها
+                                نحن شركة ناشئة جديدة ونهدف إلى أن نكون أول موقع شامل لخدمات السيارات في منطقة الشرق الأوسط وشمال إفريقيا ونوفر جميع المعلومات والخدمات الضرورية حول السيارات في مكان واحد يحتاجه الكثير من الناس.
+                                مثل ما يلي:
+                                <ul>
+                            <li>بيع السيارات الجديدة والمستعملة</li>
+                            <li>  خدمات استرداد السيارات</li>
+                        </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End About Area -->
+</div>
+    </body>
+</html>

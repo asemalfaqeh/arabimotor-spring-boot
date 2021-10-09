@@ -19,4 +19,8 @@ public interface BloggerRepository extends JpaRepository<BloggerEntity, Long> {
     List<BloggerEntity> findAllBySearchName(@Param("search") String search);
     @Override
     Optional<BloggerEntity> findById(Long aLong);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM blog b ORDER BY b.created_date DESC LIMIT :limit")
+    List<BloggerEntity> findAllByLimitRepo(@Param("limit") int limit);
+
 }
