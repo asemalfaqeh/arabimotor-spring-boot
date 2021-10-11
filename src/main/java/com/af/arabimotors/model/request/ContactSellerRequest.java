@@ -15,11 +15,11 @@ public class ContactSellerRequest {
 	private String customerName;
 	
 	@NotBlank(message = "يرجى ادخال البريد الالكتروني")
-	@Size(max = 24, message = "يجب ان لا يتحوي الحقل على اكثر من 24 حرف")
+	@Size(max = 100, message = "يجب ان لا يتحوي الحقل على اكثر من 24 حرف")
 	private String customerEmail;
 	
 	@NotBlank(message = "يرجى ادخال رقم الهاتف المحمول")
-	@Size(max = 16, message = "يجب ان لا يحتوي الحقل على اكثر من 16 حرف")
+	@Size(max = 20, message = "يجب ان لا يحتوي الحقل على اكثر من 16 حرف")
 	private String customerPhone;
 	
 	@NotBlank(message = "حقل الرسالة يجب ان لا يكون فارغ")
@@ -31,9 +31,6 @@ public class ContactSellerRequest {
 	private VehiclesEntity vehiclesEntity;
 	
 	private Date createDate;
-	
-	
-	
 	
 	
 	public Date getCreateDate() {

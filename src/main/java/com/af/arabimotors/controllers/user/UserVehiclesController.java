@@ -192,6 +192,7 @@ public class UserVehiclesController {
 	public ModelAndView messagesController() {
 		ModelAndView modelAndView = new ModelAndView();
 		List<ContactSellerEntity> contactSellerEntities = contactSellerService.getContactSellerEntitiesService();
+		Collections.reverse(contactSellerEntities);
 		modelAndView.addObject("messages", contactSellerEntities);
 		modelAndView.setViewName(WebViewsConstants.MESSAGES_VIEW);
 		return modelAndView;
