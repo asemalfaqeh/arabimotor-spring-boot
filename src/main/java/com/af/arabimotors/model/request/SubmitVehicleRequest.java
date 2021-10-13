@@ -79,6 +79,16 @@ public class SubmitVehicleRequest {
 	private boolean isFeagtured;
 	private boolean isMostPopular;
 
+	private boolean isDeleted;
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		isDeleted = deleted;
+	}
+
 	public boolean isFeagtured() {
 		return isFeagtured;
 	}

@@ -218,7 +218,8 @@ public class UserVehiclesController {
 		Optional<VehiclesEntity> vehiclesEntity = vehicleService.findVehicleById(id);
 		if (vehiclesEntity.isPresent()) {
 			if (vehiclesEntity.get().getUserEntity().getId().equals(userEntity.getId())) {
-				vehicleService.deleteUserVehicle(id);
+				vehiclesEntity.get().setDeleted(true);
+				vehicleService.saveVehicle(vehiclesEntity.get());
 			}
 		}
 

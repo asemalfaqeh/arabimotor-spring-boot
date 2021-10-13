@@ -24,29 +24,28 @@ public interface VehicleRepository extends PagingAndSortingRepository<VehiclesEn
 	
 	Optional<VehiclesEntity> findById(Long id);
 
+	@Query(nativeQuery = true,value = "SELECT * FROM vehicles v WHERE v.is_deleted = 0")
     List<VehiclesEntity> findAll();
     
-    @Query(nativeQuery = true,value="SELECT * FROM vehicles v ORDER BY v.price ASC")
+    @Query(nativeQuery = true,value="SELECT * FROM vehicles v WHERE v.is_deleted = 0 ORDER BY v.price ASC")
     List<VehiclesEntity> findAllOrderByPriceAsc();
     
-    @Query(nativeQuery = true,value="SELECT * FROM vehicles v ORDER BY v.price DESC")
+    @Query(nativeQuery = true,value="SELECT * FROM vehicles v WHERE v.is_deleted = 0 ORDER BY v.price DESC")
     List<VehiclesEntity> findAllOrderByPriceDesc();
     
-    @Query(nativeQuery = true,value="SELECT * FROM vehicles v ORDER BY v.created_date DESC")
+    @Query(nativeQuery = true,value="SELECT * FROM vehicles v WHERE v.is_deleted = 0 ORDER BY v.created_date DESC")
     List<VehiclesEntity> findAllOrderByCreatedAt();
     
-    @Query(nativeQuery = true, value="SELECT * FROM vehicles WHERE is_featured = 1")
+    @Query(nativeQuery = true, value="SELECT * FROM vehicles WHERE is_deleted = 0 && is_featured = 1")
 	List<VehiclesEntity> findAllFeaturedVehicles();
     
-    @Query(nativeQuery = true, value="SELECT * FROM vehicles WHERE condition_type = :conditionType")
+    @Query(nativeQuery = true, value="SELECT * FROM vehicles WHERE is_deleted = 0 && condition_type = :conditionType")
     List<VehiclesEntity> findAllByCondition(@Param("conditionType") String conditionType);
 
-    @Query(nativeQuery = true, value="SELECT * FROM vehicles WHERE user_id = :userId")
+    @Query(nativeQuery = true, value="SELECT * FROM vehicles WHERE is_deleted = 0 && user_id = :userId")
     List<VehiclesEntity> findAllByUserId(@Param("userId") String conditionType);
 
-
-
-    @Query(nativeQuery = true,value="SELECT * FROM vehicles WHERE price <= :priceMax && price >= :priceMin && model = :modelId && year = :yearId && condition_type = :conditionType")
+    @Query(nativeQuery = true,value="SELECT * FROM vehicles WHERE is_deleted = 0 && price <= :priceMax && price >= :priceMin && model = :modelId && year = :yearId && condition_type = :conditionType")
     List<VehiclesEntity> findAdvancedSearchPrice(
     		@Param("priceMin") int priceMin,
     	    @Param("priceMax") int priceMax,
@@ -54,26 +53,26 @@ public interface VehicleRepository extends PagingAndSortingRepository<VehiclesEn
     		@Param("yearId") String yearId,
     		@Param("conditionType") String conditionType);
     
-    @Query(nativeQuery = true,value="SELECT * FROM vehicles WHERE price <= :priceName && model = :modelId && year = :yearId && condition_type = :conditionType")
+    @Query(nativeQuery = true,value="SELECT * FROM vehicles WHERE  is_deleted = 0 && price <= :priceName && model = :modelId && year = :yearId && condition_type = :conditionType")
     List<VehiclesEntity> findAdvancedSearch(
     		@Param("priceName") int price,
     		@Param("modelId") String modelId,
     		@Param("yearId") String yearId,
     		@Param("conditionType") String conditionType);
     
-    @Query(nativeQuery = true,value="SELECT * FROM vehicles WHERE gear_type = :gearType && body_type = :bodyType && fuel_type = :fuelType")
+    @Query(nativeQuery = true,value="SELECT * FROM vehicles WHERE  is_deleted = 0 && gear_type = :gearType && body_type = :bodyType && fuel_type = :fuelType")
     List<VehiclesEntity> findAdvancedSearchFGB(
     		@Param("fuelType") String fuelType,
     		@Param("bodyType") String bodyType,
     		@Param("gearType") String gearType);
     
-    @Query(nativeQuery= true, value="SELECT * FROM vehicles WHERE ad_title LIKE CONCAT('%',:ad_title,'%')")
+    @Query(nativeQuery= true, value="SELECT * FROM vehicles WHERE  is_deleted = 0 && ad_title LIKE CONCAT('%',:ad_title,'%')")
     List<VehiclesEntity> findByAd_title(@Param("ad_title")String ad_title);
     
-    @Query(nativeQuery=true,value="SELECT * FROM vehicles WHERE body_type=:bodyType")
+    @Query(nativeQuery=true,value="SELECT * FROM vehicles WHERE  is_deleted = 0 && body_type=:bodyType")
     List<VehiclesEntity> findByBodyTypeEntity(String bodyType);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM vehicles WHERE user_id=:userId")
+    @Query(nativeQuery = true, value = "SELECT * FROM vehicles  WHERE is_deleted = 0 && user_id=:userId")
     List<VehiclesEntity> findAllByUserEntity(@Param("userId") String userId);
 
     void deleteById(Long aLong);

@@ -220,10 +220,12 @@ public class VehiclesController {
 			String[] arrOfStr = priceStr.split("-");
 			String minPrice;
 			String maxPrice;
-			maxPrice = arrOfStr[1].substring(1);
-			minPrice = arrOfStr[0].substring(1);
+			maxPrice = arrOfStr[1].substring(1).trim();
+			minPrice = arrOfStr[0].substring(1).trim();
 
-
+			if (maxPrice.equals("$100000")){
+				maxPrice = "100000";
+			}
 			if (maxPrice.contains("$")){
 				maxPrice.replace("$","");
 			}
