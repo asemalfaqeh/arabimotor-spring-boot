@@ -59,7 +59,7 @@ public class BloggerController {
 
         }else {
             // get all bloggers
-            List<BloggerEntity> bloggerEntities = bloggerService.findAll().stream().limit(5).collect(Collectors.toList());
+            List<BloggerEntity> bloggerEntities = bloggerService.findAll();
             modelAndView.addObject("blog", bloggerEntities);
             modelAndView.setViewName(WebViewsConstants.MAGAZINE_VIEW);
         }

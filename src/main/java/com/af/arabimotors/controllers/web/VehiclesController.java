@@ -145,8 +145,9 @@ public class VehiclesController {
 
 		modelAndView.setViewName(WebViewsConstants.ALL_VEHICLES_VIEW);
 		List<VehiclesEntity> vehiclesEntities = new ArrayList<>();
+		Object ct = httpSession.getAttribute("condition_type");
+		logger.info("Condition Type: " + httpSession.getAttribute("condition_type"));
 		// modelAndView.addObject("select_sort",1);
-
 		if (sortName.isPresent()) {
 			if (sortName.get().equals("1")) {
 				vehiclesEntities = vehicleService.findAllOrderByPriceDESC();
@@ -159,16 +160,14 @@ public class VehiclesController {
 				modelAndView.addObject("select_sort", 3);
 			}
 		} else if (conditionType.isPresent()) {
-
 			logger.info("Condition Type: " + conditionType.get());
 			if (conditionType.get().equals("new")) {
+				httpSession.setAttribute("condition_tye", "1");
 				vehiclesEntities = vehicleService.findAllByConditionType("1");
 			} else if (conditionType.get().equals("used")) {
+				httpSession.setAttribute("condition_tye", "2");
 				vehiclesEntities = vehicleService.findAllByConditionType("2");
 			}
-
-			logger.info("Vehicles Select By Condition Type: " + vehiclesEntities.size());
-
 		} else {
 			vehiclesEntities = vehicleService.findAll();
 		}
@@ -206,10 +205,10 @@ public class VehiclesController {
 	public ModelAndView advancedSearchController(@Validated AdvancedSearchRequest advancedSearchRequest, HttpSession httpSession) {
 
 		ModelAndView modelAndView = new ModelAndView();
-
 		logger.info("Model Session Attr Old: " + httpSession.getAttribute("model"));
 		httpSession.setAttribute("model", advancedSearchRequest.getModel());
 		logger.info("Model Session Attr " + httpSession.getAttribute("model"));
+		logger.info("Condition Type: " + httpSession.getAttribute("condition_type"));
 
 		List<VehiclesEntity> vehiclesEntities;
 		if (advancedSearchRequest.getModel() != null && advancedSearchRequest.getYear() != null

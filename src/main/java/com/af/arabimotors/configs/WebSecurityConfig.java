@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(permitPathes()).permitAll()
 				.antMatchers(userPathes()).hasAuthority("USER")
 				.antMatchers(adminPathes()).hasAuthority("ADMIN").and()
-				.csrf().disable().formLogin().successHandler(customizeAuthenticationSuccessHandler).loginPage("/login")
+				.formLogin().successHandler(customizeAuthenticationSuccessHandler).loginPage("/login")
 				.failureUrl("/login?error=true").usernameParameter("email").passwordParameter("password").and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").and()
 				.exceptionHandling();
