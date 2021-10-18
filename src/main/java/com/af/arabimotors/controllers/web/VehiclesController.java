@@ -145,27 +145,39 @@ public class VehiclesController {
 
 		modelAndView.setViewName(WebViewsConstants.ALL_VEHICLES_VIEW);
 		List<VehiclesEntity> vehiclesEntities = new ArrayList<>();
-		Object ct = httpSession.getAttribute("condition_type");
-		logger.info("Condition Type: " + httpSession.getAttribute("condition_type"));
-		// modelAndView.addObject("select_sort",1);
+		String ct = null;
+		if (httpSession.getAttribute("condition_type") != null) {
+			ct = httpSession.getAttribute("condition_type").toString();
+		}
 		if (sortName.isPresent()) {
 			if (sortName.get().equals("1")) {
-				vehiclesEntities = vehicleService.findAllOrderByPriceDESC();
+				if (ct == null){
+					vehiclesEntities = vehicleService.findAllOrderByPriceDESC();
+				}else {
+					vehiclesEntities = vehicleService.findCTAllOrderByPriceDESC(ct);
+				}
 				modelAndView.addObject("select_sort", 1);
 			} else if (sortName.get().equals("2")) {
-				vehiclesEntities = vehicleService.findAllOrderByPriceASC();
+				if (ct == null){
+					vehiclesEntities = vehicleService.findAllOrderByPriceASC();
+				}else{
+					vehiclesEntities = vehicleService.findCTOrderByPriceASC(ct);
+				}
 				modelAndView.addObject("select_sort", 2);
 			} else if (sortName.get().equals("3")) {
-				vehiclesEntities = vehicleService.findAllOrderByCreatedDate();
+				if (ct == null){
+					vehiclesEntities = vehicleService.findAllOrderByCreatedDate();
+				}else{
+					vehiclesEntities = vehicleService.findCTAllOrderByCreatedDate(ct);
+				}
 				modelAndView.addObject("select_sort", 3);
 			}
 		} else if (conditionType.isPresent()) {
-			logger.info("Condition Type: " + conditionType.get());
 			if (conditionType.get().equals("new")) {
-				httpSession.setAttribute("condition_tye", "1");
+				httpSession.setAttribute("condition_type", "1");
 				vehiclesEntities = vehicleService.findAllByConditionType("1");
 			} else if (conditionType.get().equals("used")) {
-				httpSession.setAttribute("condition_tye", "2");
+				httpSession.setAttribute("condition_type", "2");
 				vehiclesEntities = vehicleService.findAllByConditionType("2");
 			}
 		} else {
@@ -193,8 +205,9 @@ public class VehiclesController {
 	}
 
 	@RequestMapping(value = WebUrlsConstants.BODY_TYPE, method = RequestMethod.GET)
-	public ModelAndView searchByBodyTypeController(@RequestParam("id") Optional<String> id) {
+	public ModelAndView searchByBodyTypeController(@RequestParam("id") Optional<String> id, HttpSession httpSession) {
 		ModelAndView modelAndView = new ModelAndView();
+		httpSession.removeAttribute("condition_type");
 		List<VehiclesEntity> vehicleEntities = vehicleService.findAllByBodyTypeService(id.get());
 		modelAndView.addObject("vehicles", vehicleEntities);
 		modelAndView.setViewName(WebViewsConstants.ALL_VEHICLES_VIEW);

@@ -45,6 +45,18 @@ public class VehicleService {
 		return vehicleRepository.findAllOrderByCreatedAt();
 	}
 
+	public List<VehiclesEntity> findCTOrderByPriceASC(String ct) {
+		return vehicleRepository.findConditionTypeOrderByPriceAsc(ct);
+	}
+
+	public List<VehiclesEntity> findCTAllOrderByPriceDESC(String ct) {
+		return vehicleRepository.findConditionTypeOrderByPriceDesc(ct);
+	}
+
+	public List<VehiclesEntity> findCTAllOrderByCreatedDate(String ct) {
+		return vehicleRepository.findConditionTypeOrderByCreatedAt(ct);
+	}
+
 	public List<VehiclesEntity> findAllByConditionType(String conditionType) {
 		return vehicleRepository.findAllByCondition(conditionType);
 	}

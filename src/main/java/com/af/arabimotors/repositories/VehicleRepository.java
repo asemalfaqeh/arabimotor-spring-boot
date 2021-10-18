@@ -27,12 +27,21 @@ public interface VehicleRepository extends PagingAndSortingRepository<VehiclesEn
 	@Query(nativeQuery = true,value = "SELECT * FROM vehicles v WHERE v.is_deleted = 0")
     List<VehiclesEntity> findAll();
     
+    @Query(nativeQuery = true,value="SELECT * FROM vehicles v WHERE v.is_deleted = 0 && condition_type = :ct ORDER BY v.price ASC")
+    List<VehiclesEntity> findConditionTypeOrderByPriceAsc(@Param("ct") String ct);
+    
+    @Query(nativeQuery = true,value="SELECT * FROM vehicles v WHERE v.is_deleted = 0 && condition_type = :ct ORDER BY v.price DESC")
+    List<VehiclesEntity> findConditionTypeOrderByPriceDesc(@Param("ct") String ct);
+    
+    @Query(nativeQuery = true,value="SELECT * FROM vehicles v WHERE v.is_deleted = 0 && condition_type = :ct ORDER BY v.created_date DESC")
+    List<VehiclesEntity> findConditionTypeOrderByCreatedAt(@Param("ct") String ct);
+
     @Query(nativeQuery = true,value="SELECT * FROM vehicles v WHERE v.is_deleted = 0 ORDER BY v.price ASC")
     List<VehiclesEntity> findAllOrderByPriceAsc();
-    
+
     @Query(nativeQuery = true,value="SELECT * FROM vehicles v WHERE v.is_deleted = 0 ORDER BY v.price DESC")
     List<VehiclesEntity> findAllOrderByPriceDesc();
-    
+
     @Query(nativeQuery = true,value="SELECT * FROM vehicles v WHERE v.is_deleted = 0 ORDER BY v.created_date DESC")
     List<VehiclesEntity> findAllOrderByCreatedAt();
     
