@@ -132,7 +132,7 @@ public class HomeController {
 	@RequestMapping(value = WebUrlsConstants.ABOUT_US, method = RequestMethod.GET)
 	public ModelAndView aboutUsController(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("photo","uploads/cover.jpeg");
+		modelAndView.addObject("photo","uploads/cover_white.jpeg");
 		modelAndView.setViewName(WebViewsConstants.ABOUT_VIEW);
 		return modelAndView;
 	}
