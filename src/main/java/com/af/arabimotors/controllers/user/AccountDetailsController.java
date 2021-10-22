@@ -159,7 +159,7 @@ public class AccountDetailsController {
 				}
 				
 				Path absouletPath = Paths.get(".");
-				String uploadDir = absouletPath+"/src/main/resources/static/user-photos/" + userEntity.getId();
+				String uploadDir = absouletPath+"/arabimotors/WEB-INF/classes/static/user-photos/" + userEntity.getId();
 				System.err.println("Path: " + uploadDir);
 				FileUploadUtil.saveFile(uploadDir, fileName, multipartfile);
 				
