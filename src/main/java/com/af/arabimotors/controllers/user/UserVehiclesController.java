@@ -46,6 +46,8 @@ import com.af.arabimotors.utils.UserAuthenticationHelper;
 import com.af.arabimotors.utils.WebUrlsConstants;
 import com.af.arabimotors.utils.WebViewsConstants;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 public class UserVehiclesController {
 
@@ -102,7 +104,7 @@ public class UserVehiclesController {
 	}
 
 	@RequestMapping(value = WebUrlsConstants.SUBMIT_VEHICLE, method = RequestMethod.POST)
-	public ModelAndView postNewVehicle(@Validated SubmitVehicleRequest submitVehicleRequest, BindingResult bindingResult) {
+	public ModelAndView postNewVehicle(@Validated SubmitVehicleRequest submitVehicleRequest, BindingResult bindingResult, HttpServletRequest servletRequest) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -137,9 +139,11 @@ public class UserVehiclesController {
 		if (submitVehicleRequest.getMainImageMultipartFile() != null) {
 			try {
 				// get original file name //
-				Path absouletPath = Paths.get(".");
-				String uploadDir = absouletPath + "/src/main/resources/static/uploads/";
+				// Path absouletPath = Paths.get(".");
+				// String uploadDir = absouletPath + "/src/main/resources/static/uploads/";
 				// set upload image path //
+
+				String uploadDir = servletRequest.getSession().getServletContext().getRealPath("/uploads");
 				FileUploadUtil.saveFile(uploadDir, submitVehicleRequest.getMainImageMultipartFile().getOriginalFilename(),
 						submitVehicleRequest.getMainImageMultipartFile());
 				// save gallery images //

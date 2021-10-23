@@ -37,6 +37,8 @@ import com.af.arabimotors.utils.UserAuthenticationHelper;
 import com.af.arabimotors.utils.WebUrlsConstants;
 import com.af.arabimotors.utils.WebViewsConstants;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 public class AccountDetailsController {
 
@@ -133,7 +135,7 @@ public class AccountDetailsController {
 	}
 	
 	@RequestMapping(value = WebUrlsConstants.UPDATE_PHOTO_PROFILE, method = RequestMethod.POST)
-	public ModelAndView updateProfilePhoto(@RequestParam("user_photo") MultipartFile multipartfile) {
+	public ModelAndView updateProfilePhoto(@RequestParam("user_photo") MultipartFile multipartfile, HttpServletRequest servletRequest) {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -159,7 +161,8 @@ public class AccountDetailsController {
 				}
 				
 				Path absouletPath = Paths.get(".");
-				String uploadDir = absouletPath+"/arabimotors/WEB-INF/classes/static/user-photos/" + userEntity.getId();
+				//String uploadDir = absouletPath+"/arabimotors/WEB-INF/classes/static/user-photos/" + userEntity.getId();
+				String uploadDir = servletRequest.getSession().getServletContext().getRealPath("/user-photos/" + userEntity.getId());
 				System.err.println("Path: " + uploadDir);
 				FileUploadUtil.saveFile(uploadDir, fileName, multipartfile);
 				
